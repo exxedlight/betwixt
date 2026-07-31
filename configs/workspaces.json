@@ -1,0 +1,41 @@
+{
+  "default": "",
+  "rules": [
+    { "title": ".*YouTube.*", "icon": "" },
+
+    { "class": "firefox|zen", "icon": "" },
+    { "class": "firefox", "title": ".*github.*", "icon": "" },
+    { "class": "code|dev\\.zed\\.Zed", "icon": "󰨞" },
+    { "class": ".*\\.exe", "icon": "" },
+    { "class": "kitty", "icon": "" },
+    { "class": "vivaldi", "icon": "" },
+    { "class": "Audacious|deadbeef", "icon": "󰐍" },
+    { "class": "thunar", "icon": "" },
+    { "class": "telegram", "icon": "" },
+    { "class": "lutris", "icon": "" },
+    { "class": "draw.io", "icon": "" },
+    { "class": "mpv", "icon": "" },
+    { "class": "nomacs", "icon": "" },
+    { "class": "subl", "icon": "" },
+    { "class": "onlyoffice|libreoffice-writer", "icon": "" },
+    { "class": "steam", "icon": "" },
+    { "class": "org.qbittorrent.qBittorrent", "icon": "󰰩" },
+    { "class": "org.gnome.FileRoller", "icon": "" },
+    { "class": ".*calculator.*", "icon": "󰃬" },
+    { "class": "tk", "title": ".*adb.*", "icon": "" },
+    { "class": "com.exx.quickdesktop", "icon": "" },
+    { "class": "btop.*", "icon": "󰙭" },
+    { "class": "Postman", "icon": "󱂛" },
+    { "class": "Anydesk", "icon": "" },
+    { "class": "VirtualBox.*", "icon": "" },
+    { "class": "krita", "icon": "" },
+    { "class": "sai2.exe", "icon": "" },
+    { "class": "qpdfview.local.qpdfview", "icon": "" },
+    { "class": "unityhub|Unity", "icon": "" },
+    { "class": "com.gabm.satty", "icon": "󱣙" },
+    { "class": "Mysql-workbench-bin", "icon": "" },
+    { "class": "pavucontrol", "icon": "󰕾" }
+    
+    
+  ]
+}

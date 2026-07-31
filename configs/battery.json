@@ -1,0 +1,11 @@
+{
+  "levels": {
+    "warning": 60,
+    "critical": 20
+  },
+  "actions": {
+    "5": "systemctl poweroff",
+    "20": "notify-send 'Battery' 'Charge below 20%' -u critical",
+    "60": "notify-send 'Battery' 'Charge below 60%'"
+  }
+}

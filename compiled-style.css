@@ -1,0 +1,661 @@
+/* PRIMARY */
+/* BORDERS */
+/* SURFACES */
+/* ACCENTS */
+/* HIGHLIGHTS */
+/* SHADOWS */
+/* TEXT */
+/* STATES */
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Commit Mono Nerd Font";
+  outline-color: Alpha(Shade(rgb(231, 154, 255), 0.8), 0.45);
+}
+
+.workspaces {
+  font-family: "MesloLGS Nerd Font", monospace;
+  font-size: 16px;
+  padding: 0;
+  padding-right: 10px;
+}
+.workspaces .hider-btn {
+  margin-right: 3px;
+  opacity: 0.3;
+  min-width: 18px;
+  transition: opacity 0.3s ease;
+}
+.workspaces .hider-btn:hover {
+  opacity: 1;
+}
+.workspaces .tab-box {
+  padding: 0 7px;
+  min-width: 16px;
+  border-radius: 10px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border: 1px solid transparent;
+  border-top: none;
+  border-bottom: none;
+  transition: background 0.3s linear;
+}
+.workspaces .tab-box:hover {
+  background: radial-gradient(circle at center, Alpha(rgb(168, 114, 207), 0.65), transparent);
+}
+.workspaces .tab-box.active {
+  transform: skew(-10deg, 0);
+}
+.workspaces .tab-box.active > * {
+  transform: skew(10deg, 0);
+}
+.workspaces .tab-box.active {
+  padding: 0 10px;
+  background: radial-gradient(circle at center, Alpha(rgb(168, 114, 207), 0.65), transparent);
+  background-color: black;
+  border-radius: 0px;
+  border-color: rgb(82, 50, 124);
+  border-top: none;
+  border-bottom: none;
+}
+.workspaces .tab-box.active label {
+  font-size: 17px;
+}
+.workspaces .tab-box label {
+  color: rgb(217, 222, 255);
+  padding-right: 2px;
+  margin: 0 3px;
+}
+
+.nexus {
+  font-size: 14px;
+  font-family: "MesloLGS Nerd Font", monospace;
+  font-weight: 600;
+}
+.nexus .small {
+  font-size: 11px;
+  border: 1px solid rgb(140, 79, 184);
+  border-radius: 5px;
+  border-left: none;
+  border-bottom: none;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 0;
+  padding-right: 3px;
+  padding-left: 5px;
+  padding-top: 2px;
+}
+.nexus .left .small {
+  min-width: 35px;
+}
+.nexus .left > label {
+  margin-right: 5px;
+}
+.nexus .left > label.gpu-icon {
+  font-size: 16px;
+  margin: 0 10px;
+  min-width: 16px;
+  padding: 0 5px;
+  border-radius: 100%;
+}
+.nexus .left > label.gpu-icon.available {
+  color: rgb(173, 59, 243);
+  text-shadow: 0 0 5px Alpha(rgb(0, 217, 255), 0.6);
+}
+.nexus .left > label.cpu {
+  margin-right: 0px;
+  border-radius: 10px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  padding-left: 5px;
+  border: 1px solid rgb(140, 79, 184);
+  border-bottom: none;
+  border-right: none;
+}
+.nexus .left > label.temp-gpu {
+  border-radius: 10px;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  padding: 0 5px;
+  padding-right: 10px;
+  border: 1px solid rgb(140, 79, 184);
+  border-right: none;
+  border-bottom: none;
+  margin-right: 0;
+}
+.nexus .left > label.temp-cpu {
+  border-radius: 10px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  padding-right: 5px;
+  border: 1px solid rgb(140, 79, 184);
+  border-bottom: none;
+  border-left: none;
+}
+.nexus .center {
+  transform: skew(-15deg, 0);
+}
+.nexus .center > * {
+  transform: skew(15deg, 0);
+}
+.nexus .center {
+  padding: 0 10px;
+  background: radial-gradient(ellipse 50% 55% at 50% 90%, Alpha(Shade(rgb(173, 59, 243), 0.8), 0.5), transparent), radial-gradient(ellipse 100% 50% at 50% 50%, Alpha(Shade(rgb(41, 0, 67), 0.7), 0.95) 30%, transparent 85%);
+}
+.nexus .center .ram {
+  padding-left: 10px;
+  padding-right: 4px;
+  border-radius: 10px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border: 1px solid rgb(140, 79, 184);
+  border-bottom: none;
+  border-right: none;
+  background: radial-gradient(ellipse 50% 50% at 50% 60%, Shade(rgb(82, 50, 124), 0.85), transparent);
+}
+.nexus .center .menu-button {
+  padding: 0 31px;
+  font-size: 16px;
+  padding-bottom: 1px;
+  background: radial-gradient(ellipse 20% 60% at 50% 50%, rgb(41, 0, 67) 60%, transparent), radial-gradient(ellipse 50% 150% at 50% 100%, Shade(rgb(41, 0, 67), 1.1) 50%, transparent);
+  transition: background 0.3s linear, padding 0.3s linear;
+}
+.nexus .center .menu-button:hover {
+  padding: 0 40px;
+  padding-bottom: 1px;
+  background: radial-gradient(ellipse 20% 60% at 50% 50%, Alpha(rgb(173, 59, 243), 0.8) 5%, transparent), radial-gradient(ellipse 50% 150% at 50% 100%, Alpha(Shade(rgb(173, 59, 243), 1.1), 0.15) 50%, transparent);
+}
+.nexus .center .ram {
+  min-width: 100px;
+}
+.nexus .center .small {
+  min-width: 30px;
+}
+.nexus .center .time {
+  min-width: 100px;
+}
+.nexus .center {
+  text-shadow: 2px 1px 2px rgb(20, 10, 30);
+}
+.nexus .right {
+  padding-right: 10px;
+}
+.nexus .right .date {
+  margin-right: 5px;
+}
+.nexus .right .nexus-button {
+  padding: 0 5px;
+  margin: 0 3px;
+  padding-right: 8px;
+  transition: opacity 0.3s ease-in-out;
+}
+.nexus .right .nexus-button:hover {
+  opacity: 0.5;
+}
+
+.tray {
+  padding: 0 10px;
+}
+
+.tray-item popover > arrow {
+  background-color: rgba(0, 0, 0, 0);
+}
+.tray-item popover > contents {
+  background-color: Alpha(rgb(20, 10, 30), 0.75);
+  border: 1px solid Alpha(rgb(180, 100, 255), 0.3);
+  box-shadow: inset 0 0 3px 0 Alpha(rgb(180, 100, 255), 0.45);
+  border-radius: 20px;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 0;
+  padding: 4px;
+}
+.tray-item popover modelbutton {
+  padding: 0 10px;
+  font-size: 14px;
+}
+.tray-item popover menuitem, .tray-item popover modelbutton {
+  transition: all 0.3s linear;
+}
+.tray-item popover menuitem:hover,
+.tray-item popover modelbutton:hover {
+  background-color: Shade(Alpha(rgb(231, 154, 255), 0.25), 0.67);
+  box-shadow: inset 0 0 2px 2px Alpha(rgb(231, 154, 255), 0.55);
+}
+
+.nexus-panel-window {
+  background-color: transparent;
+}
+
+.bar-revealer {
+  padding: 0 5px;
+}
+.bar-revealer > box {
+  margin: 0;
+  background-color: Alpha(rgb(14, 4, 16), 0.55);
+  padding: 0 20px;
+  padding-top: 5px;
+  margin: 0 5px;
+  border-bottom: none;
+  box-shadow: inset 0 2px 5px 1px Alpha(rgb(41, 0, 67), 0.75);
+  background: radial-gradient(100% 20% at 50% 100%, rgb(14, 4, 16) 5%, transparent 40%), linear-gradient(to top, rgb(14, 4, 16) 15%, transparent 40%), linear-gradient(to bottom, rgb(14, 4, 16), transparent), radial-gradient(50% 50% at 50% 50%, rgb(41, 0, 67), transparent);
+}
+.bar-revealer .header {
+  border-bottom: 1px solid white;
+  padding-bottom: 5px;
+  padding-left: 30px;
+}
+.bar-revealer .header .panel-title {
+  font-weight: 800;
+}
+
+.nexus-apps-revealer > box,
+.nexus-wifi-revealer > box,
+.nexus-bluetooth-revealer > box {
+  transform: skew(-1deg, 0);
+}
+.nexus-apps-revealer > box > *,
+.nexus-wifi-revealer > box > *,
+.nexus-bluetooth-revealer > box > * {
+  transform: skew(1deg, 0);
+}
+.nexus-apps-revealer > box,
+.nexus-wifi-revealer > box,
+.nexus-bluetooth-revealer > box {
+  border-radius: 10px 10px 0 0;
+}
+
+.nexus-apps-revealer > box {
+  min-width: 600px;
+}
+
+.wifi-panel .wifi-scrollbox {
+  transform: skew(0deg, 0);
+}
+.wifi-panel .wifi-scrollbox > * {
+  transform: skew(0deg, 0);
+}
+.wifi-panel .wifi-scrollbox .wifi-table-header {
+  padding: 0 10px;
+  font-weight: 600;
+  margin-left: 10px;
+  min-width: 300px;
+}
+.wifi-panel .wifi-scrollbox .wifi-networks-scroll {
+  padding-bottom: 10px;
+}
+.wifi-panel .wifi-scrollbox .wifi-networks-scroll .items-box {
+  margin: 0 5px;
+  padding: 5px;
+  padding-right: 15px;
+  background: radial-gradient(circle at center, Alpha(Shade(rgb(82, 50, 124), 0.8), 0.8), transparent);
+}
+.wifi-panel .wifi-scrollbox .wifi-networks-scroll .items-box .wifi-network-item {
+  transform: skew(-15deg, 0);
+}
+.wifi-panel .wifi-scrollbox .wifi-networks-scroll .items-box .wifi-network-item > * {
+  transform: skew(15deg, 0);
+}
+.wifi-panel .wifi-scrollbox .wifi-networks-scroll .items-box .wifi-network-item {
+  background-color: transparent;
+  margin: 2px 0;
+  padding-left: 10px;
+  transition: all 0.3s linear;
+}
+.wifi-panel .wifi-scrollbox .wifi-networks-scroll .items-box .wifi-network-item:hover {
+  background-color: Alpha(Shade(rgb(231, 154, 255), 0.3), 0.5);
+  padding-left: 10px;
+}
+.wifi-panel .wifi-scrollbox .wifi-networks-scroll .items-box .wifi-network-item.active {
+  background-color: Alpha(Shade(rgb(231, 154, 255), 0.75), 0.25);
+  border: 1px solid white;
+  border-left: none;
+  border-right: none;
+  padding-left: 10px;
+}
+.wifi-panel .col-bssid {
+  min-width: 160px;
+}
+.wifi-panel .col-ssid {
+  min-width: 200px;
+}
+.wifi-panel .col-mode {
+  min-width: 70px;
+}
+.wifi-panel .col-chan {
+  min-width: 60px;
+}
+.wifi-panel .col-rate {
+  min-width: 120px;
+}
+.wifi-panel .col-signal {
+  min-width: 70px;
+}
+.wifi-panel .col-security {
+  min-width: 70px;
+}
+.wifi-panel .wifi-prompt-box {
+  background: radial-gradient(circle at center, black, transparent);
+}
+.wifi-panel .wifi-prompt-box .prompt-title {
+  font-size: 16px;
+}
+.wifi-panel .wifi-prompt-box .wifi-password-entry {
+  padding: 0 20px;
+  font-size: 16px;
+  outline-color: Alpha(Shade(rgb(231, 154, 255), 0.5), 0.5);
+}
+.wifi-panel .wifi-prompt-box .confirm-buttons {
+  padding: 0 10px;
+  border: 1px solid transparent;
+}
+.wifi-panel .wifi-prompt-box .confirm-buttons:hover {
+  padding: 0 20px;
+  margin: 0 5px;
+  box-shadow: inset 0 0 10px Shade(rgb(231, 154, 255), 0.5);
+  border-color: rgb(231, 154, 255);
+}
+
+.app-launcher-panel .app-search-entry {
+  transform: skew(-10deg, 0);
+}
+.app-launcher-panel .app-search-entry > * {
+  transform: skew(10deg, 0);
+}
+.app-launcher-panel .app-search-entry {
+  background: radial-gradient(50% 50%, Alpha(Shade(rgb(173, 59, 243), 0.75), 0.4), transparent);
+  box-shadow: inset 0 0 10px Alpha(Shade(rgb(173, 59, 243), 0.75), 0.4);
+  font-weight: 400;
+  font-style: italic;
+}
+.app-launcher-panel .app-list-scroll {
+  transform: skew(0deg, 0);
+}
+.app-launcher-panel .app-list-scroll > * {
+  transform: skew(0deg, 0);
+}
+.app-launcher-panel .app-list-scroll {
+  padding-bottom: 20px;
+}
+.app-launcher-panel .app-list-scroll .items-box {
+  padding-right: 25px;
+}
+.app-launcher-panel .app-list-scroll .items-box .app-item {
+  padding-left: 10px;
+  background: Alpha(rgb(140, 79, 184), 0.2);
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition: all 0.3s linear;
+}
+.app-launcher-panel .app-list-scroll .items-box .app-item:hover, .app-launcher-panel .app-list-scroll .items-box .app-item:focus {
+  padding-left: 10px;
+}
+.app-launcher-panel .app-list-scroll .items-box .app-item:hover {
+  background: Alpha(rgb(140, 79, 184), 0.3);
+  border-color: Alpha(rgb(231, 154, 255), 0.3);
+}
+.app-launcher-panel .app-list-scroll .items-box .app-item:focus {
+  transform: skew(-10deg, 0);
+}
+.app-launcher-panel .app-list-scroll .items-box .app-item:focus > * {
+  transform: skew(10deg, 0);
+}
+.app-launcher-panel .app-list-scroll .items-box .app-item:focus {
+  border-color: rgb(231, 154, 255);
+  margin-left: 10px;
+  min-height: 35px;
+}
+
+.bluetooth-panel .header {
+  transform: skew(0deg, 0);
+}
+.bluetooth-panel .header > * {
+  transform: skew(0deg, 0);
+}
+.bluetooth-panel .bluetooth-table-header {
+  transform: skew(0deg, 0);
+}
+.bluetooth-panel .bluetooth-table-header > * {
+  transform: skew(0deg, 0);
+}
+.bluetooth-panel .bluetooth-devices-scroll {
+  transform: skew(0deg, 0);
+}
+.bluetooth-panel .bluetooth-devices-scroll > * {
+  transform: skew(0deg, 0);
+}
+.bluetooth-panel .bluetooth-devices-scroll {
+  padding-bottom: 20px;
+}
+.bluetooth-panel .bluetooth-devices-scroll .items-box {
+  margin: 0 5px;
+  padding: 5px;
+  padding-right: 15px;
+  background: radial-gradient(circle at center, Alpha(Shade(rgb(82, 50, 124), 0.8), 0.8), transparent);
+}
+.bluetooth-panel .bluetooth-devices-scroll .items-box .bluetooth-device-item {
+  transform: skew(-15deg, 0);
+}
+.bluetooth-panel .bluetooth-devices-scroll .items-box .bluetooth-device-item > * {
+  transform: skew(15deg, 0);
+}
+.bluetooth-panel .bluetooth-devices-scroll .items-box .bluetooth-device-item {
+  background-color: transparent;
+  margin: 2px 0;
+  padding-left: 10px;
+  transition: all 0.3s linear;
+}
+.bluetooth-panel .bluetooth-devices-scroll .items-box .bluetooth-device-item:hover {
+  background-color: Alpha(Shade(rgb(231, 154, 255), 0.3), 0.5);
+  padding-left: 10px;
+}
+.bluetooth-panel .bluetooth-devices-scroll .items-box .bluetooth-device-item.active {
+  background-color: Alpha(Shade(rgb(231, 154, 255), 0.75), 0.25);
+  border: 1px solid white;
+  border-left: none;
+  border-right: none;
+  padding-left: 10px;
+}
+.bluetooth-panel .col-address {
+  min-width: 180px;
+  padding-left: 20px;
+}
+.bluetooth-panel .col-name {
+  min-width: 300px;
+}
+.bluetooth-panel .col-status {
+  min-width: 100px;
+}
+
+.quick-hub {
+  padding: 0 10px;
+  padding-left: 30px;
+  font-size: 14px;
+  font-family: "Commit Mono Nerd Font";
+  font-weight: 600;
+}
+.quick-hub .brightness-indicator {
+  margin-right: 5px;
+}
+.quick-hub .volume-input-indicator {
+  padding-right: 5px;
+}
+.quick-hub .input-source-indicator {
+  margin-right: 15px;
+  transition: opacity 0.3s linear;
+}
+.quick-hub .input-source-indicator:hover {
+  opacity: 0.7;
+}
+
+.power-hub {
+  padding: 0 10px;
+  font-size: 14px;
+  font-family: "MesloLGS Nerd Font";
+  color: rgb(197, 214, 238);
+  font-weight: 600;
+}
+.power-hub .power-modes {
+  border-radius: 10px;
+  border: 1px solid rgb(222, 222, 222);
+  border-top: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  padding: 0 10px;
+  margin: 0 10px;
+  transition: all 0.3s linear;
+}
+.power-hub .power-modes .power-button {
+  padding: 0;
+  background: transparent;
+  border-radius: 5px;
+  margin: 0 2px;
+  min-width: 25px;
+  font-size: 16px;
+  transition: all 0.3s linear;
+}
+.power-hub .power-modes .power-button:hover {
+  background: radial-gradient(40% 40% at 50% 50%, rgb(140, 79, 184), transparent), radial-gradient(50% 50% at 50% 50%, rgb(41, 0, 67), transparent);
+  padding: 0 10px;
+}
+.power-hub .power-modes .eco-modes {
+  border-radius: 10px;
+}
+.power-hub .power-modes .eco-modes.ultra-eco-mode {
+  box-shadow: inset 0 0 1px 2px rgb(140, 79, 184);
+}
+.power-hub .power-modes .ultra-eco-button {
+  border-radius: 10px;
+}
+.power-hub .power-modes .ultra-eco-button.ultra-eco-mode {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-right: 0;
+  background: radial-gradient(100% 50% at 100% 50%, rgb(140, 79, 184), transparent);
+}
+.power-hub .power-modes .eco-button {
+  border-radius: 10px;
+}
+.power-hub .power-modes .eco-button.active {
+  background: radial-gradient(60% 60% at 50% 50%, rgb(140, 79, 184), transparent);
+}
+.power-hub .power-modes .eco-button.ultra-eco-mode {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-left: 0;
+  background: radial-gradient(100% 50% at 0% 50%, rgb(140, 79, 184), transparent);
+}
+.power-hub .power-modes .ballanced-button {
+  border-radius: 100%;
+}
+.power-hub .power-modes .ballanced-button.active {
+  background: radial-gradient(60% 60% at 50% 50%, rgb(140, 79, 184), transparent);
+}
+.power-hub .power-modes .performance-button {
+  border-radius: 100%;
+}
+.power-hub .power-modes .performance-button.active {
+  background: radial-gradient(60% 60% at 50% 50%, rgb(140, 79, 184), transparent);
+}
+.power-hub .battery-indicator {
+  transform: skew(-10deg, 0);
+}
+.power-hub .battery-indicator > * {
+  transform: skew(10deg, 0);
+}
+.power-hub .battery-indicator {
+  background-color: Shade(rgb(82, 50, 124), 0.5);
+  transition: text-shadow 0.3s linear, color 0.3s linear;
+  min-width: 70px;
+}
+.power-hub .battery-indicator.charging {
+  text-shadow: 1px 1px 1px rgb(173, 59, 243);
+}
+.power-hub .battery-indicator.warning {
+  text-shadow: 0 0 10px rgb(41, 0, 67);
+  color: Alpha(Shade(rgb(230, 173, 15), 1.4), 0.75);
+}
+.power-hub .battery-indicator.critical {
+  text-shadow: 0 0 10px rgb(41, 0, 67);
+  color: Alpha(Shade(rgb(170, 18, 18), 1.5), 0.75);
+}
+.power-hub .power-menu-button {
+  background-color: transparent;
+  padding: 0 10px;
+  font-size: 16px;
+  color: rgb(180, 190, 254);
+  transition: all 0.3s linear;
+}
+.power-hub .power-menu-button:hover {
+  background: radial-gradient(40% 40% at 50% 50%, rgb(140, 79, 184), transparent), radial-gradient(50% 50% at 50% 50%, rgb(41, 0, 67), transparent);
+  transform: scale(1.1);
+  padding: 0 15px;
+}
+
+window.Bar {
+  background: rgba(0, 0, 0, 0);
+  color: rgb(197, 214, 238);
+  min-height: 20px;
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.close-button {
+  font-size: 18px;
+  font-weight: 1000;
+  min-width: 24px;
+  min-height: 24px;
+  border-radius: 100%;
+  border: 2px solid transparent;
+  color: rgb(197, 214, 238);
+  background: transparent;
+  transition: all 0.3s ease;
+}
+.close-button:hover {
+  transform: rotate(180deg);
+  background: radial-gradient(50% 50%, Alpha(rgb(231, 154, 255), 0.5) 35%, transparent 90%);
+  border-color: Alpha(rgb(140, 79, 184), 0.75);
+}
+
+.bar-surface-bottom {
+  min-height: 22px;
+  background: radial-gradient(ellipse 10% 100% at 5% 50%, rgb(20, 10, 30), transparent), radial-gradient(30% 100% at 40% 60%, Shade(rgb(14, 4, 16), 0.75), transparent), radial-gradient(20% 100% at 70% 80%, rgb(20, 10, 30), transparent), radial-gradient(40% 100% at 10% 100%, Alpha(rgb(82, 50, 124), 0.5) 50%, transparent), radial-gradient(40% 100% at 90% 100%, Alpha(Shade(rgb(173, 59, 243), 0.65), 0.35) 50%, transparent);
+}
+
+.bar-surface-top {
+  min-height: 22px;
+  background: radial-gradient(ellipse 10% 100% at 5% 50%, rgb(20, 10, 30), transparent), radial-gradient(30% 100% at 40% 60%, Alpha(Shade(rgb(14, 4, 16), 0.75), 0.5), transparent), radial-gradient(40% 80% at 10% 0%, Alpha(Shade(rgb(173, 59, 243), 0.65), 0.1) 50%, transparent), radial-gradient(40% 80% at 90% 0%, Alpha(Shade(rgb(173, 59, 243), 0.65), 0.1) 50%, transparent);
+}
+
+.bar-box {
+  transform: skew(-25deg, 0);
+}
+.bar-box > * {
+  transform: skew(25deg, 0);
+}
+.bar-box.bar-left-box {
+  margin-left: -5px;
+  background-color: Alpha(rgb(14, 4, 16), 0.5);
+}
+.bar-box.bar-center-box {
+  background: radial-gradient(50% 100% at 50% 0%, rgb(14, 4, 16), transparent);
+}
+.bar-box.bar-right-box {
+  margin-right: -10px;
+  background-color: Alpha(rgb(14, 4, 16), 0.5);
+}
+
+tooltip {
+  padding: 5px 10px;
+  background: Shade(rgb(14, 4, 16), 1.5);
+}
+
+scrollbar trough {
+  outline: none;
+}
+scrollbar slider {
+  background-color: rgb(140, 79, 184);
+  border: none;
+}
+
+/*# sourceMappingURL=compiled-style.css.map */

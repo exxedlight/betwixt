@@ -1,0 +1,18 @@
+.quick-hub {
+    padding: 0 10px;
+    padding-left: 30px;
+    font-size: 14px;
+    font-family: $regular-font;
+    font-weight: 600;
+
+    .brightness-indicator { margin-right: 5px; }
+    .volume-input-indicator { padding-right: 5px; }
+    //.volume-output-indicator { }
+
+    .input-source-indicator{
+        margin-right: 15px;
+        transition: opacity $anim-duration linear;
+
+        &:hover { opacity: .7; }
+    }
+}

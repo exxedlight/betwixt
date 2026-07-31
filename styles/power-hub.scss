@@ -1,0 +1,102 @@
+.power-hub{
+    padding: 0 10px;
+    font-size: 14px;
+    font-family: $symbols-font;
+    color: $font-base;
+    font-weight: 600;
+
+    .power-modes{
+        border-radius: 10px;
+        border: 1px solid $highlight-0;
+        border-top: none;
+        border-top-left-radius: 0; border-top-right-radius: 0;
+        padding: 0 10px;
+        margin: 0 10px;
+        transition: all $anim-duration linear;
+
+        .power-button {
+            padding: 0;
+            background: transparent;
+            border-radius: 5px;
+            margin: 0 2px;
+            min-width: 25px;
+            font-size: 16px;
+            transition: all $anim-duration linear;
+
+
+            &:hover{
+                background: 
+                    radial-gradient(40% 40% at 50% 50%, $accent-2, transparent),    
+                    radial-gradient(50% 50% at 50% 50%, $accent-4, transparent),
+                ;
+                padding: 0 10px;
+            }
+        }
+
+        .eco-modes{
+            border-radius: 10px;
+            &.ultra-eco-mode { box-shadow: inset 0 0 1px 2px $accent-2; }
+        }
+        .ultra-eco-button{
+            border-radius: 10px;
+            &.ultra-eco-mode {
+                border-top-right-radius: 0; border-bottom-right-radius: 0;
+                margin-right: 0;
+                background: radial-gradient(100% 50% at 100% 50%, $accent-2, transparent);
+            }
+        }
+        .eco-button{
+            border-radius: 10px;
+            &.active { background: radial-gradient(60% 60% at 50% 50%, $accent-2, transparent); }
+            &.ultra-eco-mode {
+                border-top-left-radius: 0; border-bottom-left-radius: 0;
+                margin-left: 0;
+                background: radial-gradient(100% 50% at 0% 50%, $accent-2, transparent);
+            }
+        }
+        .ballanced-button{
+            border-radius: 100%;
+            &.active { background: radial-gradient(60% 60% at 50% 50%, $accent-2, transparent); }
+        }
+        .performance-button{
+            border-radius: 100%;
+            &.active { background: radial-gradient(60% 60% at 50% 50%, $accent-2, transparent); }
+        }
+    }
+
+    .battery-indicator{
+        @include skew(-10deg);
+        background-color: Shade($surface-3, .5);
+        transition: text-shadow $anim-duration linear, color $anim-duration linear;
+        min-width: 70px;
+        
+        &.charging{
+            text-shadow: 1px 1px 1px $accent-3;
+        }
+        &.warning{
+            text-shadow: 0 0 10px $accent-4;
+            color: Alpha(Shade($color-warning, 1.4), .75);
+        }
+        &.critical {
+            text-shadow: 0 0 10px $accent-4;
+            color: Alpha(Shade($color-critical, 1.5), .75);
+        }
+    }
+
+    .power-menu-button{
+        background-color: transparent;
+        padding: 0 10px;
+        font-size: 16px;
+        color: $font-light;
+        transition: all $anim-duration linear;
+
+        &:hover {
+            background: 
+                radial-gradient(40% 40% at 50% 50%, $accent-2, transparent),    
+                radial-gradient(50% 50% at 50% 50%, $accent-4, transparent),
+            ;
+            transform: scale(1.1);
+            padding: 0 15px;
+        }
+    }
+}

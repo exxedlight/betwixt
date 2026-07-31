@@ -1,0 +1,18 @@
+{
+  "ultra-eco": {
+    "plan": "balanced",
+    "freq": 800
+  },
+  "eco": {
+    "plan": "balanced",
+    "freq": 1000
+  },
+  "balanced": {
+    "plan": "balanced",
+    "freq": 2500
+  },
+  "performance": {
+    "plan": "performance",
+    "freq": 3000
+  }
+}

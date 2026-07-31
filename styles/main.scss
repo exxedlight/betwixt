@@ -1,0 +1,93 @@
+@import "colors";
+@import "mixins";
+@import "fonts";
+@import "params";
+
+@import "reset";
+
+@import "workspaces";
+@import "nexus";
+@import "tray";
+
+@import "nexus-panels";
+@import "quick-hub";
+@import "power-hub";
+
+window {
+    &.Bar {
+        background: $bar-background;
+        color: $font-base;
+        min-height: 20px;
+        font-size: 12px;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+
+.close-button{
+    font-size: 18px;
+    font-weight: 1000;
+    min-width: 24px; min-height: 24px;
+
+    border-radius: 100%;
+    border: 2px solid transparent;
+    color: $font-base;
+    background: transparent;
+    transition: all $anim-duration ease;
+
+    &:hover{
+        //transform: rotate(-180deg) scale(1.5);
+        transform: rotate(180deg);
+        background: radial-gradient(50% 50%, Alpha($accent-1, .5) 35%, transparent 90%);
+        border-color: Alpha($accent-2, .75);
+    }
+}
+
+
+
+.bar-surface-bottom {
+    //background-color: Alpha($surface-1, .25); 
+    min-height: 22px;
+    background: radial-gradient(ellipse 10% 100% at 5% 50%, $surface-1, transparent),
+                radial-gradient(30% 100% at 40% 60%, Shade($surface-2, .75), transparent),
+                radial-gradient(20% 100% at 70% 80%, $surface-1, transparent),
+                radial-gradient(40% 100% at 10% 100%, Alpha($surface-3, .5) 50%, transparent),
+                radial-gradient(40% 100% at 90% 100%, Alpha(Shade($accent-3, .65), .35) 50%, transparent),
+                //radial-gradient(50% 100% at 50% 0%, $surface-2 30%, transparent 80%)
+                ;
+    
+}
+.bar-surface-top {
+    //background-color: Alpha($surface-1, .25); 
+    min-height: 22px;
+    background: radial-gradient(ellipse 10% 100% at 5% 50%, $surface-1, transparent),
+                radial-gradient(30% 100% at 40% 60%, Alpha(Shade($surface-2, .75), .5), transparent),
+                //radial-gradient(20% 100% at 70% 0%, $surface-1, transparent),
+                radial-gradient(40% 80% at 10% 0%, Alpha(Shade($accent-3, .65), .1) 50%, transparent),
+                radial-gradient(40% 80% at 90% 0%, Alpha(Shade($accent-3, .65), .1) 50%, transparent),
+                
+                
+                //radial-gradient(50% 100% at 50% 0%, $surface-2 30%, transparent 80%)
+                ;
+    
+}
+.bar-box{
+    @include skew(-25deg);
+    
+    &.bar-left-box  { margin-left: -5px; background-color: Alpha($surface-2, .5); }
+    &.bar-center-box { background: radial-gradient(50% 100% at 50% 0%, $surface-2, transparent); }
+    &.bar-right-box { margin-right: -10px; background-color: Alpha($surface-2, .5); }
+}
+
+
+
+
+tooltip{
+    padding: 5px 10px;
+    background: Shade($surface-2, 1.5);
+}
+scrollbar{
+    trough { outline: none; }
+    slider { background-color: $accent-2; border: none; }
+}

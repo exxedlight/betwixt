@@ -1,0 +1,141 @@
+.nexus {
+    font-size: 14px;
+    font-family: $symbols-font, monospace;
+    font-weight: 600;
+    
+
+    .small {
+        font-size: 11px;
+        border: 1px solid $accent-2;
+        border-radius: 5px;
+        border-left: none; border-bottom: none;
+        border-top-left-radius: 0; border-bottom-right-radius: 0;
+        padding-right: 3px; padding-left: 5px; padding-top: 2px;
+    }
+
+
+    .left {
+        .small { min-width: 35px; }
+        & > label {
+            margin-right: 5px;
+
+            &.gpu-icon {
+                font-size: 16px;
+                margin: 0 10px;
+                min-width: 16px;
+                padding: 0 5px;
+                border-radius: 100%;
+
+                &.available {
+                    color: $accent-3; 
+                    text-shadow: 0 0 5px Alpha($shadow-2, .6);
+                }
+            }
+
+            &.cpu {
+                margin-right: 0px;
+                border-radius: 10px;
+                border-bottom-right-radius: 0; 
+                border-bottom-left-radius: 0;
+                padding-left: 5px;
+                border: 1px solid $accent-2;
+                border-bottom: none; 
+                border-right: none;
+            }
+
+            &.temp-gpu {
+                border-radius: 10px;
+                border-bottom-left-radius: 0; 
+                border-top-right-radius: 0; 
+                border-bottom-right-radius: 0;
+                padding: 0 5px;
+                padding-right: 10px;
+                border: 1px solid $accent-2;
+                border-right: none; 
+                border-bottom: none;
+                margin-right: 0;
+            }
+
+            &.temp-cpu {
+                border-radius: 10px;
+                border-top-left-radius: 0; 
+                border-bottom-left-radius: 0; 
+                border-bottom-right-radius: 0;
+                padding-right: 5px;
+                border: 1px solid $accent-2;
+                border-bottom: none; 
+                border-left: none;
+            }
+        }
+    }
+
+
+    .center {
+        //@include hexagon-shape(15px, Alpha(Shade($surface-3, 1.2), .35));
+        @include skew(-15deg);
+        padding: 0 10px;
+                
+        background: //radial-gradient(ellipse 100% 80% at -50% 50%, $surface-4, transparent),
+                    //radial-gradient(ellipse 100% 80% at 150% 50%, $surface-4, transparent),
+                    radial-gradient(ellipse 50% 55% at 50% 90%, Alpha(Shade($accent-3, .8), .5), transparent),
+                    //radial-gradient(ellipse 50% 55% at 50% 10%, Alpha(Shade($accent-3, .8), .5), transparent),
+                    radial-gradient(ellipse 100% 50% at 50% 50%, Alpha(Shade($accent-4, .7), .95) 30%, transparent 85%)
+                    ;
+        
+        .ram{
+            padding-left: 10px; padding-right: 4px;
+            border-radius: 10px;
+            border-bottom-left-radius: 0; border-bottom-right-radius: 0;
+            border: 1px solid $accent-2;
+            border-bottom: none; border-right: none;
+
+
+            background: radial-gradient(ellipse 50% 50% at 50% 60%, Shade($surface-3, .85), transparent);
+        }
+        .menu-button {
+            padding: 0 31px;
+            font-size: 16px;
+            padding-bottom: 1px;
+
+            background: radial-gradient(ellipse 20% 60% at 50% 50%, $accent-4 60%, transparent), 
+                        radial-gradient(ellipse 50% 150% at 50% 100%, Shade($accent-4, 1.1) 50%, transparent);
+            transition: background $anim-duration linear, padding $anim-duration linear;
+
+
+            &:hover { 
+                padding: 0 40px; 
+                //padding-right: 43px; 
+                padding-bottom: 1px; 
+                background: radial-gradient(ellipse 20% 60% at 50% 50%, Alpha($accent-3, .8) 5%, transparent), 
+                            radial-gradient(ellipse 50% 150% at 50% 100%, Alpha(Shade($accent-3, 1.1), .15) 50%, transparent);
+            }
+        }
+
+        .ram { min-width: 100px; }
+        .small { min-width: 30px; }
+        .time { min-width: 100px; }
+
+        text-shadow: 2px 1px 2px $surface-1;
+    }
+    
+    
+    .right {
+        padding-right: 10px;
+        
+        .date {
+            margin-right: 5px;
+        }
+
+        .nexus-button{
+            padding: 0 5px;
+            margin: 0 3px;
+            padding-right: 8px;
+            transition: opacity $anim-duration ease-in-out;
+
+            &:hover { opacity: .5; }
+        }
+    }
+    
+}
+
+
