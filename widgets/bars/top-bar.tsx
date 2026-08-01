@@ -2,6 +2,7 @@ import app from "ags/gtk4/app"
 import { Astal } from "ags/gtk4"
 import SysTray from "../modules/top-bar/tray"
 import PowerHub from "../modules/top-bar/power-hub/power-hub"
+import BarPlayer from "../modules/top-bar/bar-player/bar-player"
 
 const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
@@ -26,7 +27,7 @@ export default function TopBar(monitor = 0) {
         </box>
 
         <box cssClasses={["bar-box", "bar-center-box"]} $type="center" spacing={6}>
-            <label label="player" class="dim" />
+            <BarPlayer/>
         </box>
 
         <box cssClasses={["bar-box", "bar-right-box"]} $type="end" spacing={6}>

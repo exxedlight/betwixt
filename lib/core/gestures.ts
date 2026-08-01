@@ -73,3 +73,17 @@ export function onScroll(handlers: ScrollHandlers) {
     self.add_controller(scroll)
   }
 }
+
+export function onEsc(handler: () => void){
+  return (self: Gtk.Widget) => {
+    const keyController = new Gtk.EventControllerKey()
+    keyController.connect("key-pressed", (_controller, keyval) => {
+      if (keyval === Gdk.KEY_Escape) {
+          handler()
+          return true // stop event propagation
+      }
+      return false
+    })
+    self.add_controller(keyController)
+  }
+}

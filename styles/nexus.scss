@@ -81,7 +81,7 @@
                     //radial-gradient(ellipse 50% 55% at 50% 10%, Alpha(Shade($accent-3, .8), .5), transparent),
                     radial-gradient(ellipse 100% 50% at 50% 50%, Alpha(Shade($accent-4, .7), .95) 30%, transparent 85%)
                     ;
-        
+            
         .ram{
             padding-left: 10px; padding-right: 4px;
             border-radius: 10px;
@@ -129,10 +129,10 @@
         .nexus-button{
             padding: 0 5px;
             margin: 0 3px;
-            padding-right: 8px;
             transition: opacity $anim-duration ease-in-out;
 
             &:hover { opacity: .5; }
+            label { font-family: $symbols-font, monospace; }
         }
     }
     

@@ -9,7 +9,7 @@ export function Battery() {
     const icon = createComputed(() => {
         const percent = batteryPercent()
  
-        if (batteryCharging()) return chargingIcon;
+        if (batteryStateClass() == "charging") return chargingIcon;
 
         const iconIndex = Math.floor((percent / 100) * (icons.length - 1))
         return icons[iconIndex];

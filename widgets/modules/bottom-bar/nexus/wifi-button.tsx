@@ -2,9 +2,9 @@ import { createPoll } from "ags/time"
 import { onClick } from "../../../../lib/core/gestures"
 import { getWifiStatus, setWifiRadio, WifiStatus } from "../../../../lib/services/wifi"
 import WifiPanelContent from "./panel-contents/wifi-panel-content"
-import NexusPanel from "./core/nexus-panel"
 import { Gtk } from "ags/gtk4"
 import { activeNexusPanel, closeNexusPanel, NexusPanelKey, toggleNexusPanel } from "../../../../lib/global-states"
+import RevealerPanel from "../../primitives/revealer-panel"
 
 export default function WifiButton() {
     const ICONS = ["󰤟", "󰤢", "󰤥", "󰤨"]
@@ -22,12 +22,13 @@ export default function WifiButton() {
     })
 
     //  Pop-up panel widget
-    NexusPanel({
+    RevealerPanel({
         name: "nexus-wifi-panel",
         visible: activeNexusPanel.as(k => k === NexusPanelKey.WIFI),
         children: <WifiPanelContent onClose={closeNexusPanel} />,
         transition: Gtk.RevealerTransitionType.SWING_UP,
-        revealerClass: "nexus-wifi-revealer"
+        classes: ["nexus-panel-window"],
+        revealerClasses: ["bar-revealer", "nexus-wifi-revealer"]
     })
 
     return (

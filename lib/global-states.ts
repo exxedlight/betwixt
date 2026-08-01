@@ -20,3 +20,10 @@ export const [powerMode, setPowerMode] = createState(PowerModes.BALANCED);
 export function changePowerMode(key: PowerModes) {
     setPowerMode(key);
 }
+
+
+//  POWER MENU
+export const [powermenuVisible, setPowermenuVisible] = createState(false);
+export function powermenuVisibilityToggle() {
+    setPowermenuVisible(!powermenuVisible())
+}

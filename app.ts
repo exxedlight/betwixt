@@ -18,7 +18,6 @@ app.start({
   css: style,
   requestHandler: handleKeybindRequest,
   main() {
-    //Adw.StyleManager.get_default().set_color_scheme(Adw.ColorScheme.FORCE_DARK)
     applyInitialPowerPlan()
 
     
@@ -27,7 +26,7 @@ app.start({
     const count = monitors ? monitors.get_n_items() : 1
     
     for (let i = 0; i < count; i++) {
-      //TopBar(i)
+      TopBar(i)
       BottomBar(i)
     }
   },

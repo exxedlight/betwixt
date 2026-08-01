@@ -8,6 +8,8 @@ const plans = config as Record<PowerPlanId, PowerPlanDef>
 type PowerPlanId = keyof typeof config
 type PowerPlanDef = { plan: string; freq: number } // frequency in MHz, as in json
 
+
+
 //  --- Helpers -------------------------------------------------------
 const toKhz = (mhz: number) => mhz * 1000
 
@@ -43,7 +45,9 @@ export async function setPowerPlan(id: PowerPlanId) {
     }
 }
 
-// --- Определение текущего активного плана (для подсветки кнопок)
+
+
+// --- Current stats for butons highlighting    ------------------------------------------------------------
 
 function readCurrentMaxFreqKhz(): number | null {
     try {
@@ -62,9 +66,8 @@ async function readCurrentProfile(): Promise<string | null> {
     }
 }
 
-// null, если текущее состояние системы не совпадает ни с одним планом из конфига
-// (например, частоту поменяли вручную мимо шелла)
-export const activePowerPlan = createPoll<PowerPlanId | null>(null, 2000, async () => {
+
+export const activePowerPlan = createPoll<PowerPlanId | null>(null, 1000, async () => {
     const profile = await readCurrentProfile()
     const freq = readCurrentMaxFreqKhz()
 
@@ -77,6 +80,7 @@ export const activePowerPlan = createPoll<PowerPlanId | null>(null, 2000, async 
         }
     }
 
+    // null if no config values match (f.e. freq was changes manually)
     return null
 })
 

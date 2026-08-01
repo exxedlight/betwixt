@@ -3,7 +3,6 @@ import { Gtk } from "ags/gtk4"
 import WifiButton from "../wifi-button"
 import { onClick } from "../../../../../lib/core/gestures"
 import AppsPanelContent from "../panel-contents/apps-panel-content"
-import NexusPanel from "./nexus-panel"
 import { activeNexusPanel, closeNexusPanel, NexusPanelKey, toggleNexusPanel } from "../../../../../lib/global-states"
 import BluetoothButton from "../bluetooth-button"
 import {
@@ -14,6 +13,7 @@ import {
     getCpuFreq,
     getMemory,
 } from "../../../../../lib/core/system-stats"
+import RevealerPanel from "../../../primitives/revealer-panel"
 
 
 type Stats = {
@@ -48,12 +48,13 @@ export default function Nexus() {
     )
 
     //  Pop-up panel widget (APPS)
-    NexusPanel({
+    RevealerPanel({
         name: "nexus-apps-panel",
         visible: activeNexusPanel.as((k) => k === NexusPanelKey.APPS),
         children: <AppsPanelContent onClose={closeNexusPanel} />,
         transition: Gtk.RevealerTransitionType.FADE_SLIDE_UP,
-        revealerClass: "nexus-apps-revealer"
+        classes: ["nexus-panel-window"],
+        revealerClasses: ["bar-revealer", "nexus-apps-revealer"]
     })
 
 

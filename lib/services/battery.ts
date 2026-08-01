@@ -5,6 +5,7 @@ import { createPoll } from "ags/time"
 import { execAsync } from "ags/process"
 import { setPowerPlan } from "./powerplans"
 import config from "../../configs/battery.json"
+import { isHypridleRunningAsync, runIdleDaemon, stopIdleDaemon } from "./idle"
 
 
 //  Config JSON structure
@@ -25,7 +26,7 @@ export const batteryStateClass = createComputed(() => {
     const percent = batteryPercent()
     const charging = batteryCharging()
 
-    if (charging) return "charging"
+    if (charging && percent !== 100) return "charging"
     if (percent <= cfg.levels.critical) return "critical"
     if (percent <= cfg.levels.warning) return "warning"
     return ""
@@ -44,18 +45,7 @@ function isAcOnline(): boolean {
         return true // no file ==> (Desktop, no battery) ==> AC always online
     }
 }
-const acOnline = createPoll<boolean>(isAcOnline(), 2000, () => isAcOnline())
-
-
-
-async function isHypridleRunning(): Promise<boolean> {
-    try {
-        await execAsync(["pidof", "hypridle"])
-        return true
-    } catch {
-        return false
-    }
-}
+const acOnline = createPoll<boolean>(isAcOnline(), 1000, () => isAcOnline())
 
 
 
@@ -73,7 +63,7 @@ async function onChargingStart() {
     ])
 
     //  disable hypridle
-    execAsync(["pkill", "-f", "hypridle"])
+    await stopIdleDaemon();
 }
 
 async function onChargingStop() {
@@ -86,11 +76,8 @@ async function onChargingStop() {
         "AC OFF",
         "󰚦 󰁹 \tNo power supply, using battery",
     ])
-
-    if (!(await isHypridleRunning())) {
-        try {           GLib.spawn_command_line_async("hypridle") } 
-        catch (err) {   console.error("[battery] failed to start hypridle:", err) }
-    }
+    
+    await runIdleDaemon();
 }
 
 let wasAcOnline = acOnline()

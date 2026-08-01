@@ -4,14 +4,17 @@
 @import "params";
 
 @import "reset";
+@import "anims";
 
 @import "workspaces";
 @import "nexus";
 @import "tray";
+@import "player";
 
 @import "nexus-panels";
 @import "quick-hub";
 @import "power-hub";
+@import "power-menu";
 
 window {
     &.Bar {
@@ -59,15 +62,12 @@ window {
     
 }
 .bar-surface-top {
-    //background-color: Alpha($surface-1, .25); 
     min-height: 22px;
     background: radial-gradient(ellipse 10% 100% at 5% 50%, $surface-1, transparent),
                 radial-gradient(30% 100% at 40% 60%, Alpha(Shade($surface-2, .75), .5), transparent),
                 //radial-gradient(20% 100% at 70% 0%, $surface-1, transparent),
                 radial-gradient(40% 80% at 10% 0%, Alpha(Shade($accent-3, .65), .1) 50%, transparent),
                 radial-gradient(40% 80% at 90% 0%, Alpha(Shade($accent-3, .65), .1) 50%, transparent),
-                
-                
                 //radial-gradient(50% 100% at 50% 0%, $surface-2 30%, transparent 80%)
                 ;
     

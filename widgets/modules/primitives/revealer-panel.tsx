@@ -1,9 +1,10 @@
-/*import { Astal, Gtk } from "ags/gtk4"
+import { Astal, Gtk } from "ags/gtk4"
 import app from "ags/gtk4/app"
 import { Accessor, createState } from "ags"
-import { PanelProps } from "../../../../../lib/core/types"
+import { PanelProps } from "../../../lib/core/types"
 
-export default function NexusPanel({
+
+export default function RevealerPanel({
   name, visible, children, anchor, classes: _classes, transition, revealerClasses
 }: PanelProps) {
   // window must be visible longer from panel
@@ -25,15 +26,12 @@ export default function NexusPanel({
       keymode={Astal.Keymode.ON_DEMAND}
       anchor={anchor ?? Astal.WindowAnchor.BOTTOM}
       cssClasses={_classes}
-        
-        //[..._classes ?? "", "nexus-panel-window"]}
     >
       <revealer
         transitionType={transition ?? Gtk.RevealerTransitionType.CROSSFADE}
         transitionDuration={250}
         revealChild={visible}
         cssClasses={revealerClasses}
-          //["bar-revealer", revealerClass ?? ""]}
         $={(self) => {
           self.connect("notify::child-revealed", () => {
             if (!self.get_child_revealed() && !visible()) {
@@ -46,4 +44,4 @@ export default function NexusPanel({
       </revealer>
     </window>
   )
-}*/
+}

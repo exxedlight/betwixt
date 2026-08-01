@@ -1,7 +1,7 @@
 .power-hub{
     padding: 0 10px;
     font-size: 14px;
-    font-family: $symbols-font;
+    font-family: $symbols-font, monospace;
     color: $font-base;
     font-weight: 600;
 
@@ -21,8 +21,7 @@
             margin: 0 2px;
             min-width: 25px;
             font-size: 16px;
-            transition: all $anim-duration linear;
-
+            transition: all $anim-duration ease;
 
             &:hover{
                 background: 
@@ -32,6 +31,7 @@
                 padding: 0 10px;
             }
         }
+        label { font-family: $symbols-font; }
 
         .eco-modes{
             border-radius: 10px;
@@ -43,26 +43,56 @@
                 border-top-right-radius: 0; border-bottom-right-radius: 0;
                 margin-right: 0;
                 background: radial-gradient(100% 50% at 100% 50%, $accent-2, transparent);
+                padding: 0;
             }
         }
         .eco-button{
             border-radius: 10px;
-            &.active { background: radial-gradient(60% 60% at 50% 50%, $accent-2, transparent); }
+            &.active, &:hover.active { background: radial-gradient(60% 60% at 50% 50%, $accent-2, transparent); padding: 0; }
+            
             &.ultra-eco-mode {
                 border-top-left-radius: 0; border-bottom-left-radius: 0;
                 margin-left: 0;
                 background: radial-gradient(100% 50% at 0% 50%, $accent-2, transparent);
+                padding: 0;
             }
         }
         .ballanced-button{
             border-radius: 100%;
-            &.active { background: radial-gradient(60% 60% at 50% 50%, $accent-2, transparent); }
+            &.active, &:hover.active { background: radial-gradient(60% 60% at 50% 50%, $accent-2, transparent); padding: 0; }
         }
         .performance-button{
             border-radius: 100%;
-            &.active { background: radial-gradient(60% 60% at 50% 50%, $accent-2, transparent); }
+            &.active, &:hover.active { background: radial-gradient(60% 60% at 50% 50%, $accent-2, transparent); padding: 0; }
         }
     }
+
+
+    .idle-indicator{
+        margin-right: 5px;
+        padding: 0 6px;
+        font-size: 16px;
+        border-radius: 100%;
+        transition: all $anim-duration ease;
+
+        label{ font-family: $symbols-font; }
+
+        &.active {
+            background: radial-gradient(70% 70% at 45% 50%, Alpha($shadow-2, .3), transparent);
+            text-shadow: 0 0 10px $shadow-1;
+        }
+        &:hover{
+            opacity: .8;
+            padding: 0 10px;
+            transform: scale(1.2);
+
+            &.active{
+                background: radial-gradient(50% 50% at 45% 50%, Alpha($shadow-2, .3), transparent);
+            }
+        }
+    }
+
+
 
     .battery-indicator{
         @include skew(-10deg);
@@ -96,7 +126,17 @@
                 radial-gradient(50% 50% at 50% 50%, $accent-4, transparent),
             ;
             transform: scale(1.1);
-            padding: 0 15px;
+            //padding: 0 15px;
+            min-width: 35px;
+        }
+
+        &.menu-opened{
+            @include skew(-15deg);
+            min-width: 35px;
+            &:hover{
+                padding: 0 10px;
+            }
         }
     }
+    
 }

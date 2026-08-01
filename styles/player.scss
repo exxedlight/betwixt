@@ -1,0 +1,59 @@
+.bar-player{
+    
+    //background-color: red;
+
+    .play-pause{
+        
+        border-radius: 100%;
+        padding: 0 7px;
+        font-size: 20px;
+        transition: all $anim-duration ease;
+        margin-right: 10px;
+        
+
+        label { font-family: $symbols-font; color: $font-light; }
+
+        &.playing { animation: player-playing-pulse 1s infinite ease; }
+        &.stopped { animation:none; text-shadow: 2px 2px 10px $accent-4; }
+
+        &:hover { opacity: .8; color: $highlight-0; background: radial-gradient(50% 50% at center, Alpha($accent-3, .5), transparent); }
+    }
+
+
+    .meta-progress{
+        background: 
+            radial-gradient(60% 50% at 30% 60%, Alpha($surface-3, .75), transparent),
+            radial-gradient(50% 50% at 100% 50%, $accent-4, transparent),
+        ;
+        border-radius: 5px;
+        border-top-left-radius: 0; border-bottom-right-radius: 0;
+
+        .meta {
+            min-height: 18px;
+            & label { 
+                font-family: $player-font-1, $player-font-2, $player-font-3, monospace; 
+                font-style: italic;
+                font-weight: 600;
+                text-shadow: 1px 1px 1px $accent-4;
+            }
+        }
+        .progress-bar-container{
+            min-height: 2px;
+            
+            .progress-bg{
+                background-color: white;
+            }
+            .progress-fill{
+                background-color: $surface-3;
+            }
+        }
+    }
+
+    .visualizer-container {
+        background: 
+            radial-gradient(30% 50% at 60% 70%, Alpha($surface-4, .55), transparent),
+            radial-gradient(50% 50% at 0% 50%, $accent-4, transparent),
+        ;
+    }
+    
+}
