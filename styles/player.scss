@@ -1,6 +1,13 @@
 .bar-player{
-    
-    //background-color: red;
+    padding: 0 10px;
+
+    border-radius: 7px;
+    border-top-left-radius: 0; border-top-right-radius: 0;
+
+    background-color: Alpha(Shade($surface-4, .75), .25);
+    box-shadow: inset 0 -3px 5px Alpha($highlight-2, .5);
+    border: 1px solid Alpha($highlight-1, .3);
+    border-top: none;
 
     .play-pause{
         
@@ -22,7 +29,7 @@
 
     .meta-progress{
         background: 
-            radial-gradient(60% 50% at 30% 60%, Alpha($surface-3, .75), transparent),
+            radial-gradient(40% 50% at 50% 50%, Alpha($surface-3, .75), transparent),
             radial-gradient(50% 50% at 100% 50%, $accent-4, transparent),
         ;
         border-radius: 5px;

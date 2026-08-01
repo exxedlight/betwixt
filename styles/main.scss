@@ -55,21 +55,21 @@ window {
     background: radial-gradient(ellipse 10% 100% at 5% 50%, $surface-1, transparent),
                 radial-gradient(30% 100% at 40% 60%, Shade($surface-2, .75), transparent),
                 radial-gradient(20% 100% at 70% 80%, $surface-1, transparent),
-                radial-gradient(40% 100% at 10% 100%, Alpha($surface-3, .5) 50%, transparent),
-                radial-gradient(40% 100% at 90% 100%, Alpha(Shade($accent-3, .65), .35) 50%, transparent),
-                //radial-gradient(50% 100% at 50% 0%, $surface-2 30%, transparent 80%)
+                
+                //radial-gradient(40% 100% at 10% 100%, Alpha($surface-3, .5) 50%, transparent),
+                //radial-gradient(40% 100% at 90% 100%, Alpha(Shade($accent-3, .65), .35) 50%, transparent),
                 ;
     
 }
 .bar-surface-top {
     min-height: 22px;
-    background: radial-gradient(ellipse 10% 100% at 5% 50%, $surface-1, transparent),
-                radial-gradient(30% 100% at 40% 60%, Alpha(Shade($surface-2, .75), .5), transparent),
-                //radial-gradient(20% 100% at 70% 0%, $surface-1, transparent),
-                radial-gradient(40% 80% at 10% 0%, Alpha(Shade($accent-3, .65), .1) 50%, transparent),
-                radial-gradient(40% 80% at 90% 0%, Alpha(Shade($accent-3, .65), .1) 50%, transparent),
-                //radial-gradient(50% 100% at 50% 0%, $surface-2 30%, transparent 80%)
-                ;
+    //background: radial-gradient(ellipse 10% 100% at 5% 50%, $surface-1, transparent),
+    //            radial-gradient(30% 100% at 40% 60%, Alpha(Shade($surface-2, .75), .5), transparent),
+    //            //radial-gradient(20% 100% at 70% 0%, $surface-1, transparent),
+    //            radial-gradient(40% 80% at 10% 0%, Alpha(Shade($accent-3, .65), .1) 50%, transparent),
+    //            radial-gradient(40% 80% at 90% 0%, Alpha(Shade($accent-3, .65), .1) 50%, transparent),
+    //            //radial-gradient(50% 100% at 50% 0%, $surface-2 30%, transparent 80%)
+    //            ;
     
 }
 .bar-box{
