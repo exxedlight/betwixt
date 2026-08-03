@@ -10,3 +10,20 @@ export type PanelProps = {
   revealerClasses: string[]
   transition?: Gtk.RevealerTransitionType | Accessor<NonNullable<Gtk.RevealerTransitionType | undefined>> | undefined;
 }
+
+export type DesktopPreferences = {
+    "grid-size": [number, number]
+    "icon-size": [number, number]
+    spacing: [number, number],
+    "icons-font-size": string
+}
+export type DesktopItem = {
+    pos: [number, number]
+    icon: string
+    label: string
+    command: string
+}
+export type DesktopConfig = {
+    preferences: DesktopPreferences
+    items: DesktopItem[]
+}

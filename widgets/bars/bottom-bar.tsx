@@ -3,6 +3,7 @@ import { Astal } from "ags/gtk4"
 import Workspaces from "../modules/bottom-bar/workspaces"
 import Nexus from "../modules/bottom-bar/nexus/core/nexus"
 import QuickHub from "../modules/bottom-bar/quick-hub/quick-hub"
+import HiderButton from "../modules/bottom-bar/hider-button"
 
 
 
@@ -26,7 +27,8 @@ export default function BottomBar(monitor = 0) {
       <centerbox class="bar-surface-bottom">
         
         <box $type="start" spacing={6} cssClasses={["bar-box", "bar-left-box"]}>
-            <Workspaces></Workspaces>
+            <HiderButton/>
+            <Workspaces/>
         </box>
 
         <box $type="center" spacing={6} cssClasses={["bar-box", "bar-center-box"]}>

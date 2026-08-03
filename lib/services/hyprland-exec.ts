@@ -1,4 +1,4 @@
-import { execAsync } from "ags/process"
+import { exec, execAsync } from "ags/process"
 import Apps from "gi://AstalApps"
 
 // Desktop entries can contain field codes (%u, %f, %U, %F, %i, %c, %k) in
@@ -33,6 +33,7 @@ export const launchApp = (app: Apps.Application, closeHandler?: () => void) => {
     closeHandler?.()
 }
 
+//  Launch terminal command from Hyprland dispatch
 export const launchCommand = (_command: string, closeHandler?: () => void) => {
     const command = stripFieldCodes(_command)
     const luaExpr = `hl.dsp.exec_cmd(${toLuaStringLiteral(command)})`
@@ -44,9 +45,15 @@ export const launchCommand = (_command: string, closeHandler?: () => void) => {
     closeHandler?.();
 }
 
+//  End session
 export const exitHyprland = (closeHandler?: () => void) => {
     execAsync(["hyprctl", "dispatch", "hl.dsp.exit()"]).catch((err) =>
         console.error("Failed to exit Hyprland:", err)
     )
     closeHandler?.()
+}
+
+//  Go to first empty workspace
+export const swithToEmptyWorkspace = () => {
+    exec(["hyprctl", "eval", `hl.dispatch(hl.dsp.focus({ workspace = "empty" }))`])
 }

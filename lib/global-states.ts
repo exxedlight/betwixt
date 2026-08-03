@@ -27,3 +27,9 @@ export const [powermenuVisible, setPowermenuVisible] = createState(false);
 export function powermenuVisibilityToggle() {
     setPowermenuVisible(!powermenuVisible())
 }
+
+
+//  DESKTOP
+export const [desktopVisible, setDesktopVisible] = createState(false);
+export const toggleDesktop = () => setDesktopVisible(!desktopVisible());
+

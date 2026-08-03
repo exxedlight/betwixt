@@ -1,0 +1,90 @@
+.desktop-button{
+    font-family: $symbols-font;
+    font-size: 16px;
+    padding: 0 3px;
+    opacity: .7;
+    transition: all $anim-duration ease;
+
+    &:hover{
+        opacity: 1;
+        text-shadow: 0 0 5px $accent-1;
+    }
+}
+
+.desktop-panel{
+    margin-left: -60px;
+    //background-color: green;
+    
+    .desktop-revealer{
+        //background-color: rgba(0, 0, 255, 0.484);
+        padding: 0 30px;
+        
+        .desktop-panel-content{
+            @include skew(-3deg);
+            padding: 0 50px;
+            
+            background: 
+                radial-gradient(45% 10% at 30% 100%, Alpha($accent-4, .5), transparent),
+                radial-gradient(45% 10% at 70% 0%, Alpha($surface-3, .3), transparent),
+                radial-gradient(50% 50% at 50% 50%, Alpha($accent-4, .45), transparent)
+            ;
+            background-color: Alpha($surface-2, .5);
+        }
+    }
+}
+
+.desktop-wrapper{
+    .desktop-header{
+        //background-color: rgba(255, 255, 0, 0.298);
+    }
+    .desktop-grid {
+        //background-color: rgba(0, 0, 255, 0.338);
+    }
+}
+
+.desktop-grid-row{
+    //background-color: rgba(255, 255, 0, 0.362);
+    //padding: 0 10px;
+
+    .desktop-grid-cell {
+        //background-color: green;
+        //padding: 10px;
+    }
+}
+
+
+.desktop-icon{
+    //background-color: $accent-4;
+    //background-color: red;
+    border-radius: 15px;
+    transition: all $anim-duration ease;
+
+    .desktop-icon-glyph{
+        font-family: $symbols-font;
+        transition: all $anim-duration ease;
+    }
+    .desktop-icon-label{
+        font-size: 8px;
+        opacity: 0;
+        transition: all $anim-duration ease;
+        //transform: rotate(45deg);
+    }
+
+    &:hover{
+
+        transform: scale(1.2); //rotate(-45deg);
+        box-shadow: 0 0 30px $surface-3;
+        //background-color: transparent;
+        //border-radius: 100%;
+
+        .desktop-icon-glyph{
+            transform: scale(.7) ;//rotate(45deg);
+        }
+        .desktop-icon-label{
+            opacity: 1;
+            //transform: rotate(45deg);
+        }
+        
+        
+    }
+}

@@ -10,6 +10,7 @@
 @import "nexus";
 @import "tray";
 @import "player";
+@import "desktop";
 
 @import "nexus-panels";
 @import "quick-hub";
@@ -75,7 +76,7 @@ window {
 .bar-box{
     @include skew(-25deg);
     
-    &.bar-left-box  { margin-left: -5px; background-color: Alpha($surface-2, .5); }
+    &.bar-left-box  { margin-left: -5px; padding-left: 5px; background-color: Alpha($surface-2, .5); }
     &.bar-center-box { background: radial-gradient(50% 100% at 50% 0%, $surface-2, transparent); }
     &.bar-right-box { margin-right: -10px; background-color: Alpha($surface-2, .5); }
 }

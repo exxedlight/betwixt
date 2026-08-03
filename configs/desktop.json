@@ -1,0 +1,119 @@
+{
+  "preferences": {
+    "grid-size": [22, 11],
+    "icon-size": [45, 45],
+    "spacing": [10, 45],
+    "icons-font-size": 20
+  },
+
+  "items": [
+    {
+      "pos": [0, 5],
+      "icon": "",
+      "label": "Telegram",
+      "command": "Telegram"
+    },
+    {
+      "pos": [0, 6],
+      "icon": "",
+      "label": "Vivaldi",
+      "command": "vivaldi"
+    },
+    {
+      "pos": [0, 0],
+      "icon": "",
+      "label": "Thunar",
+      "command": "thunar"
+    },
+    {
+      "pos": [1, 0],
+      "icon": "",
+      "label": "OWN",
+      "command": "thunar ~/OWN/"
+    },
+    {
+      "pos": [2, 0],
+      "icon": "",
+      "label": "zDocs",
+      "command": "thunar ~/zDocs/"
+    },
+    {
+      "pos": [21, 0],
+      "icon": "",
+      "label": "Lutris",
+      "command": "lutris"
+    },
+    {
+      "label": "Draw.io",
+      "icon": "",
+      "command": "drawio",
+      "pos": [10, 10]
+    },
+    {
+      "label": "MariaDB toogle",
+      "icon": "",
+      "command": "kitty ~/Env/Scripts/toogle-mariadb-service.fish",
+      "pos": [10, 11]
+    },
+    {
+      "label": "MariaDB Shell",
+      "icon": "",
+      "command": "kitty mysql -u mysql -p",
+      "pos": [11, 11]
+    },
+    {
+      "label": "MySQL\nWorksbench",
+      "icon": "",
+      "command": "mysql-workbench",
+      "pos": [12, 11]
+    },
+    {
+      "label": "Hyprland\nconf",
+      "icon": "",
+      "command": "zeditor ~/.config/hypr/",
+      "pos": [21, 7]
+    },
+    {
+      "label": "Own\nscripts",
+      "icon": "󰯂",
+      "command": "zeditor ~/Env/Scripts/",
+      "pos": [21, 8]
+    },
+    {
+      "label": "VBox\nWin10-LTSC-21H2",
+      "icon": "",
+      "command": "VirtualBoxVM --startvm 'Win10-LTSC-21H2' &",
+      "pos": [0, 10]
+    },
+    {
+      "label": "Steam",
+      "icon": "",
+      "command": "steam",
+      "pos": [15, 0]
+    },
+    {
+      "label": "SAI2",
+      "icon": "",
+      "command": "wine ~/zPrograms/SAI2/sai2.exe",
+      "pos": [3, 5]
+    },
+    {
+      "label": "Unity",
+      "icon": "",
+      "command": "unityhub",
+      "pos": [3, 8]
+    },
+    {
+      "label": "Krita",
+      "icon": "",
+      "command": "krita",
+      "pos": [4, 5]
+    },
+    {
+      "label": "Calc",
+      "icon": "󰃬",
+      "command": "uno-calculator",
+      "pos": [7, 7]
+    }
+  ]
+}

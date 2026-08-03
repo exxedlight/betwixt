@@ -254,4 +254,3 @@ export const changeVolume = (delta: number) => {
 export const togglePlayPause = () => activePlayer()?.play_pause()
 export const nextTrack = () => activePlayer()?.next()
 export const prevTrack = () => activePlayer()?.previous()
-

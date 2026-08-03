@@ -35,12 +35,6 @@ export default function Workspaces() {
 
   return (
     <box class="workspaces" spacing={2}>
-      <label
-        class={"hider-btn"}
-        label={""}
-        $={onClick(() => exec(["hyprctl", "eval", `hl.dispatch(hl.dsp.focus({ workspace = "empty" }))`]))}
-      />
-
       <For each={workspaces}>
         {(ws) => (
           <box

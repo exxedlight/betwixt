@@ -47,11 +47,10 @@
         .progress-bar-container{
             min-height: 2px;
             
-            .progress-bg{
-                background-color: white;
-            }
+            //.progress-bg { background-color: white; }
             .progress-fill{
-                background-color: $surface-3;
+                //background-color: $surface-3;
+                background: linear-gradient(to left, $highlight-1 1%, $accent-3 25%, $surface-3 70%);
             }
         }
     }

@@ -1,4 +1,4 @@
-import { toggleNexusPanel, NexusPanelKey } from "../global-states"
+import { toggleNexusPanel, NexusPanelKey, toggleDesktop } from "../global-states"
 
 
 export function handleKeybindRequest(argv: string[], res: (response: string) => void) {
@@ -23,7 +23,6 @@ export function handleKeybindRequest(argv: string[], res: (response: string) => 
 //
 //      ~ example: hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("ags request 'toggle-apps'"))
 const actions: Record<string, () => void> = {
-    "toggle-apps": () => toggleNexusPanel(NexusPanelKey.APPS),
-
-
+    "toggle-apps":      () => toggleNexusPanel(NexusPanelKey.APPS),     //  toggle Apps panel (wofi analog)
+    "toggle-desktop":   () => toggleDesktop(),                          //  toggle desktop panel
 }

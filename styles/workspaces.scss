@@ -1,19 +1,21 @@
+.hider-btn {
+    margin-right: 3px;
+    opacity: .3;
+    min-width: 18px;
+    transition: opacity $anim-duration ease;
+    font-family: $symbols-font;
+    font-size: 18px;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
 .workspaces {
     font-family: $symbols-font, monospace;
     font-size: 16px;
     padding: 0;
     padding-right: 10px;
-
-    .hider-btn {
-        margin-right: 3px;
-        opacity: .3;
-        min-width: 18px;
-        transition: opacity $anim-duration ease;
-
-        &:hover {
-            opacity: 1;
-        }
-    }
 
     .tab-box {
         padding: 0 7px;
