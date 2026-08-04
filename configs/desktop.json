@@ -1,20 +1,20 @@
 {
   "preferences": {
-    "grid-size": [22, 11],
+    "grid-size": [22, 10],
     "icon-size": [45, 45],
     "spacing": [10, 45],
-    "icons-font-size": 20
+    "icons-font-size": 25
   },
 
   "items": [
     {
-      "pos": [0, 5],
+      "pos": [0, 4],
       "icon": "",
       "label": "Telegram",
       "command": "Telegram"
     },
     {
-      "pos": [0, 6],
+      "pos": [0, 5],
       "icon": "",
       "label": "Vivaldi",
       "command": "vivaldi"
@@ -47,7 +47,7 @@
       "label": "Draw.io",
       "icon": "",
       "command": "drawio",
-      "pos": [10, 10]
+      "pos": [10, 7]
     },
     {
       "label": "MariaDB toogle",
@@ -80,10 +80,16 @@
       "pos": [21, 8]
     },
     {
+      "pos": [21, 9],
+      "icon": "󱢒",
+      "label": "Betwixt",
+      "command": "code ~/OWN/Betwixt"
+    },
+    {
       "label": "VBox\nWin10-LTSC-21H2",
       "icon": "",
       "command": "VirtualBoxVM --startvm 'Win10-LTSC-21H2' &",
-      "pos": [0, 10]
+      "pos": [0, 9]
     },
     {
       "label": "Steam",
@@ -101,7 +107,7 @@
       "label": "Unity",
       "icon": "",
       "command": "unityhub",
-      "pos": [3, 8]
+      "pos": [5, 9]
     },
     {
       "label": "Krita",
@@ -113,7 +119,7 @@
       "label": "Calc",
       "icon": "󰃬",
       "command": "uno-calculator",
-      "pos": [7, 7]
+      "pos": [0, 7]
     }
   ]
 }

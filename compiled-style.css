@@ -309,10 +309,10 @@
 }
 
 .desktop-panel {
-  margin-left: -60px;
+  margin-left: -70px;
 }
 .desktop-panel .desktop-revealer {
-  padding: 0 30px;
+  padding: 0 40px;
 }
 .desktop-panel .desktop-revealer .desktop-panel-content {
   transform: skew(-3deg, 0);
@@ -322,13 +322,33 @@
 }
 .desktop-panel .desktop-revealer .desktop-panel-content {
   padding: 0 50px;
-  background: radial-gradient(45% 10% at 30% 100%, Alpha(rgb(41, 0, 67), 0.5), transparent), radial-gradient(45% 10% at 70% 0%, Alpha(rgb(82, 50, 124), 0.3), transparent), radial-gradient(50% 50% at 50% 50%, Alpha(rgb(41, 0, 67), 0.45), transparent);
-  background-color: Alpha(rgb(14, 4, 16), 0.5);
+  background: radial-gradient(45% 10% at 10% 100%, Alpha(rgb(41, 0, 67), 0.5), transparent), radial-gradient(45% 5% at 80% 0%, Alpha(rgb(82, 50, 124), 0.25), transparent), radial-gradient(50% 50% at 50% 50%, Alpha(rgb(41, 0, 67), 0.45), transparent);
+  background-color: Alpha(rgb(14, 4, 16), 0.75);
+  box-shadow: 2px 0 2px Alpha(rgb(82, 50, 124), 0.1), 2px 0 10px Alpha(rgb(173, 59, 243), 0.3);
 }
 
+.desktop-wrapper {
+  padding-left: 20px;
+}
+.desktop-wrapper .desktop-grid {
+  transform: skew(-3deg, 0);
+}
+.desktop-wrapper .desktop-grid > * {
+  transform: skew(3deg, 0);
+}
+.desktop-wrapper .desktop-grid {
+  border-radius: 10px;
+  padding: 10px;
+}
+
+/*.desktop-grid-row{
+    .desktop-grid-cell {  }
+}
+*/
 .desktop-icon {
   border-radius: 15px;
   transition: all 0.3s ease;
+  box-shadow: 0 0 1px Alpha(rgb(222, 222, 222), 0.35);
 }
 .desktop-icon .desktop-icon-glyph {
   font-family: "Symbols Nerd Font";
