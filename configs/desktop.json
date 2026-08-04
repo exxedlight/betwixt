@@ -38,6 +38,12 @@
       "command": "thunar ~/zDocs/"
     },
     {
+      "pos": [4, 0],
+      "icon": "",
+      "label": "Betwixt",
+      "command": "thunar ~/OWN/Betwixt"
+    },
+    {
       "pos": [21, 0],
       "icon": "",
       "label": "Lutris",

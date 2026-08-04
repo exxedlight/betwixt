@@ -1,10 +1,13 @@
 import { exec } from "ags/process"
+import Gio from "gi://Gio";
 import GLib from "gi://GLib"
-
 
 //  Previous tick CPU shot
 let prevCPUStat: { idle: number; total: number } | null = null
 
+//  Regular names for CPU temp
+const CPU_TEMP_DRIVERS = ["coretemp", "k10temp", "zenpower"]
+let cpuTempPath: string | null | undefined
 
 
 
@@ -30,12 +33,31 @@ export function getGpuTemp(): number | null {
 }
 
 
-//  CPU temperature (hmon address)
-export function getCpuTemp(path = "/sys/class/hwmon/hwmon4/temp1_input"): number | null {
-  const [ok, bytes] = GLib.file_get_contents(path)
+
+//  ===   CPU temperature   ===
+
+
+function resolveCpuTempPath(): string | null {
+  const base = "/sys/class/hwmon"
+  const list = Gio.File.new_for_path(base).enumerate_children(
+    "standard::name", Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null,
+  )
+  let info: Gio.FileInfo | null
+  while ((info = list.next_file(null))) {
+    const [ok, bytes] = GLib.file_get_contents(`${base}/${info.get_name()}/name`)
+    if (!ok) continue
+    if (CPU_TEMP_DRIVERS.includes(new TextDecoder().decode(bytes).trim()))
+      return `${base}/${info.get_name()}/temp1_input`
+  }
+  return null
+}
+
+export function getCpuTemp(): number | null {
+  if (cpuTempPath === undefined) cpuTempPath = resolveCpuTempPath()
+  if (!cpuTempPath) return null
+  const [ok, bytes] = GLib.file_get_contents(cpuTempPath)
   if (!ok) return null
-  const raw = new TextDecoder().decode(bytes).trim()
-  return Math.round(parseInt(raw, 10) / 1000)
+  return Math.round(parseInt(new TextDecoder().decode(bytes).trim(), 10) / 1000)
 }
 
 

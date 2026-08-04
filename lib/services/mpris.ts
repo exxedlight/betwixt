@@ -76,11 +76,11 @@ class MprisPlayer {
     }
 
     private pcall(method: string, args: GLib.Variant | null): GLib.Variant | null {
-        try { return this.player.call_sync(method, args, Gio.DBusCallFlags.NONE, -1, null) }
+        try { return this.player.call_sync(method, args, Gio.DBusCallFlags.NONE, 100, null) }
         catch { return null }
     }
     private scall(method: string, args: GLib.Variant): GLib.Variant | null {
-        try { return this.props.call_sync(method, args, Gio.DBusCallFlags.NONE, -1, null) }
+        try { return this.props.call_sync(method, args, Gio.DBusCallFlags.NONE, 100, null) }
         catch { return null }
     }
 
@@ -194,22 +194,11 @@ export const activePlayer = createComputed<MprisPlayer | null>(() => {
 
 // ================= GETTERS (unchanged, except isPlaying string compare) =================
 
-export const trackTitle = createPoll("Unknown Track", 1000, () =>
-    activePlayer()?.title || "Unknown Track"
-)
-
-export const trackArtist = createPoll("Unknown Artist", 1000, () =>
-    activePlayer()?.artist || "Unknown Artist"
-)
-
-// 250ms for a snappy play/pause icon reaction on click
-export const isPlaying = createPoll(false, 250, () =>
-    activePlayer()?.playback_status === "Playing"
-)
-
-export const playerVolume = createPoll(0, 1000, () => activePlayer()?.volume || 0)
-export const trackDuration = createPoll(0, 1000, () => activePlayer()?.length || 0)
-
+export const trackTitle    = createComputed(() => activePlayer()?.title  || "Unknown Track")
+export const trackArtist   = createComputed(() => activePlayer()?.artist || "Unknown Artist")
+export const isPlaying     = createComputed(() => activePlayer()?.playback_status === "Playing")
+export const playerVolume  = createComputed(() => activePlayer()?.volume || 0)
+export const trackDuration = createComputed(() => activePlayer()?.length || 0)
 
 
 

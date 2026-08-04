@@ -1,2 +1,5 @@
 node_modules/
 @girs/
+compiled-style.css
+compiled-style.css.map
+allCode.txt

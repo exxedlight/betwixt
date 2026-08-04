@@ -8,7 +8,6 @@ const langMap = languagesMap as Record<string, string>
 
 export default function InputSourceIndicator() {
     const hyprland = Hyprland.get_default()
-    
     const [layoutVar, setLayoutVar] = createState("US");
     
     hyprland.connect("keyboard-layout", (_self, _keyboard, layout: string) => {

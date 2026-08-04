@@ -40,7 +40,7 @@ export async function scanWifi() {
 }
 
 export async function getWifiNetworks(): Promise<WifiNetwork[]> {
-  await scanWifi()
+  //await scanWifi()
   const out = await execAsync([
     "nmcli", "-t", "-f",
     "IN-USE,BSSID,SSID,MODE,CHAN,RATE,SIGNAL,SECURITY",

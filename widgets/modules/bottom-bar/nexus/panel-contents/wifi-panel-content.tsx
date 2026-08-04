@@ -1,7 +1,6 @@
 import Gtk from "gi://Gtk?version=4.0"
 import { Accessor, createState, createComputed, For } from "ags"
-import { createPoll } from "ags/time"
-import { getWifiNetworks, connectWifi, WifiNetwork, SecretsRequiredError } from "../../../../../lib/services/wifi"
+import { getWifiNetworks, connectWifi, WifiNetwork, SecretsRequiredError, scanWifi } from "../../../../../lib/services/wifi"
 
 type NetworkItemProps = {
   net: Accessor<WifiNetwork>
@@ -47,7 +46,19 @@ type Props = {
 }
 
 export default function WifiPanelContent({ onClose }: Props) {
-  const networks = createPoll<WifiNetwork[]>([], 3000, () => getWifiNetworks())
+
+  const [networks, setNetworks] = createState<WifiNetwork[]>([])
+  let pollTimer: ReturnType<typeof setInterval> | null = null
+
+  const refresh = () => getWifiNetworks().then(setNetworks).catch(() => {})
+  const startPoll = () => {
+    if (pollTimer) return
+    refresh()
+    pollTimer = setInterval(refresh, 3000)
+  }
+  const stopPoll = () => {
+    if (pollTimer) { clearInterval(pollTimer); pollTimer = null }
+  }
 
   // Keys list by bssid
   const bssids = createComputed(() => networks().map((n) => n.bssid))
@@ -71,7 +82,15 @@ export default function WifiPanelContent({ onClose }: Props) {
   }
 
   return (
-    <box class="wifi-panel" orientation={Gtk.Orientation.VERTICAL} spacing={8}>
+    <box 
+      class="wifi-panel" 
+      orientation={Gtk.Orientation.VERTICAL} 
+      spacing={8}
+      $={(self) => {
+        self.connect("map", async () => { await scanWifi(); startPoll() })
+        self.connect("unmap", () => stopPoll())
+      }}
+    >
       <centerbox class="header">
         <label $type="start" label="Wi-Fi Networks" class="panel-title" />
         <button class="close-button" $type="end" label="" onClicked={onClose} />
