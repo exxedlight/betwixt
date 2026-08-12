@@ -1,17 +1,10 @@
 import { Gdk, Gtk } from "ags/gtk4"
 import { createState, With } from "ags"
-import { DesktopConfig } from "../../lib/core/types"
-import GLib from "gi://GLib"
-import { monitorFile } from "ags/file"
 import { onClick } from "../../lib/core/gestures"
 import { launchCommand, swithToEmptyWorkspace } from "../../lib/services/hyprland-exec"
 import { toggleDesktop } from "../../lib/global-states"
 import { desktopConfig } from "../../lib/services/desktop"
-
-function getPrimaryMonitorWidth(): number {
-    const monitor = Gdk.Display.get_default()?.get_monitors().get_item(0) as Gdk.Monitor | null
-    return monitor?.get_geometry().width ?? 1920 // fallback
-}
+import { getPrimaryMonitorWidth } from "../../lib/services/monitors"
 
 //const CONFIG_PATH = `${SRC}/configs/desktop.json`
 
@@ -45,7 +38,7 @@ function getPrimaryMonitorWidth(): number {
 })*/
 
 export default function DesktopPanelContent() {
-    const panelWidth = Math.round(getPrimaryMonitorWidth() * 0.7)
+    const panelWidth = Math.round(getPrimaryMonitorWidth() * 0.65)
     const handleClose = () => toggleDesktop()
 
     const [glowCss, setGlowCss] = createState("")
@@ -54,11 +47,6 @@ export default function DesktopPanelContent() {
         const motion = new Gtk.EventControllerMotion()
  
         motion.connect("motion", (_ctl, x: number, y: number) => {
-            // Swap this rgba for your actual accent color (or an
-            // @define-color name if you have GTK-native color vars — SCSS
-            // $variables aren't available here, this string is built at
-            // runtime, after SCSS has already compiled away).
-            
             //  Light
             setGlowCss(`
                 background-image: 
@@ -73,7 +61,6 @@ export default function DesktopPanelContent() {
                     radial-gradient(circle 1550px at ${x}px ${y}px, rgba(0, 0, 0, 0.8), transparent 70%)
                 ;
             `)*/
-            //  radial-gradient(circle 650px at ${x}px ${y}px, rgba(132, 37, 124, 0.15), transparent 70%)
         })
  
         motion.connect("leave", () => setGlowCss(""))

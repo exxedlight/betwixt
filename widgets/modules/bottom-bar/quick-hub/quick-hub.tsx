@@ -4,6 +4,7 @@ import InputSourceIndicator from "./indicators/input-source-indicator";
 import VolumeInputIndicator from "./indicators/volume-input-indicator";
 import VolumeOutputIndicator from "./indicators/volume-output-indicator";
 import { createState } from "ags";
+import SidepanelButton from "../../../sidepanel/sidepanel-button";
 
 export default function QuickHub() {
     const [volumeInputVisible, setVolumeInputVisible] = createState(false);
@@ -27,6 +28,9 @@ export default function QuickHub() {
 
     return (
         <box class="quick-hub">
+
+            <SidepanelButton/>
+
             <InputSourceIndicator/>
             <BrightnessIndicator/>
 

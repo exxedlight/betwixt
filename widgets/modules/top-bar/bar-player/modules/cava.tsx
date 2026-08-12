@@ -1,11 +1,18 @@
-import { Gtk } from "ags/gtk4"
+import { Gdk, Gtk } from "ags/gtk4"
 import { subprocess } from "ags/process"
 import { createState } from "ags"
 import cairo from "cairo"
 
+const VISUALISER_WIDTH = 200;
+
 export default function Cava() {
     const [bars, setBars] = createState<number[]>(new Array(40).fill(0))
     let drawingArea: Gtk.DrawingArea | null = null
+
+    //const gradient = new cairo.LinearGradient(0, 0, VISUALISER_WIDTH, 0)
+    //gradient.addColorStopRGBA(0.0, 0.6, 0.2, 1.0, 0.8)  // start (purple)
+    //gradient.addColorStopRGBA(0.5, 0.8, 0.4, 1.0, 0.9)  // middle
+    //gradient.addColorStopRGBA(1.0, 1.0, 0.6, 1.0, 1.0)  // end (pink)
 
     subprocess(
         //  cava config path
@@ -19,34 +26,47 @@ export default function Cava() {
         }
     )
 
+    
+
     return (
         <drawingarea
             class="visualizer-container"
             valign={Gtk.Align.CENTER}
-            css="min-width: 200px; min-height: 20px;"
+            css={`min-width: ${VISUALISER_WIDTH}px; min-height: 20px;`}
             $={(self: Gtk.DrawingArea) => {
                 drawingArea = self
 
-                //  GTK4 drawing ==> set_draw_func
                 self.set_draw_func((_, cr: cairo.Context, width: number, height: number) => {
                     const barValues = bars()
 
-                    //  Clear the canvas
+                    // === Clear canvas
                     cr.setSourceRGBA(0, 0, 0, 0)
                     cr.paint()
 
-                    //  Main line setup
-                    cr.setLineWidth(2)
-                    cr.setLineCap(cairo.LineCap.ROUND)
+                    // === Dynamic CSS colors loader
 
-                    //  Gradient
+                    //  Get visualiser left color
+                    const context = self.get_style_context()
+                    context.save()
+                    context.add_class("cava-left")
+                    const colorLeft = context.get_color()
+                    context.restore()
+
+                    //  Get visualiser right color
+                    context.save()
+                    context.add_class("cava-right")
+                    const colorRight = context.get_color()
+                    context.restore()
+
+                    // === Create gradient for current width and colors
                     const gradient = new cairo.LinearGradient(0, 0, width, 0)
-                    gradient.addColorStopRGBA(0.0, 0.6, 0.2, 1.0, 0.8)  // start (purple)
-                    gradient.addColorStopRGBA(0.5, 0.8, 0.4, 1.0, 0.9)  // middle
-                    gradient.addColorStopRGBA(1.0, 1.0, 0.6, 1.0, 1.0)  // end (pink)
+                    gradient.addColorStopRGBA(0.0, colorLeft.red, colorLeft.green, colorLeft.blue, colorLeft.alpha)
+                    gradient.addColorStopRGBA(1.0, colorRight.red, colorRight.green, colorRight.blue, colorRight.alpha)
                     cr.setSource(gradient)
 
-                    //  Smooth waveform curve
+                    // === Drawind with Bezier curve
+                    cr.setLineWidth(2)
+                    cr.setLineCap(cairo.LineCap.ROUND)
                     cr.moveTo(0, height / 2)
 
                     for (let i = 0; i < barValues.length; i++) {
@@ -56,7 +76,6 @@ export default function Cava() {
                         if (i === 0) {
                             cr.moveTo(x, y)
                         } else {
-                            //  Smoothing via Bezier control points
                             const prevX = ((i - 1) / (barValues.length - 1)) * width
                             const prevY = height / 2 - (barValues[i - 1] / 100) * (height / 2)
                             const cpX = (prevX + x) / 2
@@ -67,8 +86,8 @@ export default function Cava() {
                     }
                     cr.stroke()
 
-                    //  Glow effect
-                    cr.setSourceRGBA(0.7, 0.3, 1.0, 0.3)
+                    // Glow
+                    cr.setSourceRGBA(colorRight.red, colorRight.green, colorRight.blue, 0.3)
                     cr.setLineWidth(6)
                     cr.stroke()
                 })

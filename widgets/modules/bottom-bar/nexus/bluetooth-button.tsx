@@ -43,7 +43,7 @@ export default function BluetoothButton() {
                 })(self)
             }}
         >
-            <label label={icon} />
+            <label xalign={0.5} label={icon} />
         </box>
     )
 }

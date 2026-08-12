@@ -1,5 +1,5 @@
 .power-hub{
-    padding: 0 10px;
+    padding-right: 10px;
     font-size: 14px;
     font-family: $symbols-font, monospace;
     color: $font-base;
@@ -78,8 +78,8 @@
         label{ font-family: $symbols-font; }
 
         &.active {
-            background: radial-gradient(70% 70% at 45% 50%, Alpha($shadow-2, .3), transparent);
-            text-shadow: 0 0 10px $shadow-1;
+            background: radial-gradient(70% 70% at 45% 50%, Alpha($highlight-4, .3), transparent);
+            text-shadow: 0 0 10px $accent-2;
         }
         &:hover{
             opacity: .8;
@@ -87,7 +87,7 @@
             transform: scale(1.2);
 
             &.active{
-                background: radial-gradient(50% 50% at 45% 50%, Alpha($shadow-2, .3), transparent);
+                background: radial-gradient(50% 50% at 45% 50%, Alpha($highlight-4, .3), transparent);
             }
         }
     }

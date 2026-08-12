@@ -126,6 +126,13 @@
       "icon": "󰃬",
       "command": "uno-calculator",
       "pos": [0, 7]
+    },
+
+    {
+      "label": "Anomalies. docx",
+      "icon": "",
+      "command": "onlyoffice-desktopeditors '~/zDocs/WIP/AnomaliesDetection - Event Sourcing.docx'",
+      "pos": [7, 2]
     }
   ]
 }

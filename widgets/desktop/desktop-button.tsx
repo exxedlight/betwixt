@@ -2,7 +2,7 @@ import { onClick } from "../../lib/core/gestures";
 import RevealerPanel from "../modules/primitives/revealer-panel";
 import DesktopPanelContent from "./desktop-panel-content";
 import { Astal, Gtk } from "ags/gtk4";
-import { desktopVisible, toggleDesktop } from "../../lib/global-states";
+import { desktopVisible, toggleDesktop, toggleSidepanel } from "../../lib/global-states";
 
 export default function DesktopButton() {
     
@@ -21,7 +21,7 @@ export default function DesktopButton() {
         <label
             label=""
             class="desktop-button"
-            $={onClick(() => toggleDesktop())}
+            $={onClick(() => toggleDesktop() )}
         />
     )
 }

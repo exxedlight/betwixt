@@ -33,3 +33,8 @@ export function powermenuVisibilityToggle() {
 export const [desktopVisible, setDesktopVisible] = createState(false);
 export const toggleDesktop = () => setDesktopVisible(!desktopVisible());
 
+
+//  SIDE PANEL
+export const [sidepanelVisible, setSidepanelVisible] = createState(false);
+export const toggleSidepanel = () => setSidepanelVisible(!sidepanelVisible());
+

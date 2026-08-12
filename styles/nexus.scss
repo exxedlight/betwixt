@@ -28,7 +28,7 @@
 
                 &.available {
                     color: $accent-3; 
-                    text-shadow: 0 0 5px Alpha($shadow-2, .6);
+                    text-shadow: 0 0 5px Alpha($highlight-4, .6);
                 }
             }
 
@@ -83,7 +83,7 @@
                     ;
             
         .ram{
-            padding-left: 10px; padding-right: 4px;
+            padding-left: 10px; padding-right: 4px; padding-top: 4px;
             border-radius: 10px;
             border-bottom-left-radius: 0; border-bottom-right-radius: 0;
             border: 1px solid $accent-2;
@@ -137,5 +137,3 @@
     }
     
 }
-
-

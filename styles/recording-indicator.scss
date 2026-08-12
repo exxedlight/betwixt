@@ -1,0 +1,57 @@
+
+.video-capture-indicator-v1{
+    color: Shade($accent-2, 1.2);
+    text-shadow: 1px 1px 2px black;
+    font-size: 14px;
+    font-weight: 800;
+    font-family: $symbols-font;
+    border: 1px solid $accent-2;
+    padding: 0 5px;
+    border-top: none; border-bottom: none;
+    transition: all $anim-duration ease;
+    animation: video-record-anim 2.5s infinite linear;
+
+    &:hover{
+        color: Shade($accent-2, 1.7);
+        padding: 0 8px;
+        animation: video-record-anim 5.5s infinite linear;
+    }
+}
+
+.video-capture-indicator-v2{
+    color: Shade(red, 1.2);
+    text-shadow: 1px 1px 2px black;
+    font-size: 14px;
+    font-weight: 800;
+    font-family: $symbols-font;
+    border: 1px solid red;
+    padding: 0 5px;
+    
+    transition: all $anim-duration ease;
+    animation: video-record-anim 2.5s infinite linear;
+
+    &:hover{
+        color: Shade(red, 1.7);
+        padding: 0 8px;
+        animation: video-record-anim 5.5s infinite linear;
+    }
+}
+
+
+
+
+
+
+
+@keyframes video-record-anim {
+	0%,100% {
+		background: radial-gradient(30% 20% at 50% 50%, $highlight-2, transparent);
+		border-radius: 10px;
+    	border-top-right-radius: 0; border-bottom-left-radius: 0;
+	}
+	50% {
+		background: radial-gradient(80% 60% at 50% 50%, Alpha($highlight-2, .8), transparent);
+		border-radius: 10px;
+    	border-bottom-right-radius: 0; border-top-left-radius: 0;
+	}
+}

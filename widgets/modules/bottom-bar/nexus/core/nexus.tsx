@@ -14,6 +14,7 @@ import {
     getMemory,
 } from "../../../../../lib/core/system-stats"
 import RevealerPanel from "../../../primitives/revealer-panel"
+import UpdateButton from "../updates-button"
 
 
 type Stats = {
@@ -85,7 +86,7 @@ export default function Nexus() {
             </box>
 
             <box class="center">
-                <label class="ram" label={stats.as((s) => s.memory ? `󰘚 ${s.memory.used.toFixed(1)} GB` : "--" )}/>
+                <label class="ram" label={stats.as((s) => s.memory ? `󰘚 ${s.memory.used.toFixed(1)} GB` : "--" )} valign={Gtk.Align.END}/>
                 <label label={stats.as((s) => s.memory ? `${s.memory.total.toFixed(1)}` : "--")} class="small" valign={Gtk.Align.END} />
                 <label
                     label="󰣇"
@@ -106,7 +107,7 @@ export default function Nexus() {
 
                 <WifiButton />
                 <BluetoothButton/>
-                <label class="nexus-button" label="󰄠"/>
+                <UpdateButton/>
             </box>
 
         </box>
