@@ -71,7 +71,7 @@
 - `hypridle`, `hyprlock` -- idle-daemon and lockscreen
 - `pacman-contrib` -- checkupdates for updates counter
 - `jq` -- hyprctl parsing in player
-- `kitty` -- terminal
+- `kitty` -- terminal (if you use other, customize `/widgets/modules/bottom-bar/nexus/updates-button.tsx`, replace Kitty to your terminal. It will be fixed later)
 - `pavucontrol` -- sound mixer (optional)
 - `nvidia-utils` -- NVidia tool (optional)
 #### Fonts

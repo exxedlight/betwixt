@@ -23,7 +23,6 @@
     { "class": "org.gnome.FileRoller", "icon": "" },
     { "class": ".*calculator.*", "icon": "󰃬" },
     { "class": "tk", "title": ".*adb.*", "icon": "" },
-    { "class": "com.exx.quickdesktop", "icon": "" },
     { "class": "btop.*", "icon": "󰙭" },
     { "class": "Postman", "icon": "󱂛" },
     { "class": "Anydesk", "icon": "" },

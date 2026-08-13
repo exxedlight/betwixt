@@ -3,6 +3,7 @@ node_modules/
 compiled-style.css
 compiled-style.css.map
 allCode.txt
+betwixt_bundle
 
 configs/weather.json
 configs/desktop.json
