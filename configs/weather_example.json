@@ -1,0 +1,27 @@
+//  Location supports two formats: "lon,lat" or "City name"
+
+//  Examples:
+//  "location": "12.34, 56.78",
+//  -- OR --
+//  "location": "London",
+
+//  Choose one and delete all this comment lines!
+//  Rename file to weather.json and go 
+
+{
+    "location": "12.34, 56.78",
+    
+    "icons": {
+        "clear": "󰖙",
+        "mainly_clear": "",
+        "partly_cloudy": "",
+        "overcast": "",
+        "fog": "󰖑",
+        "drizzle": "",
+        "rain": "",
+        "heavy_rain": "",
+        "snow": "󰼶",
+        "thunderstorm": "",
+        "unknown": "󰨹"
+    }
+}

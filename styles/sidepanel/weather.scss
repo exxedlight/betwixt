@@ -12,13 +12,13 @@
             background: radial-gradient(50% 40% at 50% 50%, Alpha(Shade($accent-3, .7), .5), transparent);
             box-shadow: inset 0 0 5px $accent-3;
 
-            .weather-day-name{ font-size: 12px; }
+            .weather-day-name{ font-size: 11px; font-family: $symbols-font; }
             .weather-day-icon{
                 font-family: $symbols-font;
-                font-size: 24px;
-                padding: 3px 0;
+                font-size: 26px;
+                padding: 5px 0;
             }
-            .weather-temps{ font-size: 12px; }
+            .weather-temps{ font-size: 12px; font-family: $symbols-font; font-weight: 800; }
         }
     }
 }

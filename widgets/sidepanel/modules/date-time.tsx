@@ -19,7 +19,7 @@ function Clock(){
     return (
         <centerbox class="clock-circle" orientation={Gtk.Orientation.VERTICAL} valign={Gtk.Align.CENTER} halign={Gtk.Align.CENTER}>
             <box $type="center" class="wrapper" valign={Gtk.Align.CENTER} halign={Gtk.Align.CENTER} orientation={Gtk.Orientation.VERTICAL}>
-                <label class="clock-time"  label={now.as(n => n.time)}  xalign={0} hexpand={false} halign={Gtk.Align.CENTER} />
+                <label class="clock-time"  label={now.as(n => n.time)}  xalign={0.5} hexpand={false} halign={Gtk.Align.CENTER} />
                 <label class="clock-date"  label={now.as(n => n.date)}  xalign={0.5} />
                 <label class="clock-month" label={now.as(n => n.month)} xalign={0.5} />
             </box>

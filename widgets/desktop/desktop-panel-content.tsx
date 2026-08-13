@@ -6,37 +6,6 @@ import { toggleDesktop } from "../../lib/global-states"
 import { desktopConfig } from "../../lib/services/desktop"
 import { getPrimaryMonitorWidth } from "../../lib/services/monitors"
 
-//const CONFIG_PATH = `${SRC}/configs/desktop.json`
-
-/*function loadConfig(): DesktopConfig | null {
-    try {
-        const [ok, bytes] = GLib.file_get_contents(CONFIG_PATH)
-        if (!ok) return null
-        const text = new TextDecoder().decode(bytes)
-        return JSON.parse(text) as DesktopConfig
-    } catch (e) {
-        console.error("Desktop config error:", e)
-        return null
-    }
-}*/
-
-// Reactive config
-//const [config, setConfig] = createState<DesktopConfig | null>(loadConfig())
-
-// most editors trigger more than one filesystem event per write so debounce here.
-//let reloadTimeoutId: number | null = null
-
-/*monitorFile(CONFIG_PATH, () => {
-    if (reloadTimeoutId) GLib.source_remove(reloadTimeoutId)
-
-    reloadTimeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 150, () => {
-        reloadTimeoutId = null
-        console.log("[desktop] config changed, reloading")
-        setConfig(loadConfig())
-        return GLib.SOURCE_REMOVE
-    })
-})*/
-
 export default function DesktopPanelContent() {
     const panelWidth = Math.round(getPrimaryMonitorWidth() * 0.65)
     const handleClose = () => toggleDesktop()

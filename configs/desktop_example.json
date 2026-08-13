@@ -1,0 +1,29 @@
+//  Desktop grid config
+//  "preferences" section is about icons sizing
+//  "items" are icons by its own, "pos" is array [x, y] in grid positions coordinates (indexes)
+
+//  Delete all this comment lines!
+//  Rename file to desktop.json and go
+{
+  "preferences": {
+    "grid-size": [22, 10],
+    "icon-size": [45, 45],
+    "spacing": [10, 45],
+    "icons-font-size": 25
+  },
+
+  "items": [
+    {
+      "pos": [0, 0],
+      "icon": "",
+      "label": "Thunar",
+      "command": "thunar"
+    },
+    {
+      "pos": [0, 1],
+      "icon": "",
+      "label": "Lutris",
+      "command": "lutris"
+    }
+  ]
+}
