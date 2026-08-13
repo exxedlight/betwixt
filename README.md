@@ -1,7 +1,8 @@
 # Betwixt shell 
-*~ Shell created for Hyprland.*
 
-*!! W.I.P.*
+~ *Shell created for Hyprland.*
+
+*!! WorkInProgress !!*
 
 
 ## DEMO
@@ -81,8 +82,8 @@
 - `ttf-nerd-fonts-symbols-common`
 - *or change it in /styles/core/_fonts.scss*
 #### Others
-- `mako` -- notification daemon
-- `audacious` -- music player
+- `mako` -- notification daemon (you may use other daemon)
+- `audacious` -- music player (or other, but integration is lower. Add you player to array in `configs/player.json`)
 
 
 
@@ -90,11 +91,23 @@
 1. Install required packages
 2. Download/clone this project and place it somewhere on your disk
 3. Look and configure configs inside `configs/` dir
-4. Run it in terminal: `ags run /path/to/app.ts`
-5. For autostart, print in your `hyprland.lua`: 
+4. Run it in terminal: `ags run /path/to/app.ts & disown`
+5. For autostart, add in your `hyprland.lua`: 
 ```lua
 hl.on("hyprland.start", function ()
     hl.exec_cmd("ags run /path/to/app.ts")
+    -- ...(your other autostart commands...)
+end)
+```
+OR
+
+4. Make a bundle: `ags bundle /path/to/app.ts /path/to/output_file`
+5. Make it executable: `chmod +x /path/to/output_file`
+6. Run it in terminal: `/path/to/output_file`
+7. For autostart, add in your `hyprland.lua`:
+```lua
+hl.on("hyprland.start", function ()
+    hl.exec_cmd("/path/to/output_file")
     -- ...(your other autostart commands...)
 end)
 ```
@@ -103,3 +116,12 @@ end)
 - Look to `configs/{name}_example.json` files and create your own `configs/{name}.json` without *_example* in name. Instruction provided in every such file.
 - Required adaptation of pathes inside `configs/screen-capture.json`, cause my path for shell is *~/OWN/Betwixt/*, replace to yours
 
+## Hyprland integration
+Betwixt uses AGS signals to perform shell actions. Full list of supported actions proveded in */lib/services/actions.ts*
+
+Syntax for _hyprland.lua_ is: `hl.bind({COMBINATION}, hl.dsp.exec_cmd("ags request '{ACTION-NAME}'"))`
+
+Example:
+```lua
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("ags request 'toggle-apps'"))
+```
