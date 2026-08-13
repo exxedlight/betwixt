@@ -1,3 +1,5 @@
+@use "../core" as *;
+
 .bar-player{
     padding: 0 10px;
 
@@ -66,3 +68,10 @@
 
 .cava-left { color: Shade($accent-4, 2.0); }
 .cava-right { color: Shade($accent-4, 6.0); }
+
+
+@keyframes player-playing-pulse {
+    0% { background: radial-gradient(circle at center, Alpha($highlight-2, .9) 0%, transparent); }
+	50% { background: radial-gradient(circle at center, Alpha($highlight-2, .9) 50%, transparent 40%); }
+	100% { background: radial-gradient(circle at center, Alpha($highlight-2, .9) 0%, transparent); }
+}

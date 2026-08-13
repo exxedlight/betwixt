@@ -1,3 +1,5 @@
+@use "colors" as *;
+
 @mixin hexagon-shape($cut-size: 16px, $bg: $surface-1) {
     background: linear-gradient(135deg, transparent $cut-size, $bg $cut-size),
                 linear-gradient(225deg, transparent $cut-size, $bg $cut-size),

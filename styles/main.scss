@@ -1,24 +1,8 @@
-@import "colors";
-@import "mixins";
-@import "fonts";
-@import "params";
-
-@import "reset";
-@import "anims";
-
-@import "workspaces";
-@import "nexus";
-@import "tray";
-@import "player";
-@import "desktop";
-@import "sidepanel";
-
-@import "nexus-panels";
-@import "quick-hub";
-@import "power-hub";
-@import "power-menu";
-
-@import "recording-indicator";
+@use "core" as *;
+@use "bars" as *;
+@use "desktop" as *;
+@use "panels" as *;
+@use "sidepanel" as *;
 
 window {
     &.Bar {

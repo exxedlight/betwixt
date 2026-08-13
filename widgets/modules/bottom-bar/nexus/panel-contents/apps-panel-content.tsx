@@ -1,7 +1,6 @@
 import Gtk from "gi://Gtk?version=4.0"
 import Apps from "gi://AstalApps"
-import { createComputed, createState } from "ags"
-import { Gdk } from "ags/gtk4"
+import { createBinding, createComputed, createState, For } from "ags"
 import { launchApp } from "../../../../../lib/services/hyprland-exec"
 import { onEsc } from "../../../../../lib/core/gestures"
 
@@ -13,10 +12,8 @@ export default function AppsPanelContent({ onClose }: Props) {
     const [query, setQuery] = createState("")
 
     const appsService = new Apps.Apps()
-
-    // Сopy the array with [...] so sort() doesn't mutate original list
-    const allApps = [...appsService.list].sort((a, b) =>
-        a.name.localeCompare(b.name, undefined, { sensitivity: "base" })
+    const allApps = createBinding(appsService, "list").as(list =>
+        [...list].sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: "base" }))
     )
 
     //  Enter point to panel close event
@@ -53,7 +50,7 @@ export default function AppsPanelContent({ onClose }: Props) {
                     // Launch the first VISIBLE app on Enter
                     self.connect("activate", () => {
                         const q = query().toLowerCase()
-                        const firstMatch = allApps.find(app =>
+                        const firstMatch = allApps().find(app =>
                             !q ||
                             app.name.toLowerCase().includes(q) ||
                             (app.description && app.description.toLowerCase().includes(q))
@@ -75,30 +72,28 @@ export default function AppsPanelContent({ onClose }: Props) {
                 heightRequest={300}
             >
                 <box class="items-box" orientation={Gtk.Orientation.VERTICAL} spacing={4}>
-                    {/* Render ALL apps exactly once */}
-                    {allApps.map((app) => {
-                        // Per-app visibility mini-state
-                        const isVisible = createComputed(() => {
+                    <For each={allApps}>
+                        {(app) => {
+                            const isVisible = createComputed(() => {
                             const q = query().toLowerCase()
-                            if (!q) return true // no query -> show everything
-
+                            if (!q) return true
                             return app.name.toLowerCase().includes(q) ||
-                                   (app.description && app.description.toLowerCase().includes(q)) || false
-                        })
-
-                        return (
-                            <button
-                                class="app-item"
-                                tooltipText={app.description || ""}
-                                visible={isVisible} // GTK hides the widget without freeing it from memory
-                                onClicked={() => launchApp(app, handleClose)}
-                            >
-                                <box spacing={8} hexpand>
+                                (app.description && app.description.toLowerCase().includes(q)) || false
+                            })
+                            return (
+                                <button
+                                    class="app-item"
+                                    tooltipText={app.description || ""}
+                                    visible={isVisible}
+                                    onClicked={() => launchApp(app, handleClose)}
+                                >
+                                    <box spacing={8} hexpand>
                                     <label label={app.name} xalign={0} hexpand />
-                                </box>
-                            </button>
-                        )
-                    })}
+                                    </box>
+                                </button>
+                            )
+                        }}
+                    </For>
                 </box>
             </scrolledwindow>
         </box>

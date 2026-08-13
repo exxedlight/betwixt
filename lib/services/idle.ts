@@ -25,7 +25,7 @@ export function isHypridleRunning(): boolean {
 }
 
 //  Monitoring
-export const idleState = createPoll<boolean>(false, 1000, () => isHypridleRunning())
+export const idleState = createPoll<boolean>(false, 1000, async () => await isHypridleRunningAsync())
 
 
 

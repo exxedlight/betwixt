@@ -25,17 +25,17 @@ type Stats = {
 }
 
 export default function Nexus() {
-    const gpuAvailable = createPoll(false, 5000, () => getGpuAvailable())
-    const gpuTemp = createPoll<number | null>(null, 2000, () => getGpuTemp())
+    const gpuAvailable = createPoll(false, 5000, async () => await getGpuAvailable())
+    const gpuTemp = createPoll<number | null>(null, 2000, async () => await getGpuTemp())
 
     const stats = createPoll<Stats>(
         { cpuTemp: null, cpuUsage: null, cpuFreq: null, memory: null },
         1000,
-        () => ({
-            cpuTemp: getCpuTemp(),
-            cpuUsage: getCpuUsage(),
-            cpuFreq: getCpuFreq(),
-            memory: getMemory(),
+        async () => ({
+            cpuTemp: await getCpuTemp(),
+            cpuUsage: await getCpuUsage(),
+            cpuFreq: await getCpuFreq(),
+            memory: await getMemory(),
         })
     )
 

@@ -1,6 +1,7 @@
 import { createState, createComputed } from "ags"
 import { onClick, onHover, onScroll } from "../../../../../lib/core/gestures"
-import { execAsync, subprocess } from "ags/process"
+import { execAsync } from "ags/process"
+import { onPulseEvent } from "../../../../../lib/services/pulse-subscribe";
 
 type Props = {
     onEnter?: () => void;
@@ -48,14 +49,7 @@ export default function VolumeInputIndicator({ onEnter, onLeave }: Props) {
         )
     }
 
-    // Other sources sync
-    subprocess(
-        ["pactl", "subscribe"],
-        (line) => {
-            if (line.includes("change") && line.includes("source")) syncFromSystem()
-        },
-        (err) => console.error("Mic subscribe error:", err)
-    )
+    onPulseEvent("source", syncFromSystem)
 
     syncFromSystem()
 

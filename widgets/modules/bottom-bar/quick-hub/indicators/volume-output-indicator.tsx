@@ -1,8 +1,7 @@
-// QuickHub/VolumeOutputIndicator.tsx
-
 import { createState, createComputed } from "ags"
 import { onClick, onHover, onScroll } from "../../../../../lib/core/gestures"
 import { execAsync, subprocess } from "ags/process"
+import { onPulseEvent } from "../../../../../lib/services/pulse-subscribe"
 
 type SinkKind = "speaker" | "headphones" | "headset"
 
@@ -83,7 +82,6 @@ export default function VolumeOutputIndicator( {onEnter, onLeave} : Props ) {
     }
 
     const changeVolume = (delta: number) => {
-        // Оптимистичное обновление — мгновенно, без ожидания процесса.
         setPercent((prev) => Math.max(0, Math.min(100, prev + delta)))
 
         const arg = delta > 0 ? "1%+" : "1%-"
@@ -95,21 +93,14 @@ export default function VolumeOutputIndicator( {onEnter, onLeave} : Props ) {
     }
 
     const toggleMute = () => {
-        setMuted((m) => !m) // оптимистично
+        setMuted((m) => !m) 
         execAsync("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle").catch((err) =>
             console.error("Mute toggle error:", err)
         )
         scheduleSync()
     }
 
-    // Other sources sync
-    subprocess(
-        ["pactl", "subscribe"],
-        (line) => {
-            if (line.includes("change") && line.includes("sink")) scheduleSync(30)
-        },
-        (err) => console.error("Volume subscribe error:", err)
-    )
+    onPulseEvent("sink", () => scheduleSync(30))
 
     syncFromSystem()
 

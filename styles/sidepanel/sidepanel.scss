@@ -1,3 +1,5 @@
+@use "../core" as *;
+
 .sidebar-button{
     font-size: 16px;
     font-family: $symbols-font;
@@ -19,8 +21,9 @@
 
         .sidepanel-content{
             @include skew(-3deg);
-            background-color: green;
-            padding: 0 50px;
+            
+            padding: 10px 30px;
+            padding-right: 70px;
 
             background: 
                 radial-gradient(45% 10% at 10% 100%, Alpha($accent-4, .5), transparent),

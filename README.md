@@ -8,6 +8,12 @@
 - aylurs-gtk-shell (AUR)
 - libastal-meta (AUR)
 
+### Packages requiremens
+- mako
+- grim, slurp, grimblast, satty, wf-recorder
+- cpupower
+- canberra-gtk-play
+
 
 ### Installation and running
 - Install required packages
@@ -16,16 +22,18 @@
 - For autostart, print in your _hyprland.lua_: 
 ```lua
 hl.on("hyprland.start", function ()
-    hl.exec_cmd("waybar -c ~/.config/waybar/topbar/config.jsonc -s ~/.config/waybar/topbar/style.css")
+    hl.exec_cmd("ags run /path/to/app.ts")
     -- ...(your other autostart commands...)
 end)
 ```
 
 
-### Medules
+### Modules
 - Workspaces panel with apps icons
 - System state indication
 - Apps panel
 - Wifi panel
 - Bluetooth panel
-
+- Screen capture / translation
+- Custom CPU power modes
+- 

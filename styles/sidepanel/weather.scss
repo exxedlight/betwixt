@@ -1,0 +1,24 @@
+@use "../core" as *;
+
+.sidepanel-content .weather-row{
+
+    .weather-day-pill{
+
+        .pill-content{
+            padding: 3px 20px;
+            border-radius: 20px;
+            border-top-left-radius: 5px; border-bottom-right-radius: 5px;
+
+            background: radial-gradient(50% 40% at 50% 50%, Alpha(Shade($accent-3, .7), .5), transparent);
+            box-shadow: inset 0 0 5px $accent-3;
+
+            .weather-day-name{ font-size: 12px; }
+            .weather-day-icon{
+                font-family: $symbols-font;
+                font-size: 24px;
+                padding: 3px 0;
+            }
+            .weather-temps{ font-size: 12px; }
+        }
+    }
+}

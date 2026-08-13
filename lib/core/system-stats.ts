@@ -1,4 +1,4 @@
-import { exec } from "ags/process"
+import { exec, execAsync } from "ags/process"
 import Gio from "gi://Gio";
 import GLib from "gi://GLib"
 
@@ -12,9 +12,9 @@ let cpuTempPath: string | null | undefined
 
 
 //  GPU state (nvidia-smi)
-export function getGpuAvailable(): boolean {
+export async function getGpuAvailable(): Promise<boolean> {
   try {
-    exec(["nvidia-smi", "-L"])
+    await execAsync(["nvidia-smi", "-L"])
     return true
   } catch {
     return false
@@ -23,9 +23,9 @@ export function getGpuAvailable(): boolean {
 
 
 //  GPU temperature (nvidia-smi)
-export function getGpuTemp(): number | null {
+export async function getGpuTemp(): Promise<number | null> {
   try {
-    const out = exec(["nvidia-smi", "--query-gpu=temperature.gpu", "--format=csv,noheader"])
+    const out = await execAsync(["nvidia-smi", "--query-gpu=temperature.gpu", "--format=csv,noheader"])
     return parseInt(out.trim(), 10)
   } catch {
     return null
@@ -52,7 +52,7 @@ function resolveCpuTempPath(): string | null {
   return null
 }
 
-export function getCpuTemp(): number | null {
+export async function getCpuTemp(): Promise<number | null> {
   if (cpuTempPath === undefined) cpuTempPath = resolveCpuTempPath()
   if (!cpuTempPath) return null
   const [ok, bytes] = GLib.file_get_contents(cpuTempPath)
@@ -62,9 +62,9 @@ export function getCpuTemp(): number | null {
 
 
 //  CPU frequency
-export function getCpuFreq(): number | null {
+export async function getCpuFreq(): Promise<number | null> {
   try {
-    const out = exec([
+    const out = await execAsync([
       "bash", "-c",
       "cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_cur_freq 2>/dev/null | sort -nr | head -1",
     ])
@@ -77,7 +77,7 @@ export function getCpuFreq(): number | null {
 
 
 //  CPU usage by two /proc/stat
-export function getCpuUsage(): number | null {
+export async function getCpuUsage(): Promise<number | null> {
   const [ok, bytes] = GLib.file_get_contents("/proc/stat")
   if (!ok) return null
 
@@ -101,7 +101,7 @@ export function getCpuUsage(): number | null {
 
 
 //  RAM usage (default format is 1024, may be changed to 1000, iyw)
-export function getMemory(format: number = 1024): { used: number; total: number } | null {
+export async function getMemory(format: number = 1024): Promise<{ used: number; total: number } | null> {
   const [ok, bytes] = GLib.file_get_contents("/proc/meminfo")
   if (!ok) return null
 
