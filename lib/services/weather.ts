@@ -1,6 +1,7 @@
 import GLib from "gi://GLib"
 import { createState } from "ags"
 import { execAsync } from "ags/process"
+import { CurrentDate } from "./date-time"
 
 type WeatherConfig = {
     location: string
@@ -151,4 +152,19 @@ refresh()
 GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 30 * 60, () => {
     refresh()
     return GLib.SOURCE_CONTINUE
+})
+
+// React to date changes
+let lastKnownDate = CurrentDate().isoDate
+CurrentDate.subscribe(() => {
+    const currentDate = CurrentDate().isoDate
+    if (currentDate === lastKnownDate) return
+    lastKnownDate = currentDate
+    
+    const state = weatherState()
+    if (state.days.length === 0) return
+    if (state.days[0].date !== currentDate) {
+        console.log("[weather] stale data detected, refreshing")
+        refresh()
+    }
 })

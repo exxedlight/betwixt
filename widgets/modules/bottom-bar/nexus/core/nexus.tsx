@@ -15,6 +15,7 @@ import {
 } from "../../../../../lib/core/system-stats"
 import RevealerPanel from "../../../primitives/revealer-panel"
 import UpdateButton from "../updates-button"
+import { CurrentDate, CurrentTime } from "../../../../../lib/services/date-time"
 
 
 type Stats = {
@@ -37,15 +38,6 @@ export default function Nexus() {
             cpuFreq: await getCpuFreq(),
             memory: await getMemory(),
         })
-    )
-
-    const time = createPoll("", 1000, () => new Date().toLocaleTimeString("ru-RU", { hour12: false }))
-    const date = createPoll("", 60_000, () => {
-            const d = new Date()
-            const dayMonth = d.toLocaleDateString("ru-RU", { day: "2-digit", month: "2-digit" })
-            const weekday = d.toLocaleDateString("en-US", { weekday: "short" })
-            return `${dayMonth} ${weekday}`
-        }
     )
 
     //  Pop-up panel widget (APPS)
@@ -99,11 +91,11 @@ export default function Nexus() {
                     }}
                 />
                 
-                <label class="time" label={time}/>
+                <label class="time" label={CurrentTime.as(t => `${t}`)}/>
             </box>
 
             <box class="right">
-                <label class="date" label={date.as(v => `󰸗 ${v}`)}/>
+                <label class="date" label={CurrentDate.as(d => `󰸗 ${d.date_short} ${d.weekday}`)}/>
 
                 <WifiButton />
                 <BluetoothButton/>

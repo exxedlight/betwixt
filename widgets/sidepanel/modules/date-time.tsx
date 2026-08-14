@@ -2,26 +2,27 @@ import { createComputed, createState, For } from "ags";
 import { Gtk } from "ags/gtk4";
 import { createPoll } from "ags/time";
 import GLib from "gi://GLib";
+import { CurrentDate, CurrentTime } from "../../../lib/services/date-time";
 
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
 function Clock(){
 
     // single tick for all three labels
-    const now = createPoll({ time: "", date: "", month: "" }, 1000, () => {
+    /*const now = createPoll({ time: "", date: "", month: "" }, 1000, () => {
         const d = new Date()
         return {
             time: d.toLocaleTimeString("en-GB", { hour12: false }),
             date: d.toLocaleDateString("ru-RU", { day: "2-digit", month: "2-digit", year: "2-digit" }),
             month: d.toLocaleDateString("en-US", { month: "long" }),
         }
-    })
+    })*/
     return (
         <centerbox class="clock-circle" orientation={Gtk.Orientation.VERTICAL} valign={Gtk.Align.CENTER} halign={Gtk.Align.CENTER}>
             <box $type="center" class="wrapper" valign={Gtk.Align.CENTER} halign={Gtk.Align.CENTER} orientation={Gtk.Orientation.VERTICAL}>
-                <label class="clock-time"  label={now.as(n => n.time)}  xalign={0.5} hexpand={false} halign={Gtk.Align.CENTER} />
-                <label class="clock-date"  label={now.as(n => n.date)}  xalign={0.5} />
-                <label class="clock-month" label={now.as(n => n.month)} xalign={0.5} />
+                <label class="clock-time"  label={CurrentTime.as(t => t)}  xalign={0.5} hexpand={false} halign={Gtk.Align.CENTER} />
+                <label class="clock-date"  label={CurrentDate.as(d => d.date)}  xalign={0.5} />
+                <label class="clock-month" label={CurrentDate.as(d => d.month)} xalign={0.5} />
             </box>
         </centerbox>
     )
@@ -49,13 +50,21 @@ function Calendar(){
         return out
     })
 
-    const isToday = (day: number) => {
+    /*const isToday = (day: number) => {
         const dt = displayed()
-        const now = GLib.DateTime.new_now_local()
-        return day === now.get_day_of_month()
-            && dt.get_month() === now.get_month()
-            && dt.get_year() === now.get_year()
-    }
+        const t = CurrentDate()  // reading global poll
+        return day === t.day
+            && dt.get_month() === t.monthNum
+            && dt.get_year() === t.year
+    }*/
+    const isTodayClass = createComputed(() => {
+        const t = CurrentDate()
+        const dt = displayed()
+        return (day: number | null) =>
+            day !== null && day === t.day && dt.get_month() === t.monthNum && dt.get_year() === t.year
+                ? "calendar-day today"
+                : "calendar-day"
+    })
 
     return (
         <box class="calendar" orientation={Gtk.Orientation.VERTICAL} spacing={6} valign={Gtk.Align.CENTER}>
@@ -79,7 +88,7 @@ function Calendar(){
                         <box class="calendar-row" spacing={4}>
                             {row.map((day) => (
                                 <label
-                                    class={day !== null && isToday(day) ? "calendar-day today" : "calendar-day"}
+                                    class={isTodayClass.as(fn => fn(day))}
                                     label={day !== null ? String(day) : ""}
                                     hexpand
                                     xalign={0.5}

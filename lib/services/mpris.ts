@@ -76,11 +76,11 @@ class MprisPlayer {
     }
 
     private pcall(method: string, args: GLib.Variant | null): GLib.Variant | null {
-        try { return this.player.call_sync(method, args, Gio.DBusCallFlags.NONE, 100, null) }
+        try { return this.player.call_sync(method, args, Gio.DBusCallFlags.NONE, 500, null) }
         catch { return null }
     }
     private scall(method: string, args: GLib.Variant): GLib.Variant | null {
-        try { return this.props.call_sync(method, args, Gio.DBusCallFlags.NONE, 100, null) }
+        try { return this.props.call_sync(method, args, Gio.DBusCallFlags.NONE, 500, null) }
         catch { return null }
     }
 
