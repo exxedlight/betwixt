@@ -4,6 +4,7 @@ import GLib from "gi://GLib"
 import { launchCommand } from "./hyprland-exec"
 import config from "../../configs/screen-capture.json"
 import Gio from "gi://Gio"
+import { pathExpander } from "../core/format"
 
 type ScreenCaptureConfig = {
     video: {
@@ -34,10 +35,6 @@ const cfg = config as ScreenCaptureConfig
 
 //  === Helpers ==========================================================
 
-function expandHome(path: string): string {
-    return path.startsWith("~") ? path.replace("~", GLib.get_home_dir()) : path
-}
-
 //  Safe insertion in '...' for shell command
 function shQuote(value: string): string {
     return `'${value.replace(/'/g, `'\\''`)}'`
@@ -56,7 +53,7 @@ function timestamp(withDash: boolean): string {
 }
 
 function playSound(path: string) {
-    execAsync(["canberra-gtk-play", "-f", expandHome(path)]).catch((err) =>
+    execAsync(["canberra-gtk-play", "-f", pathExpander(path)]).catch((err) =>
         console.error("[screen-capture] sound playback failed:", err)
     )
 }
@@ -98,7 +95,7 @@ export async function toggleVideoRecording() {
         return
     }
 
-    const dir = expandHome(cfg.video["save-path"])
+    const dir = pathExpander(cfg.video["save-path"])
     ensureDir(dir)
 
     const file = `${dir}/videorecord-${timestamp(true)}.mp4`
@@ -123,7 +120,7 @@ export const Screenshot = {
         launchCommand(cfg.img["fullscreen-to-clipboard-command"])
     },
     SaveToFolder: async () => {
-        const dir = expandHome(cfg.img["save-path"])
+        const dir = pathExpander(cfg.img["save-path"])
         ensureDir(dir)
 
         const title = (await getActiveWindowTitle()) || "screenshot"

@@ -114,7 +114,7 @@ end)
 
 ## Required configuration
 - Look to `configs/{name}_example.json` files and create your own `configs/{name}.json` without *_example* in name. Instruction provided in every such file.
-- Required adaptation of pathes inside `configs/screen-capture.json`, cause my path for shell is *~/OWN/Betwixt/*, replace to yours
+
 
 ## Hyprland integration
 Betwixt uses AGS signals to perform shell actions. Full list of supported actions proveded in */lib/services/actions.ts*

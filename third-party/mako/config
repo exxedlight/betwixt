@@ -1,0 +1,34 @@
+# === Position
+anchor=top-right
+margin=10,10,2,0
+
+# === Visual
+background-color=#0e041066
+text-color=#ffffff
+border-color=#b289e899
+border-radius=3,20,3,20
+border-size=2
+padding=5
+font=Symbols Nerd Font 10
+
+# === Behavior
+default-timeout=3000
+ignore-timeout=0
+sort=-time
+max-visible=10
+
+# === Max size
+width=400
+height=800
+
+# === History
+history=1
+max-history=100
+
+# === Sound
+on-notify=exec canberra-gtk-play -f ~/Env/Sounds/notification.wav >/dev/null 2>&1 &
+
+
+# === Notify without sound
+[app-name="silent-notify"]
+on-notify=none
