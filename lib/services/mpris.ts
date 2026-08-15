@@ -22,6 +22,8 @@ import { createPoll } from "ags/time"
 
 //  supported players list; listen ONLY this players
 //  ensure, that player supports MPRIS, then you may add it in this file
+//  supported players: 
+//  >> busctl --user list | grep org.mpris.MediaPlayer2
 const CONFIG_PATH = `${SRC}/configs/player.json`
 
 //  MPRIS interfaces
@@ -167,7 +169,15 @@ Gio.DBus.session.signal_subscribe(
 )
 
 // Pick up players already running at shell start
-if (supported.length > 0) {
+// Pick up players already running at shell start
+const [existing] = Gio.DBus.session.call_sync(
+    "org.freedesktop.DBus", "/org/freedesktop/DBus",
+    "org.freedesktop.DBus", "ListNames", null, null,
+    Gio.DBusCallFlags.NONE, -1, null,
+).deep_unpack() as [string[]]
+for (const n of existing)
+    if (n.startsWith("org.mpris.MediaPlayer2.") && matches(n)) ensureName(n)
+/*if (supported.length > 0) {
     for (const s of supported) ensureName(s)
 } else {
     const [existing] = Gio.DBus.session.call_sync(
@@ -177,7 +187,7 @@ if (supported.length > 0) {
     ).deep_unpack() as [string[]]
     for (const n of existing)
         if (n.startsWith("org.mpris.MediaPlayer2.") && matches(n)) ensureName(n)
-}
+}*/
 
 //  Current player
 export const activePlayer = createComputed<MprisPlayer | null>(() => {

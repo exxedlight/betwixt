@@ -8,7 +8,7 @@
   },
   "img": {
     "save-path": "~/Screenshots",
-    "shutter-sound": "~/OWN/Betwixt/resources/sounds/shutter2.wav",
+    "shutter-sound": "~/OWN/Betwixt/resources/sounds/shutter1.wav",
     "area-to-clipboard-command": "grimblast copy area",
     "area-markup-command": "grimblast --freeze save output - | satty --disable-notifications --filename -",
     "fullscreen-to-clipboard-command": "grim - | wl-copy",
