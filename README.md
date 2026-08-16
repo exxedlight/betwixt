@@ -1,4 +1,4 @@
-# Betwixt shell 
+# Betwixt shell (AGS / Astal)
 
 ~ *Shell created for Hyprland.*
 
@@ -17,16 +17,15 @@
 ## KEY FEATURES
 #### Bars & widgets
 - Top & bottom bars
-- Workspaces tabs with per-app icons driven by regex rules (`configs/workspaces.json`)
+- Workspaces tabs with per-app icons driven by regex rules (`./configs/workspaces.json`)
 - Live system stats: CPU temp / usage / frequency, discrete GPU temp, RAM
 - MPRIS player: seekable progress bar, bezier-curve cava
 - System tray with styled popovers
 - Updates counter: official repos + AUR helper autodetect
 #### Panels
 - App launcher with live search
-- Wi-Fi panel
-- Bluetooth panel
-- Desktop grid: configurable icon grid with hot reload on config change (`configs/desktop.json`)
+- Wi-Fi & bluetooth panels
+- Desktop grid with hot reload on config change (`./configs/desktop.json`)
 - Right side panel: 5-day weather forecast (Open-Meteo), clock, month-navigable calendar
 #### Power & automation
 - Battery indicator with warning / critical thresholds and per-level custom actions (`configs/battery.json`)
@@ -44,53 +43,25 @@
 - Keyboard layout indicator with click-to-switch
 #### Customization
 - SCSS variable themes + styles hot reload
-- Everything tunable via JSON configs (look to `configs/` dir)
-- Hyprland keybinds integration via `ags request` (look to `lib/services/actions.ts` file)
+- Everything tunable via JSON configs (look to `./configs/` dir)
+- Hyprland keybinds integration via `ags request` (look to `./lib/services/actions.ts` file)
 
 
 ## REQUIREMENTS
-#### Core
-- **`hyprland` -- WM**
-- **`aylurs-gtk-shell` **(AUR)** -- AGS v3 (TypeScript-Astal implementation)**
-- **`libastal-meta` **(AUR)** -- Astal libraries**
-- **`sass`** / **`dart-sass`** **-- styles compiler**
-- `curl` -- weather
-- `networkmanager` -- WiFi panel
-- `pipewire`, `pipewire-pulse`, `wireplumber` -- System sound
-#### Screen capture
-- `grim`, `slurp`, `wl-clipboard`
-- `grimblast-git` -- helper for screenshots within Hyprland
-- `satty` -- screenshots markup tool
-- `wf-recorder` -- screen video capture
-- `tesseract` + `tesseract-data-eng`, `translate-shell` -- screen translation
-- `libcanberra` -- shell sounds play
-#### System and power
-- `power-profiles-daemon` — powerprofilesctl
-- `cpupower` -- CPU frequency limits
-- `brightnessctl` -- screen brightness
-- `hypridle`, `hyprlock` -- idle-daemon and lockscreen
-- `pacman-contrib` -- checkupdates for updates counter
-- `jq` -- hyprctl parsing in player
-- `kitty` -- terminal (if you use other, customize `/widgets/modules/bottom-bar/nexus/updates-button.tsx`, replace Kitty to your terminal. It will be fixed later)
-- `pavucontrol` -- sound mixer (optional)
-- `nvidia-utils` -- NVidia tool (optional)
-#### Fonts
-- `otf-commit-mono-nerd`
-- `ttf-fantasque-nerd`
-- `ttf-meslo-nerd`
-- `ttf-nerd-fonts-symbols`
-- `ttf-nerd-fonts-symbols-common`
-- *or change it in /styles/core/_fonts.scss*
-#### Others
-- `mako` -- notification daemon (you may use other daemon)
-- `audacious` -- music player (or other, but integration is lower. Add you player to array in `configs/player.json`)
+~ Check requirements list, you may delete / comment smth you don't need before install.
+
+List of required packages provided in _requirements.list_
+
+Quick installation script provided in _install-deps.sh_. Using (**terminal inside shell directory (!)**):
+1. `chmod +x ./install-deps.sh`
+2. `./install-deps.sh`
 
 
 
 ## Installation and running
-1. Install required packages
+1. Install requirements (`./install-deps.sh`)
 2. Download/clone this project and place it somewhere on your disk
-3. Look and configure configs inside `configs/` dir
+3. Look and configure configs inside `./configs/` dir
 4. Run it in terminal: `ags run /path/to/app.ts & disown`
 5. For autostart, add in your `hyprland.lua`: 
 ```lua
@@ -99,21 +70,10 @@ hl.on("hyprland.start", function ()
     -- ...(your other autostart commands...)
 end)
 ```
-OR
 
-4. Make a bundle: `ags bundle /path/to/app.ts /path/to/output_file`
-5. Make it executable: `chmod +x /path/to/output_file`
-6. Run it in terminal: `/path/to/output_file`
-7. For autostart, add in your `hyprland.lua`:
-```lua
-hl.on("hyprland.start", function ()
-    hl.exec_cmd("/path/to/output_file")
-    -- ...(your other autostart commands...)
-end)
-```
 
 ## Required configuration
-- Look to `configs/{name}_example.json` files and create your own `configs/{name}.json` without *_example* in name. Instruction provided in every such file.
+- Look to `./configs/{name}_example.json` files and create your own `./configs/{name}.json` without *_example* in name. Instruction provided in every such file.
 
 
 ## Hyprland integration
