@@ -38,3 +38,6 @@ export const toggleDesktop = () => setDesktopVisible(!desktopVisible());
 export const [sidepanelVisible, setSidepanelVisible] = createState(false);
 export const toggleSidepanel = () => setSidepanelVisible(!sidepanelVisible());
 
+
+//  PLAYER
+export const [playerPanelVisible, setPlayerPanelVisible] = createState(false);

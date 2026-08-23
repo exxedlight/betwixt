@@ -134,6 +134,32 @@ class MprisPlayer {
         this.pcall("SetPosition", new GLib.Variant("(ox)", [id, Math.round(sec * 1_000_000)]))
     }
 
+    get loop_supported(): boolean {
+        return this.player.get_cached_property("LoopStatus") !== null
+    }
+    get loop_status(): string {
+        const v = this.player.get_cached_property("LoopStatus")
+        return v ? v.unpack() as string : "None"
+    }
+    set loop_status(status: string) {
+        this.scall("Set", new GLib.Variant("(ssv)", [
+            PLAYER_IFACE, "LoopStatus", new GLib.Variant("s", status),
+        ]))
+    }
+
+    get shuffle_supported(): boolean {
+        return this.player.get_cached_property("Shuffle") !== null
+    }
+    get shuffle(): boolean {
+        const v = this.player.get_cached_property("Shuffle")
+        return v ? v.unpack() as boolean : false
+    }
+    set shuffle(val: boolean) {
+        this.scall("Set", new GLib.Variant("(ssv)", [
+            PLAYER_IFACE, "Shuffle", new GLib.Variant("b", val),
+        ]))
+    }
+
     play_pause() { this.pcall("PlayPause", null) }
     next() { this.pcall("Next", null) }
     previous() { this.pcall("Previous", null) }
@@ -169,7 +195,6 @@ Gio.DBus.session.signal_subscribe(
 )
 
 // Pick up players already running at shell start
-// Pick up players already running at shell start
 const [existing] = Gio.DBus.session.call_sync(
     "org.freedesktop.DBus", "/org/freedesktop/DBus",
     "org.freedesktop.DBus", "ListNames", null, null,
@@ -177,17 +202,7 @@ const [existing] = Gio.DBus.session.call_sync(
 ).deep_unpack() as [string[]]
 for (const n of existing)
     if (n.startsWith("org.mpris.MediaPlayer2.") && matches(n)) ensureName(n)
-/*if (supported.length > 0) {
-    for (const s of supported) ensureName(s)
-} else {
-    const [existing] = Gio.DBus.session.call_sync(
-        "org.freedesktop.DBus", "/org/freedesktop/DBus",
-        "org.freedesktop.DBus", "ListNames", null, null,
-        Gio.DBusCallFlags.NONE, -1, null,
-    ).deep_unpack() as [string[]]
-    for (const n of existing)
-        if (n.startsWith("org.mpris.MediaPlayer2.") && matches(n)) ensureName(n)
-}*/
+
 
 //  Current player
 export const activePlayer = createComputed<MprisPlayer | null>(() => {
@@ -204,11 +219,16 @@ export const activePlayer = createComputed<MprisPlayer | null>(() => {
 
 // ================= GETTERS (unchanged, except isPlaying string compare) =================
 
-export const trackTitle    = createComputed(() => activePlayer()?.title  || "Unknown Track")
-export const trackArtist   = createComputed(() => activePlayer()?.artist || "Unknown Artist")
-export const isPlaying     = createComputed(() => activePlayer()?.playback_status === "Playing")
-export const playerVolume  = createComputed(() => activePlayer()?.volume || 0)
-export const trackDuration = createComputed(() => activePlayer()?.length || 0)
+export const trackTitle         = createComputed(() => activePlayer()?.title  || "Unknown Track")
+export const trackArtist        = createComputed(() => activePlayer()?.artist || "Unknown Artist")
+export const isPlaying          = createComputed(() => activePlayer()?.playback_status === "Playing")
+export const playerVolume       = createComputed(() => activePlayer()?.volume || 0)
+export const trackDuration      = createComputed(() => activePlayer()?.length || 0)
+export const loopStatus         = createComputed(() => activePlayer()?.loop_status || "None")
+export const shuffleEnabled     = createComputed(() => activePlayer()?.shuffle || false)
+export const loopSupported      = createComputed(() => activePlayer()?.loop_supported ?? false)
+export const shuffleSupported   = createComputed(() => activePlayer()?.shuffle_supported ?? false)
+
 
 
 
@@ -244,6 +264,25 @@ export const playbackPercentage = createPoll(0, 200, () => {
 
 // ================= SETTERS / ACTIONS ============================
 
+export const cycleLoop = () => {
+    const player = activePlayer()
+    if (!player) return
+    const order = ["None", "Playlist", "Track"] as const
+    const next = order[(order.indexOf(player.loop_status as any) + 1) % order.length]
+    player.loop_status = next
+}
+
+export const toggleShuffle = () => {
+    const player = activePlayer()
+    if (!player) return
+    player.shuffle = !player.shuffle
+}
+
+export const setVolume = (val: number) => {
+    const player = activePlayer()
+    if (!player) return
+    player.volume = Math.max(0, Math.min(1, val))
+}
 export const changeVolume = (delta: number) => {
     const player = activePlayer()
     if (!player) return

@@ -85,11 +85,6 @@ export default function Cava() {
                         }
                     }
                     cr.stroke()
-
-                    // Glow
-                    cr.setSourceRGBA(colorRight.red, colorRight.green, colorRight.blue, 0.3)
-                    cr.setLineWidth(6)
-                    cr.stroke()
                 })
             }}
         />

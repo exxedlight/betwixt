@@ -28,7 +28,6 @@ window {
     transition: all $anim-duration ease;
 
     &:hover{
-        //transform: rotate(-180deg) scale(1.5);
         transform: rotate(180deg);
         background: radial-gradient(50% 50%, Alpha($accent-1, .5) 35%, transparent 90%);
         border-color: Alpha($accent-2, .75);
@@ -38,26 +37,15 @@ window {
 
 
 .bar-surface-bottom {
-    //background-color: Alpha($surface-1, .25); 
     min-height: 22px;
     background: radial-gradient(ellipse 10% 100% at 5% 50%, $surface-1, transparent),
                 radial-gradient(30% 100% at 40% 60%, Shade($surface-2, .75), transparent),
                 radial-gradient(20% 100% at 70% 80%, $surface-1, transparent),
-                
-                //radial-gradient(40% 100% at 10% 100%, Alpha($surface-3, .5) 50%, transparent),
-                //radial-gradient(40% 100% at 90% 100%, Alpha(Shade($accent-3, .65), .35) 50%, transparent),
                 ;
     
 }
 .bar-surface-top {
     min-height: 22px;
-    //background: radial-gradient(ellipse 10% 100% at 5% 50%, $surface-1, transparent),
-    //            radial-gradient(30% 100% at 40% 60%, Alpha(Shade($surface-2, .75), .5), transparent),
-    //            //radial-gradient(20% 100% at 70% 0%, $surface-1, transparent),
-    //            radial-gradient(40% 80% at 10% 0%, Alpha(Shade($accent-3, .65), .1) 50%, transparent),
-    //            radial-gradient(40% 80% at 90% 0%, Alpha(Shade($accent-3, .65), .1) 50%, transparent),
-    //            //radial-gradient(50% 100% at 50% 0%, $surface-2 30%, transparent 80%)
-    //            ;
     
 }
 .bar-box{
@@ -79,7 +67,7 @@ window {
 
 tooltip{
     padding: 5px 10px;
-    background: Shade($surface-1, 1.5);
+    background: Alpha(Shade($surface-4, .85), .75);
     font-size: 13px;
     opacity: .95;
     border: 1px solid Alpha($highlight-0, .5);

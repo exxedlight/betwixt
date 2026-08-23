@@ -2,13 +2,15 @@ import app from "ags/gtk4/app"
 import { Astal } from "ags/gtk4"
 import SysTray from "../modules/top-bar/tray"
 import PowerHub from "../modules/top-bar/power-hub/power-hub"
-import BarPlayer from "../modules/top-bar/bar-player/bar-player"
+import BarPlayer, { PlayerPanelWindow } from "../modules/top-bar/bar-player/bar-player"
 import DesktopButton from "../desktop/desktop-button"
 import RecordingIndicator from "../modules/top-bar/rec-indicator"
 
 const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
 export default function TopBar(monitor = 0) {
+  PlayerPanelWindow();
+  
   return (
     <window
       name={`TopBar-${monitor}`}
