@@ -1,3 +1,21 @@
-[
-  "audacious"
-]
+{
+  "audacious": {
+    "show-window": "audtool mainwin-show on",
+    "hide-window": "audtool mainwin-show off",
+
+    "playlist-get": "audtool playlist-display",
+    "playlist-name": "audtool current-playlist-name",
+    "playlist-jump": "audtool playlist-jump {n}",
+
+    "playlists-number": "audtool number-of-playlists",
+
+
+    "shuffle-status": "audtool playlist-shuffle-status",
+    "shuffle-toggle": "audtool playlist-shuffle-toggle",
+
+    "repeat-status": "audtool playlist-repeat-status",
+    "repeat-toggle": "audtool playlist-repeat-toggle"
+
+
+  }
+}

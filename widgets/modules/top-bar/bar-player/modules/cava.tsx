@@ -2,10 +2,15 @@ import { Gdk, Gtk } from "ags/gtk4"
 import { subprocess } from "ags/process"
 import { createState } from "ags"
 import cairo from "cairo"
+import { onClick } from "../../../../../lib/core/gestures"
+
+type Props = {
+    onClick?: () => void;
+}
 
 const VISUALISER_WIDTH = 200;
 
-export default function Cava() {
+export default function Cava({ onClick: _onClick } : Props) {
     const [bars, setBars] = createState<number[]>(new Array(40).fill(0))
     let drawingArea: Gtk.DrawingArea | null = null
 
@@ -34,6 +39,9 @@ export default function Cava() {
             valign={Gtk.Align.CENTER}
             css={`min-width: ${VISUALISER_WIDTH}px; min-height: 20px;`}
             $={(self: Gtk.DrawingArea) => {
+
+                onClick(() => _onClick?.())(self);
+
                 drawingArea = self
 
                 self.set_draw_func((_, cr: cairo.Context, width: number, height: number) => {

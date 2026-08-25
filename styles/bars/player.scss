@@ -28,21 +28,27 @@
 }
 
 .bar-player, .bar-player-panel-content{
-    min-width: 500px;
+    min-width: 550px;
     padding: 0 10px;
 }
 
 .bar-player{
-    background-color: Alpha(Shade($surface-4, .75), .25);
     transition: all $anim-duration ease;
+    /*background: 
+        radial-gradient(50% 70% at 0% 50%, $surface-4, transparent),
+        radial-gradient(60% 280% at 100% 50%, $surface-4, transparent),
+        radial-gradient(50% 100% at 50% 100%, $surface-2, transparent),
+        radial-gradient(50% 70% at 10% 0%, Shade($surface-4, .7), transparent)
+    ;*/
+    background-color: Alpha($surface-2, .75);
+
     .play-pause{
         
         border-radius: 100%;
         padding: 0 7px;
         font-size: 20px;
         transition: all $anim-duration ease;
-        margin-right: 10px;
-        
+        margin: 0 5px;       
 
         label { font-family: $symbols-font; color: $font-light; }
 
@@ -50,6 +56,24 @@
         &.stopped { animation:none; text-shadow: 2px 2px 10px $accent-4; }
 
         &:hover { opacity: .8; color: $highlight-0; background: radial-gradient(50% 50% at center, Alpha($accent-3, .5), transparent); }
+    }
+    .bar-player-button{
+        font-family: $symbols-font;
+        min-width: 25px;
+        
+
+        label{
+            font-family: $symbols-font; font-size: 14px;
+            color: $font-light;
+            border-radius: 0 5px 0 5px;
+            transition: all $anim-duration linear;
+            padding: 1px 2px;
+        }
+        &:hover {
+            label {
+                box-shadow: 0 0 10px $accent-2;
+            }
+        }
     }
 
 
@@ -60,6 +84,7 @@
         ;
         border-radius: 5px;
         border-top-left-radius: 0; border-bottom-right-radius: 0;
+        margin-left: 10px;
 
         .meta {
             min-height: 18px;
@@ -99,27 +124,34 @@
     .player-revealer{
         padding: 0 10px;
         .bar-player-panel-content{
-            
 
-            background-color: Alpha(Shade($surface-4, .75), .25);
-            background: 
-                radial-gradient(50% 50% at 50% 50%, $surface-2, transparent),
-            ;
+            /*background: 
+                radial-gradient(60% 60% at 50% 50%, $surface-2, transparent),
+                radial-gradient(30% 70% at 0% 50%, $surface-2, transparent),
+                radial-gradient(30% 70% at 100% 50%, $surface-2, transparent),
+                linear-gradient(to bottom, Alpha(Shade($surface-4, .7), .85), transparent),
+                linear-gradient(to top, Alpha($surface-4, .65), transparent, transparent),
+                radial-gradient(50% 50% at 50% 100%, $accent-2, transparent),
+                radial-gradient(50% 50% at 50% 0%, $accent-2, transparent),
+            ;*/
+            background-color: Alpha($surface-2, .75);
+
             box-shadow: inset 0 -5px 10px $accent-4;
             border-radius: 0 0 7px 7px;
             padding-top: 10px;
             padding-bottom: 10px;
-            border: 1px solid Alpha($highlight-1, .3);
-            border-top: none;
 
             .track-title{
                 background: radial-gradient(70% 50% at 50% 50%, $surface-3, transparent);
                 padding: 1px 5px;
                 border-radius: 15px 0 15px 0;
-                font-family: $player-font-1, $player-font-2, $player-font-3, monospace; 
-                font-style: italic;
-                font-weight: 600;
-                text-shadow: 1px 1px 1px $accent-4;
+
+                .track-title-label{
+                    font-family: $player-font-1, $player-font-2, $player-font-3, monospace; 
+                    font-style: italic;
+                    font-weight: 600;
+                    text-shadow: 1px 1px 1px $accent-4;
+                }
             }
 
             .player-controls{
@@ -148,29 +180,33 @@
                         color: $font-light;
                         font-size: 28px;
                         transition: all $anim-duration ease;
+
+                        padding: 3px 15px;
+                        border: 1px solid $accent-2;
+                    
+                        &.prev{ border-radius: 15px 0 10px 0; border-right: none; box-shadow: -2px 0 5px $accent-2; }
+                        &.next{ border-radius: 0 15px 0 10px; border-left: none;  box-shadow: 2px 0 5px $accent-2; }
+
                         &:hover{
-                            transform: scaleX(1.3);
-                            background: radial-gradient(50% 20% at 50% 50%, $accent-2, transparent);
-                            padding: 0 10px;
+                            background: radial-gradient(50% 50% at 50% 50%, $accent-2, transparent);
+                            border-color: $accent-3;
+                            &.prev{ box-shadow: -3px 0 10px $accent-2, inset 5px 0 5px $accent-3; }
+                            &.next{ box-shadow: 3px 0 10px $accent-2, inset -5px 0 5px $accent-3; }
                         }
                     }
                     .play-pause{
                         font-family: $symbols-font;
                         color: $font-light;
                         font-size: 52px;
-                        margin: 0 20px;
+                        margin: 0 10px;
                         padding: 5px;
-                        box-shadow: inset 0 0 15px $accent-3;
+                        box-shadow: 0 0 0 $accent-2, inset 0 0 10px $accent-2;
                         border-radius: 100%;
                         min-width: 60px;
                         transition: all $anim-duration ease;
-                        //animation: player-playing-pulse-big 1.5s infinite ease;
-                        //&.playing { animation: player-playing-pulse-big 1.5s infinite ease; }
-                        //&.stopped { animation:none; text-shadow: 2px 2px 10px $accent-4; }
 
                         &:hover{
-                            opacity: .85;
-                            transform: rotate(45deg);
+                            box-shadow: 0 0 5px $accent-2, inset 0 0 15px $accent-3;
                         }
                     }
                 }
@@ -189,7 +225,7 @@
                             background-color: $accent-4;
                             .volume-slider-fill{
                                 border-radius: 30px;
-                                background-color: Shade($accent-3, .75);
+                                background: linear-gradient(to left, $highlight-1 1%, $accent-3 25%, $surface-3 70%);
                             }
                         }
                     }

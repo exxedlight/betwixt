@@ -2,6 +2,7 @@ import Gio from "gi://Gio"
 import GLib from "gi://GLib"
 import { createComputed, createState } from "ags"
 import { createPoll } from "ags/time"
+import { PlayerConfig } from "../core/types"
 
 
 //  Only God and I know what is written here. 
@@ -32,20 +33,26 @@ const PROPS_IFACE = "org.freedesktop.DBus.Properties"
 const OBJ_PATH = "/org/mpris/MediaPlayer2"
 
 //  Reading config file
-function getSupportedPlayers(): string[] {
+function getSupportedPlayers(): Record<string, PlayerConfig> {
     try {
         const [ok, bytes] = GLib.file_get_contents(CONFIG_PATH)
-        if (!ok) return []
+        if (!ok) return {}
         const parsed = JSON.parse(new TextDecoder().decode(bytes))
-        return Array.isArray(parsed) ? parsed : []
+        return (parsed && typeof parsed === "object" && !Array.isArray(parsed)) ? parsed : {}
     } catch {
-        return []
+        return {}
     }
 }
 
 const supported = getSupportedPlayers()
+const supportedNames = Object.keys(supported)
 const toBusName = (n: string) => n.startsWith("org.mpris.") ? n : `org.mpris.MediaPlayer2.${n}`
-const matches = (n: string) => supported.length === 0 || supported.some(s => n.includes(s))
+const matches = (n: string) => supportedNames.length === 0 || supportedNames.some(s => n.includes(s))
+
+function getPlayerConfig(busName: string): PlayerConfig | null {
+    const key = supportedNames.find(s => busName.includes(s))
+    return key ? supported[key] : null
+}
 
 // Re-evaluation trigger for activePlayer. Fires ONLY on real D-Bus events.
 const [tick, setTick] = createState(0)

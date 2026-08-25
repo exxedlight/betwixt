@@ -1,4 +1,4 @@
-import { launchCommand } from "./hyprland-exec"
+import { launchCommand } from "../hyprland-exec"
 
 
 //  My primary player is Audacious, you can adjust it to yours.

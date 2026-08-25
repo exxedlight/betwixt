@@ -62,14 +62,16 @@ export default function BarPlayerPanelContent(){
             
             <box 
                 class="track-title"
+                orientation={Gtk.Orientation.VERTICAL}
             >
                 <label
                     label={metaTitle}
-                    class="track-title"
+                    class="track-title-label"
                     ellipsize={Pango.EllipsizeMode.END}
                     maxWidthChars={65}
-                    widthRequest={200}
                     xalign={0.5}
+                    hexpand={false}
+                    valign={Gtk.Align.CENTER}
                 />
             </box>
 
@@ -84,11 +86,19 @@ export default function BarPlayerPanelContent(){
                 </centerbox>
 
                 <box class="center" orientation={Gtk.Orientation.HORIZONTAL} valign={Gtk.Align.CENTER} halign={Gtk.Align.CENTER} hexpand>
-                    <label xalign={0.5} label="" class="skip" $={onClick(() => prevTrack())}/>
+                    
+                    <centerbox orientation={Gtk.Orientation.VERTICAL}>
+                        <label $type="center" xalign={0.5} label="" class="skip prev" $={onClick(() => prevTrack())}/>
+                    </centerbox>
+                    
                     <box class={isPlaying.as(p => `play-pause ${p ? "playing" : "stopped"}`)} $={onClick(() => togglePlayPause())} orientation={Gtk.Orientation.VERTICAL} valign={Gtk.Align.CENTER} halign={Gtk.Align.CENTER}>
                         <label xalign={0.5} label={isPlaying.as(p => p ? "" : "")}  />
                     </box>
-                    <label xalign={0.5} label="" class="skip" $={onClick(() => nextTrack())}/>
+
+                    <centerbox orientation={Gtk.Orientation.VERTICAL}>
+                        <label $type="center" xalign={0.5} label="" class="skip next" $={onClick(() => nextTrack())}/>
+                    </centerbox>
+                    
                 </box>
                 
                 <box class="right" vexpand orientation={Gtk.Orientation.VERTICAL} valign={Gtk.Align.CENTER}>

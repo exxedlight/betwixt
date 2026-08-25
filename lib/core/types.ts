@@ -31,3 +31,21 @@ export type DesktopConfig = {
     preferences: DesktopPreferences
     items: DesktopItem[]
 }
+
+
+export type PlayerConfig = {
+    "show-window"?: string
+    "hide-window"?: string
+
+    "playlist-get"?: string
+    "playlist-name"?: string
+    "playlist-jump"?: string
+
+    "playlists-number"?: string
+
+    "shuffle-status"?: string
+    "shuffle-toggle"?: string
+
+    "repeat-status"?: string
+    "repeat-toggle"?: string
+}
