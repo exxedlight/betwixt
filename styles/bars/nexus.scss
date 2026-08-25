@@ -8,7 +8,7 @@
 
     .small {
         font-size: 11px;
-        border: 1px solid $accent-2;
+        border: 1px solid $accent-1;
         border-radius: 5px;
         border-left: none; border-bottom: none;
         border-top-left-radius: 0; border-bottom-right-radius: 0;
@@ -29,8 +29,8 @@
                 border-radius: 100%;
 
                 &.available {
-                    color: $accent-3; 
-                    text-shadow: 0 0 5px Alpha($highlight-4, .6);
+                    color: $accent-2; 
+                    text-shadow: 0 0 5px Alpha($highlight-3, .6);
                 }
             }
 
@@ -40,7 +40,7 @@
                 border-bottom-right-radius: 0; 
                 border-bottom-left-radius: 0;
                 padding-left: 5px;
-                border: 1px solid $accent-2;
+                border: 1px solid $accent-1;
                 border-bottom: none; 
                 border-right: none;
             }
@@ -52,7 +52,7 @@
                 border-bottom-right-radius: 0;
                 padding: 0 5px;
                 padding-right: 10px;
-                border: 1px solid $accent-2;
+                border: 1px solid $accent-1;
                 border-right: none; 
                 border-bottom: none;
                 margin-right: 0;
@@ -64,7 +64,7 @@
                 border-bottom-left-radius: 0; 
                 border-bottom-right-radius: 0;
                 padding-right: 5px;
-                border: 1px solid $accent-2;
+                border: 1px solid $accent-1;
                 border-bottom: none; 
                 border-left: none;
             }
@@ -73,34 +73,34 @@
 
 
     .center {
-        //@include hexagon-shape(15px, Alpha(Shade($surface-3, 1.2), .35));
+        //@include hexagon-shape(15px, Alpha(Shade($surface-2, 1.2), .35));
         @include skew(-15deg);
         padding: 0 10px;
                 
-        background: //radial-gradient(ellipse 100% 80% at -50% 50%, $surface-4, transparent),
-                    //radial-gradient(ellipse 100% 80% at 150% 50%, $surface-4, transparent),
-                    radial-gradient(ellipse 50% 55% at 50% 90%, Alpha(Shade($accent-3, .8), .5), transparent),
-                    //radial-gradient(ellipse 50% 55% at 50% 10%, Alpha(Shade($accent-3, .8), .5), transparent),
-                    radial-gradient(ellipse 100% 50% at 50% 50%, Alpha(Shade($accent-4, .7), .95) 30%, transparent 85%)
+        background: //radial-gradient(ellipse 100% 80% at -50% 50%, $surface-2, transparent),
+                    //radial-gradient(ellipse 100% 80% at 150% 50%, $surface-2, transparent),
+                    radial-gradient(ellipse 50% 55% at 50% 90%, Alpha(Shade($accent-2, .8), .5), transparent),
+                    //radial-gradient(ellipse 50% 55% at 50% 10%, Alpha(Shade($accent-2, .8), .5), transparent),
+                    radial-gradient(ellipse 100% 50% at 50% 50%, Alpha(Shade($accent-3, .7), .95) 30%, transparent 85%)
                     ;
             
         .ram{
             padding-left: 10px; padding-right: 4px; padding-top: 4px;
             border-radius: 10px;
             border-bottom-left-radius: 0; border-bottom-right-radius: 0;
-            border: 1px solid $accent-2;
+            border: 1px solid $accent-1;
             border-bottom: none; border-right: none;
 
 
-            background: radial-gradient(ellipse 50% 50% at 50% 60%, Shade($surface-3, .85), transparent);
+            background: radial-gradient(ellipse 50% 50% at 50% 60%, Shade($surface-2, .85), transparent);
         }
         .menu-button {
             padding: 0 31px;
             font-size: 16px;
             padding-bottom: 1px;
 
-            background: radial-gradient(ellipse 20% 60% at 50% 50%, $accent-4 60%, transparent), 
-                        radial-gradient(ellipse 50% 150% at 50% 100%, Shade($accent-4, 1.1) 50%, transparent);
+            background: radial-gradient(ellipse 20% 60% at 50% 50%, $accent-3 60%, transparent), 
+                        radial-gradient(ellipse 50% 150% at 50% 100%, Shade($accent-3, 1.1) 50%, transparent);
             transition: background $anim-duration linear, padding $anim-duration linear;
 
 
@@ -108,8 +108,8 @@
                 padding: 0 40px; 
                 //padding-right: 43px; 
                 padding-bottom: 1px; 
-                background: radial-gradient(ellipse 20% 60% at 50% 50%, Alpha($accent-3, .8) 5%, transparent), 
-                            radial-gradient(ellipse 50% 150% at 50% 100%, Alpha(Shade($accent-3, 1.1), .15) 50%, transparent);
+                background: radial-gradient(ellipse 20% 60% at 50% 50%, Alpha($accent-2, .8) 5%, transparent), 
+                            radial-gradient(ellipse 50% 150% at 50% 100%, Alpha(Shade($accent-2, 1.1), .15) 50%, transparent);
             }
         }
 

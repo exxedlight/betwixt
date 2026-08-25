@@ -5,12 +5,12 @@
     .power-menu-revealer{
         
         .power-menu-box{
-            //background-color: Alpha($surface-2, .75);
+            //background-color: Alpha($surface-1, .75);
             padding: 10px; padding-left: 15px;
             border-radius: 10px;
             border-top-right-radius: 0; border-top-left-radius: 0; border-bottom-right-radius: 0;
             
-            background: linear-gradient(to bottom, Alpha($surface-2, .5), Alpha($surface-1, .75));
+            background: linear-gradient(to bottom, Alpha($surface-1, .5), Alpha($surface-1, .75));
 
             & label{
                 background: radial-gradient(40% 40% at 50% 50%, $accent-1, transparent);

@@ -4,28 +4,28 @@ $bar-background:    rgba(0,0,0,0);
 
 /* SURFACES */
 $surface-1:         rgb(0, 0, 0);
+$surface-1:         rgb(0, 0, 0);
 $surface-2:         rgb(0, 0, 0);
-$surface-3:         rgb(0, 0, 0);
-$surface-4:         rgb(0, 0, 0);
+$surface-2:         rgb(0, 0, 0);
 
 /* ACCENTS */
 $accent-1:          rgb(176, 176, 176);
-$accent-2:          rgb(118, 118, 118);
-$accent-3:          rgb(230, 223, 223);
-$accent-4:          rgb(26, 23, 23);
+$accent-1:          rgb(118, 118, 118);
+$accent-2:          rgb(230, 223, 223);
+$accent-3:          rgb(26, 23, 23);
 
 
 /* HIGHLIGHTS */
-$highlight-0:       rgb(187, 187, 187);
-$highlight-1:       rgb(156, 151, 160);
-$highlight-2:       rgb(141, 141, 141);
-$highlight-4:       rgb(117, 142, 146);
+$highlight-1:       rgb(187, 187, 187);
+$highlight-2:       rgb(156, 151, 160);
+$accent-1:       rgb(141, 141, 141);
+$highlight-3:       rgb(117, 142, 146);
 
 
 /* TEXT */
-$font-base:         rgb(197, 214, 238);
-$font-workspaces:   rgb(217, 222, 255);
-$font-light:        rgb(215, 215, 215);
+$font-base-color:         rgb(197, 214, 238);
+$font-workspaces-color:   rgb(217, 222, 255);
+$font-light-color:        rgb(215, 215, 215);
 
 /* STATES */
 $color-warning:     rgb(230, 173, 15);

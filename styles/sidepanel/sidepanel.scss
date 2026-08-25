@@ -26,14 +26,14 @@
             padding-right: 70px;
 
             background: 
-                radial-gradient(45% 10% at 10% 100%, Alpha($accent-4, .5), transparent),
-                radial-gradient(45% 5% at 80% 0%, Alpha($surface-3, .25), transparent),
-                radial-gradient(50% 50% at 50% 50%, Alpha($accent-4, .45), transparent)
+                radial-gradient(45% 10% at 10% 100%, Alpha($accent-3, .5), transparent),
+                radial-gradient(45% 5% at 80% 0%, Alpha($surface-2, .25), transparent),
+                radial-gradient(50% 50% at 50% 50%, Alpha($accent-3, .45), transparent)
             ;
-            background-color: Alpha($surface-2, .75);
+            background-color: Alpha($surface-1, .75);
             box-shadow: 
-                inset -5px 2px 5px $surface-3,
-                inset 2px -2px 5px $surface-3,
+                inset -5px 2px 5px $surface-2,
+                inset 2px -2px 5px $surface-2,
             ;
         }
     }

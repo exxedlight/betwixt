@@ -7,7 +7,7 @@
 window {
     &.Bar {
         background: $bar-background;
-        color: $font-base;
+        color: $font-base-color;
         min-height: 20px;
         font-size: 12px;
         margin: 0;
@@ -23,14 +23,14 @@ window {
 
     border-radius: 100%;
     border: 2px solid transparent;
-    color: $font-base;
+    color: $font-base-color;
     background: transparent;
     transition: all $anim-duration ease;
 
     &:hover{
         transform: rotate(180deg);
         background: radial-gradient(50% 50%, Alpha($accent-1, .5) 35%, transparent 90%);
-        border-color: Alpha($accent-2, .75);
+        border-color: Alpha($accent-1, .75);
     }
 }
 
@@ -39,7 +39,7 @@ window {
 .bar-surface-bottom {
     min-height: 22px;
     background: radial-gradient(ellipse 10% 100% at 5% 50%, $surface-1, transparent),
-                radial-gradient(30% 100% at 40% 60%, Shade($surface-2, .75), transparent),
+                radial-gradient(30% 100% at 40% 60%, Shade($surface-1, .75), transparent),
                 radial-gradient(20% 100% at 70% 80%, $surface-1, transparent),
                 ;
     
@@ -51,9 +51,9 @@ window {
 .bar-box{
     @include skew(-25deg);
     
-    &.bar-left-box  { margin-left: -5px; padding-left: 5px; background-color: Alpha($surface-2, .5); }
-    &.bar-center-box { background: radial-gradient(50% 100% at 50% 0%, $surface-2, transparent); }
-    &.bar-right-box { margin-right: -10px; background-color: Alpha($surface-2, .5); padding-left: 15px; transition: all $anim-duration ease; }
+    &.bar-left-box  { margin-left: -5px; padding-left: 5px; background-color: Alpha($surface-1, .5); }
+    &.bar-center-box { background: radial-gradient(50% 100% at 50% 0%, $surface-1, transparent); }
+    &.bar-right-box { margin-right: -10px; background-color: Alpha($surface-1, .5); padding-left: 15px; transition: all $anim-duration ease; }
 }
 
 
@@ -67,13 +67,13 @@ window {
 
 tooltip{
     padding: 5px 10px;
-    background: Alpha(Shade($surface-4, .85), .75);
+    background: Alpha(Shade($surface-2, .85), .75);
     font-size: 13px;
     opacity: .95;
-    border: 1px solid Alpha($highlight-0, .5);
-    box-shadow: inset 0 0 5px Alpha($highlight-0, .5);
+    border: 1px solid Alpha($highlight-1, .5);
+    box-shadow: inset 0 0 5px Alpha($highlight-1, .5);
 }
 scrollbar{
     trough { outline: none; }
-    slider { background-color: $accent-2; border: none; }
+    slider { background-color: $accent-1; border: none; }
 }

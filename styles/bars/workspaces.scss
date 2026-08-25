@@ -30,17 +30,17 @@
         transition: background $anim-duration linear;
 
         &:hover {
-            background: radial-gradient(circle at center, Alpha($highlight-1, .65), transparent);
+            background: radial-gradient(circle at center, Alpha($highlight-2, .65), transparent);
         }
 
         &.active {
             @include skew(-10deg);
             padding: 0 10px;
-            background: radial-gradient(circle at center, Alpha($highlight-1, .65), transparent);
+            background: radial-gradient(circle at center, Alpha($highlight-2, .65), transparent);
             background-color: black;
 
             border-radius: 0px;
-            border-color: $surface-3;
+            border-color: $surface-2;
             border-top: none; border-bottom: none;
 
             label { font-size: 17px; }
@@ -48,7 +48,7 @@
 
         label {
             font-family: $symbols-font;
-            color: $font-workspaces;
+            color: $font-workspaces-color;
             margin: 0 3px;
         }
     }

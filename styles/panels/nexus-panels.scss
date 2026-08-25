@@ -7,20 +7,20 @@
 
     & > box {
         margin: 0;
-        background-color: Alpha($surface-2, .55);
+        background-color: Alpha($surface-1, .55);
         padding: 0 20px; padding-top: 5px;
         margin: 0 5px;
         border-bottom: none;
         box-shadow: 
-                    inset 0 2px 5px 1px Alpha($accent-4, .75),
+                    inset 0 2px 5px 1px Alpha($accent-3, .75),
                     ;
         background: 
-                    //radial-gradient(150% 10% at 0% 100%, Alpha($surface-3, .25) 20%, transparent 40%),
-                    //radial-gradient(150% 10% at 100% 100%, Alpha($surface-3, .25) 25%, transparent 40%),
-                    radial-gradient(100% 20% at 50% 100%, $surface-2 5%, transparent 40%),
-                    linear-gradient(to top, $surface-2 15%, transparent 40%),
-                    linear-gradient(to bottom, $surface-2, transparent),
-                    radial-gradient(50% 50% at 50% 50%, $accent-4, transparent),
+                    //radial-gradient(150% 10% at 0% 100%, Alpha($surface-2, .25) 20%, transparent 40%),
+                    //radial-gradient(150% 10% at 100% 100%, Alpha($surface-2, .25) 25%, transparent 40%),
+                    radial-gradient(100% 20% at 50% 100%, $surface-1 5%, transparent 40%),
+                    linear-gradient(to top, $surface-1 15%, transparent 40%),
+                    linear-gradient(to bottom, $surface-1, transparent),
+                    radial-gradient(50% 50% at 50% 50%, $accent-3, transparent),
                     
                     ;
         
@@ -72,7 +72,7 @@
                 margin: 0 5px;
                 padding: 5px;
                 padding-right: 15px;
-                background: radial-gradient(circle at center, Alpha(Shade($surface-3, .8), .8), transparent);
+                background: radial-gradient(circle at center, Alpha(Shade($surface-2, .8), .8), transparent);
                 
                 
                 .wifi-network-item {
@@ -140,8 +140,8 @@
     //.header {  }
     .app-search-entry{
         @include skew(-10deg);
-        background: radial-gradient(50% 50%, Alpha(Shade($accent-3, .75), .4), transparent);
-        box-shadow: inset 0 0 10px Alpha(Shade($accent-3, .75), .4);
+        background: radial-gradient(50% 50%, Alpha(Shade($accent-2, .75), .4), transparent);
+        box-shadow: inset 0 0 10px Alpha(Shade($accent-2, .75), .4);
         font-weight: 400;
         font-style: italic;
     }
@@ -154,13 +154,13 @@
             
             .app-item{
                 padding-left: 10px;
-                background: Alpha($accent-2, .2);
+                background: Alpha($accent-1, .2);
                 font-weight: 600;
                 border: 1px solid transparent;
                 transition: all $anim-duration linear;
 
                 &:hover, &:focus{ padding-left: 10px; }
-                &:hover{ background: Alpha($accent-2, .3); border-color: Alpha($accent-1, .3); }
+                &:hover{ background: Alpha($accent-1, .3); border-color: Alpha($accent-1, .3); }
                 &:focus{
                     @include skew(-10deg);
                     border-color: $accent-1;
@@ -187,7 +187,7 @@
             margin: 0 5px;
             padding: 5px;
             padding-right: 15px;
-            background: radial-gradient(circle at center, Alpha(Shade($surface-3, .8), .8), transparent);
+            background: radial-gradient(circle at center, Alpha(Shade($surface-2, .8), .8), transparent);
 
             .bluetooth-device-item {
                 @include skew(-15deg);

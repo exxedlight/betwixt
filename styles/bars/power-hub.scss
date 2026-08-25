@@ -4,12 +4,12 @@
     padding-right: 10px;
     font-size: 14px;
     font-family: $symbols-font, monospace;
-    color: $font-base;
+    color: $font-base-color;
     font-weight: 600;
 
     .power-modes{
         border-radius: 10px;
-        border: 1px solid $highlight-0;
+        border: 1px solid $highlight-1;
         border-top: none;
         border-top-left-radius: 0; border-top-right-radius: 0;
         padding: 0 10px;
@@ -27,8 +27,8 @@
 
             &:hover{
                 background: 
-                    radial-gradient(40% 40% at 50% 50%, $accent-2, transparent),    
-                    radial-gradient(50% 50% at 50% 50%, $accent-4, transparent),
+                    radial-gradient(40% 40% at 50% 50%, $accent-1, transparent),    
+                    radial-gradient(50% 50% at 50% 50%, $accent-3, transparent),
                 ;
                 padding: 0 10px;
             }
@@ -37,35 +37,35 @@
 
         .eco-modes{
             border-radius: 10px;
-            &.ultra-eco-mode { box-shadow: inset 0 0 1px 2px $accent-2; }
+            &.ultra-eco-mode { box-shadow: inset 0 0 1px 2px $accent-1; }
         }
         .ultra-eco-button{
             border-radius: 10px;
             &.ultra-eco-mode {
                 border-top-right-radius: 0; border-bottom-right-radius: 0;
                 margin-right: 0;
-                background: radial-gradient(100% 50% at 100% 50%, $accent-2, transparent);
+                background: radial-gradient(100% 50% at 100% 50%, $accent-1, transparent);
                 padding: 0;
             }
         }
         .eco-button{
             border-radius: 10px;
-            &.active, &:hover.active { background: radial-gradient(60% 60% at 50% 50%, $accent-2, transparent); padding: 0; }
+            &.active, &:hover.active { background: radial-gradient(60% 60% at 50% 50%, $accent-1, transparent); padding: 0; }
             
             &.ultra-eco-mode {
                 border-top-left-radius: 0; border-bottom-left-radius: 0;
                 margin-left: 0;
-                background: radial-gradient(100% 50% at 0% 50%, $accent-2, transparent);
+                background: radial-gradient(100% 50% at 0% 50%, $accent-1, transparent);
                 padding: 0;
             }
         }
         .ballanced-button{
             border-radius: 100%;
-            &.active, &:hover.active { background: radial-gradient(60% 60% at 50% 50%, $accent-2, transparent); padding: 0; }
+            &.active, &:hover.active { background: radial-gradient(60% 60% at 50% 50%, $accent-1, transparent); padding: 0; }
         }
         .performance-button{
             border-radius: 100%;
-            &.active, &:hover.active { background: radial-gradient(60% 60% at 50% 50%, $accent-2, transparent); padding: 0; }
+            &.active, &:hover.active { background: radial-gradient(60% 60% at 50% 50%, $accent-1, transparent); padding: 0; }
         }
     }
 
@@ -80,8 +80,8 @@
         label{ font-family: $symbols-font; }
 
         &.active {
-            background: radial-gradient(70% 70% at 45% 50%, Alpha($highlight-4, .3), transparent);
-            text-shadow: 0 0 10px $accent-2;
+            background: radial-gradient(70% 70% at 45% 50%, Alpha($highlight-3, .3), transparent);
+            text-shadow: 0 0 10px $accent-1;
         }
         &:hover{
             opacity: .8;
@@ -89,7 +89,7 @@
             transform: scale(1.2);
 
             &.active{
-                background: radial-gradient(50% 50% at 45% 50%, Alpha($highlight-4, .3), transparent);
+                background: radial-gradient(50% 50% at 45% 50%, Alpha($highlight-3, .3), transparent);
             }
         }
     }
@@ -98,19 +98,19 @@
 
     .battery-indicator{
         @include skew(-10deg);
-        background-color: Shade($surface-3, .5);
+        background-color: Shade($surface-2, .5);
         transition: text-shadow $anim-duration linear, color $anim-duration linear;
         min-width: 70px;
         
         &.charging{
-            text-shadow: 1px 1px 1px $accent-3;
+            text-shadow: 1px 1px 1px $accent-2;
         }
         &.warning{
-            text-shadow: 0 0 10px $accent-4;
+            text-shadow: 0 0 10px $accent-3;
             color: Alpha(Shade($color-warning, 1.4), .75);
         }
         &.critical {
-            text-shadow: 0 0 10px $accent-4;
+            text-shadow: 0 0 10px $accent-3;
             color: Alpha(Shade($color-critical, 1.5), .75);
         }
     }
@@ -119,13 +119,13 @@
         background-color: transparent;
         padding: 0 10px;
         font-size: 16px;
-        color: $font-light;
+        color: $font-light-color;
         transition: all $anim-duration linear;
 
         &:hover {
             background: 
-                radial-gradient(40% 40% at 50% 50%, $accent-2, transparent),    
-                radial-gradient(50% 50% at 50% 50%, $accent-4, transparent),
+                radial-gradient(40% 40% at 50% 50%, $accent-1, transparent),    
+                radial-gradient(50% 50% at 50% 50%, $accent-3, transparent),
             ;
             transform: scale(1.1);
             //padding: 0 15px;

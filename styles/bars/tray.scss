@@ -12,8 +12,8 @@
         &>arrow { background-color: transparent; }
         &>contents {
             background-color: Alpha($surface-1, .75);
-            border: 1px solid Alpha($accent-3, .5);
-            box-shadow: inset 0 0 3px 0 Alpha($accent-3, .45);
+            border: 1px solid Alpha($accent-2, .5);
+            box-shadow: inset 0 0 3px 0 Alpha($accent-2, .45);
             border-radius: 20px;
             border-bottom-right-radius: 0;
             border-top-left-radius: 0;
