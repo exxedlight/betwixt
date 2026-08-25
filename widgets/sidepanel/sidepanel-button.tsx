@@ -1,8 +1,8 @@
 import { Astal, Gtk } from "ags/gtk4";
 import { onClick } from "../../lib/core/gestures";
 import { sidepanelVisible, toggleSidepanel } from "../../lib/global-states";
-import RevealerPanel from "../modules/primitives/revealer-panel";
 import SidepanelContent from "./sidepanel-content";
+import RevealerPanel from "../primitives/revealer-panel";
 
 export default function SidepanelButton(){
     

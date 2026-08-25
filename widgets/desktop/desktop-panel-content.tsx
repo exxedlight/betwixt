@@ -1,4 +1,4 @@
-import { Gdk, Gtk } from "ags/gtk4"
+import { Gtk } from "ags/gtk4"
 import { createState, With } from "ags"
 import { onClick } from "../../lib/core/gestures"
 import { launchCommand, swithToEmptyWorkspace } from "../../lib/services/hyprland-exec"

@@ -1,10 +1,10 @@
 import app from "ags/gtk4/app"
-import TopBar from "./widgets/bars/top-bar"
 import { Gdk } from "ags/gtk4"
-import BottomBar from "./widgets/bars/bottom-bar"
 import { loadStyles } from "./lib/core/styles-loader"
 import { handleKeybindRequest } from "./lib/services/actions"
 import { applyInitialPowerPlan } from "./lib/services/powerplans"
+import TopBar from "./widgets/bar-top"
+import BottomBar from "./widgets/bar-bottom"
 
 
 // --- Hot Reload start:
