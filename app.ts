@@ -5,6 +5,9 @@ import { handleKeybindRequest } from "./lib/services/actions"
 import { applyInitialPowerPlan } from "./lib/services/powerplans"
 import TopBar from "./widgets/bar-top"
 import BottomBar from "./widgets/bar-bottom"
+import { SettingsWindow } from "./widgets/settings/settings-window"
+import DesktopWindow from "./widgets/desktop/desktop"
+import SidePanelWindow from "./widgets/sidepanel/sidepanel"
 
 
 // --- Hot Reload start:
@@ -28,6 +31,11 @@ app.start({
     for (let i = 0; i < count; i++) {
       TopBar(i)
       BottomBar(i)
+
+      SettingsWindow()
+
+      DesktopWindow();
+      SidePanelWindow();
     }
   },
 })

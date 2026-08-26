@@ -1,10 +1,10 @@
 import { Gtk } from "ags/gtk4";
 import { createState } from "ags";
-import SidepanelButton from "../../sidepanel/sidepanel-button";
 import InputSourceIndicator from "./indicator-input-source";
 import BrightnessIndicator from "./indicator-brightness";
 import VolumeInputIndicator from "./indicator-volume-input";
 import VolumeOutputIndicator from "./indicator-volume-output";
+import { SidepanelButton } from "../../sidepanel/sidepanel";
 
 
 export default function QuickHub() {

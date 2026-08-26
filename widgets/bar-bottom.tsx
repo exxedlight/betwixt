@@ -4,12 +4,20 @@ import HiderButton from "./bar-modules/hider-button"
 import Workspaces from "./bar-modules/workspaces"
 import Nexus from "./bar-modules/nexus/nexus"
 import QuickHub from "./bar-modules/quick-hub/quick-hub"
-
+import AppsPanel from "./panels/apps-panel"
+import BluetoothPanel from "./panels/bluetooth-panel"
+import WifiPanel from "./panels/wifi-panel"
 
 
 const { BOTTOM, LEFT, RIGHT } = Astal.WindowAnchor
 
 export default function BottomBar(monitor = 0) {
+
+  //  --- PANELS
+  AppsPanel();
+  BluetoothPanel();
+  WifiPanel();
+  //  -------------------
 
   return (
     <window

@@ -1,9 +1,6 @@
 import Bluetooth from "gi://AstalBluetooth"
 import { createBinding, createComputed } from "ags"
-import { Gtk } from "ags/gtk4"
-import BluetoothPanelContent from "../../panels/bluetooth-panel-content"
-import RevealerPanel from "../../primitives/revealer-panel"
-import { activeNexusPanel, closeNexusPanel, NexusPanelKey, toggleNexusPanel } from "../../../lib/global-states"
+import { NexusPanelKey, toggleNexusPanel } from "../../../lib/global-states"
 import { onClick } from "../../../lib/core/gestures"
 
 export default function BluetoothButton() {
@@ -16,16 +13,6 @@ export default function BluetoothButton() {
         if (!powered()) return "󰂲"      // bluetooth-off
         if (connected()) return "󰂱"     // bluetooth-connect
         return "󰂯"                      // bluetooth (on, idle)
-    })
-
-    //  Pop-up panel widget
-    RevealerPanel({
-        name: "nexus-bluetooth-panel",
-        visible: activeNexusPanel.as(k => k === NexusPanelKey.BLUETOOTH),
-        children: <BluetoothPanelContent onClose={closeNexusPanel} />,
-        transition: Gtk.RevealerTransitionType.SWING_UP,
-        classes: ["nexus-panel-window"],
-        revealerClasses: ["bar-revealer", "nexus-bluetooth-revealer"]
     })
 
     return (

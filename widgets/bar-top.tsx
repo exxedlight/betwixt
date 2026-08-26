@@ -1,16 +1,22 @@
 import app from "ags/gtk4/app"
 import { Astal } from "ags/gtk4"
-import DesktopButton from "./desktop/desktop-button"
-import BarPlayer, { PlayerPanelWindow } from "./bar-modules/player/bar-player";
 import SysTray from "./bar-modules/tray";
 import RecordingIndicator from "./bar-modules/rec-indicator";
 import PowerHub from "./bar-modules/power-hub/power-hub";
+import { DesktopButton } from "./desktop/desktop";
+import PowerMenuPanel from "./panels/powermenu-panel";
+import BarPlayerPanel from "./panels/bar-player-panel";
+import BarPlayer from "./bar-modules/player/bar-player";
 
 const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
 export default function TopBar(monitor = 0) {
-  PlayerPanelWindow();
-  
+
+  //  --- PANELS
+  BarPlayerPanel();
+  PowerMenuPanel();
+  //  -----------------------
+
   return (
     <window
       name={`TopBar-${monitor}`}

@@ -1,13 +1,11 @@
 import { createPoll } from "ags/time"
 import { Gtk } from "ags/gtk4"
 import { getCpuFreq, getCpuTemp, getCpuUsage, getGpuAvailable, getGpuTemp, getMemory } from "../../../lib/core/system-stats"
-import { activeNexusPanel, closeNexusPanel, NexusPanelKey, toggleNexusPanel } from "../../../lib/global-states"
+import { NexusPanelKey, toggleNexusPanel } from "../../../lib/global-states"
 import { onClick } from "../../../lib/core/gestures"
 import { CurrentDate, CurrentTime } from "../../../lib/services/date-time"
 import WifiButton from "./wifi-button"
-import AppsPanelContent from "../../panels/apps-panel-content"
 import BluetoothButton from "./bluetooth-button"
-import RevealerPanel from "../../primitives/revealer-panel"
 import UpdateButton from "./updates-button"
 
 
@@ -32,16 +30,6 @@ export default function Nexus() {
             memory: await getMemory(),
         })
     )
-
-    //  Pop-up panel widget (APPS)
-    RevealerPanel({
-        name: "nexus-apps-panel",
-        visible: activeNexusPanel.as((k) => k === NexusPanelKey.APPS),
-        children: <AppsPanelContent onClose={closeNexusPanel} />,
-        transition: Gtk.RevealerTransitionType.FADE_SLIDE_UP,
-        classes: ["nexus-panel-window"],
-        revealerClasses: ["bar-revealer", "nexus-apps-revealer"]
-    })
 
 
     return (

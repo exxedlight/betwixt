@@ -1,12 +1,35 @@
-import { Gtk } from "ags/gtk4"
+import { Astal, Gtk } from "ags/gtk4"
 import { createState, With } from "ags"
 import { onClick } from "../../lib/core/gestures"
 import { launchCommand, swithToEmptyWorkspace } from "../../lib/services/hyprland-exec"
-import { toggleDesktop } from "../../lib/global-states"
+import { desktopVisible, toggleDesktop } from "../../lib/global-states"
 import { desktopConfig } from "../../lib/services/desktop"
 import { getPrimaryMonitorWidth } from "../../lib/services/monitors"
+import RevealerPanel from "../primitives/revealer-panel"
 
-export default function DesktopPanelContent() {
+export default function DesktopWindow(){
+    return RevealerPanel({
+        name: "desktop-panel", 
+        visible: desktopVisible.as(v => v), 
+        children: <DesktopPanelContent/>, 
+        anchor: Astal.WindowAnchor.LEFT | Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM, 
+        classes: ["desktop-panel"], 
+        transition: Gtk.RevealerTransitionType.FADE_SLIDE_RIGHT, 
+        revealerClasses: ["desktop-revealer"]
+    })
+}
+
+export function DesktopButton() {
+    return (
+        <label
+            label=""
+            class="desktop-button"
+            $={onClick(() => toggleDesktop() )}
+        />
+    )
+}
+
+function DesktopPanelContent() {
     const panelWidth = Math.round(getPrimaryMonitorWidth() * 0.65)
     const handleClose = () => toggleDesktop()
 

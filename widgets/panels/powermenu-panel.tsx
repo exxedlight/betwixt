@@ -1,15 +1,28 @@
-import { createState } from "ags";
-import { Gtk } from "ags/gtk4";
+import { Astal, Gtk } from "ags/gtk4";
 import { onClick } from "../../lib/core/gestures";
 import { exitHyprland, launchCommand } from "../../lib/services/hyprland-exec";
+import RevealerPanel from "../primitives/revealer-panel";
+import { powermenuVisible, setPowermenuVisible } from "../../lib/global-states";
 
 type Props = {
     onClose?: () => void
 }
 
-export default function PowerMenuPanelContent({ onClose }: Props) {
-    const [windowVisible, setWindowVisible] = createState(false)
+const {TOP, RIGHT} = Astal.WindowAnchor
 
+export default function PowerMenuPanel(){
+    return RevealerPanel({
+        name: "power-menu-panel",
+        visible: powermenuVisible,
+        children: <PowerMenuPanelContent onClose={() => setPowermenuVisible(false)} />,
+        transition: Gtk.RevealerTransitionType.SWING_DOWN,
+        anchor: TOP | RIGHT,
+        classes: ["power-menu-panel"],
+        revealerClasses: ["power-menu-revealer"]
+    })
+}
+
+function PowerMenuPanelContent({ onClose }: Props) {
     return (
         <box 
             orientation={Gtk.Orientation.VERTICAL} 

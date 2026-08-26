@@ -3,12 +3,25 @@ import Apps from "gi://AstalApps"
 import { createBinding, createComputed, createState, For } from "ags"
 import { onEsc } from "../../lib/core/gestures"
 import { launchApp } from "../../lib/services/hyprland-exec"
+import RevealerPanel from "../primitives/revealer-panel";
+import { activeNexusPanel, closeNexusPanel, NexusPanelKey } from "../../lib/global-states";
 
 type Props = {
     onClose: () => void
 }
 
-export default function AppsPanelContent({ onClose }: Props) {
+export default function AppsPanel(){
+    return RevealerPanel({
+        name: "nexus-apps-panel",
+        visible: activeNexusPanel.as((k) => k === NexusPanelKey.APPS),
+        children: <AppsPanelContent onClose={closeNexusPanel} />,
+        transition: Gtk.RevealerTransitionType.FADE_SLIDE_UP,
+        classes: ["nexus-panel-window"],
+        revealerClasses: ["bar-revealer", "nexus-apps-revealer"]
+    })
+}
+
+function AppsPanelContent({ onClose }: Props) {
     const [query, setQuery] = createState("")
 
     const appsService = new Apps.Apps()

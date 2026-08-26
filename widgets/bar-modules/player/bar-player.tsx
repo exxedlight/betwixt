@@ -1,10 +1,8 @@
-import { Astal, Gtk } from "ags/gtk4"
+import { Gtk } from "ags/gtk4"
 import Cava from "./cava"
 import PlayerProgressBar from "./progress"
 import Pango from "gi://Pango"
 import { createComputed } from "gnim"
-import RevealerPanel from "../../primitives/revealer-panel"
-import BarPlayerPanelContent from "../../panels/bar-player-panel-content"
 import { playerPanelVisible, setPlayerPanelVisible } from "../../../lib/global-states"
 import { isPlaying, nextTrack, prevTrack, togglePlayPause, trackArtist, trackTitle } from "../../../lib/services/mpris"
 import { onClick } from "../../../lib/core/gestures"
@@ -15,24 +13,8 @@ const META_WIDTH = 250
 // before it visually touches the edge of the column.
 const TITLE_WIDTH = 220
 
-export function PlayerPanelWindow() {
-    return RevealerPanel({
-        name: "player-panel",
-        visible: playerPanelVisible,
-        children: <BarPlayerPanelContent />,
-        anchor: Astal.WindowAnchor.TOP,
-        classes: ["player-window"],
-        transition: Gtk.RevealerTransitionType.SLIDE_LEFT,
-        transitionDuration: 150,
-        revealerClasses: ["player-revealer"],
-        //onEnter: showPanelPlayer, 
-        //onLeave: hidePanelPlayer
-    })
-}
-
 export default function BarPlayer() {
     
-
     const metaTitle = createComputed(() => 
         `${trackTitle()}${trackArtist() !== "Unknown Artist" ? ` - ${trackArtist()}` : ""}`
     )
@@ -40,12 +22,6 @@ export default function BarPlayer() {
     return (
         <box 
             class={playerPanelVisible.as(v => `bar-player ${v ? "opened" : "closed"}`)}
-            /*$={(self) => {
-                onHover({
-                    enter: handleEnter,
-                    leave: handleLeave
-                })(self)
-            }}*/
         >
             <centerbox class="bar-player-button" orientation={Gtk.Orientation.VERTICAL} $={onClick(() => prevTrack())}>
                 <label $type="center" label="" xalign={0.5} valign={Gtk.Align.CENTER}/>

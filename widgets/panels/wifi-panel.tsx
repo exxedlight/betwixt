@@ -1,6 +1,22 @@
 import Gtk from "gi://Gtk?version=4.0"
 import { Accessor, createState, createComputed, For } from "ags"
 import { getWifiNetworks, connectWifi, WifiNetwork, SecretsRequiredError, scanWifi } from "../../lib/services/wifi"
+import RevealerPanel from "../primitives/revealer-panel"
+import { activeNexusPanel, closeNexusPanel, NexusPanelKey } from "../../lib/global-states"
+
+
+export default function WifiPanel() {
+  return RevealerPanel({
+    name: "nexus-wifi-panel",
+    visible: activeNexusPanel.as(k => k === NexusPanelKey.WIFI),
+    children: <WifiPanelContent onClose={closeNexusPanel} />,
+    transition: Gtk.RevealerTransitionType.SWING_UP,
+    classes: ["nexus-panel-window"],
+    revealerClasses: ["bar-revealer", "nexus-wifi-revealer"]
+  })
+}
+
+
 
 type NetworkItemProps = {
   net: Accessor<WifiNetwork>
@@ -13,18 +29,18 @@ function NetworkItem({ net, onAttemptConnect }: NetworkItemProps) {
     <button
       class={net.as((n) => n.active ? "wifi-network-item active" : "wifi-network-item")}
       onClicked={() => {
-        const currentNet = net.get()
+        const currentNet = net()
         if (!currentNet.active) onAttemptConnect(currentNet)
       }}
     >
       <box>
-        <label label={net.as(n => n.bssid)}       class="col-bssid"     xalign={0} />
-        <label label={net.as(n => n.ssid)}        class="col-ssid"      xalign={0} />
-        <label label={net.as(n => n.mode)}        class="col-mode"      xalign={0} />
-        <label label={net.as(n => n.chan)}        class="col-chan"      xalign={0} />
-        <label label={net.as(n => n.rate)}        class="col-rate"      xalign={0} />
-        <label label={net.as(n => `${n.signal}`)} class="col-signal"    xalign={0} />
-        <label label={net.as(n => n.security)}    class="col-security"  xalign={0} />
+        <label label={net.as(n => n.bssid)} class="col-bssid" xalign={0} />
+        <label label={net.as(n => n.ssid)} class="col-ssid" xalign={0} />
+        <label label={net.as(n => n.mode)} class="col-mode" xalign={0} />
+        <label label={net.as(n => n.chan)} class="col-chan" xalign={0} />
+        <label label={net.as(n => n.rate)} class="col-rate" xalign={0} />
+        <label label={net.as(n => `${n.signal}`)} class="col-signal" xalign={0} />
+        <label label={net.as(n => n.security)} class="col-security" xalign={0} />
       </box>
     </button>
   )
@@ -45,12 +61,12 @@ type Props = {
   onClose: () => void
 }
 
-export default function WifiPanelContent({ onClose }: Props) {
+function WifiPanelContent({ onClose }: Props) {
 
   const [networks, setNetworks] = createState<WifiNetwork[]>([])
   let pollTimer: ReturnType<typeof setInterval> | null = null
 
-  const refresh = () => getWifiNetworks().then(setNetworks).catch(() => {})
+  const refresh = () => getWifiNetworks().then(setNetworks).catch(() => { })
   const startPoll = () => {
     if (pollTimer) return
     refresh()
@@ -82,9 +98,9 @@ export default function WifiPanelContent({ onClose }: Props) {
   }
 
   return (
-    <box 
-      class="wifi-panel" 
-      orientation={Gtk.Orientation.VERTICAL} 
+    <box
+      class="wifi-panel"
+      orientation={Gtk.Orientation.VERTICAL}
       spacing={8}
       $={(self) => {
         self.connect("map", async () => { await scanWifi(); startPoll() })
@@ -131,13 +147,13 @@ export default function WifiPanelContent({ onClose }: Props) {
       {/* WI-FI NETWORKS BOX */}
       <box orientation={Gtk.Orientation.VERTICAL} spacing={4} visible={promptBssid.as((b) => b === null)} class="wifi-scrollbox">
         <box class="wifi-table-header" spacing={0}>
-          <label label="BSSID"    class="col-bssid"     xalign={0} />
-          <label label="SSID"     class="col-ssid"      xalign={0} />
-          <label label="MODE"     class="col-mode"      xalign={0} />
-          <label label="CHAN"     class="col-chan"      xalign={0} />
-          <label label="RATE"     class="col-rate"      xalign={0} />
-          <label label="SIGNAL"   class="col-signal"    xalign={0} />
-          <label label="SECURITY" class="col-security"  xalign={0} />
+          <label label="BSSID" class="col-bssid" xalign={0} />
+          <label label="SSID" class="col-ssid" xalign={0} />
+          <label label="MODE" class="col-mode" xalign={0} />
+          <label label="CHAN" class="col-chan" xalign={0} />
+          <label label="RATE" class="col-rate" xalign={0} />
+          <label label="SIGNAL" class="col-signal" xalign={0} />
+          <label label="SECURITY" class="col-security" xalign={0} />
         </box>
 
         <scrolledwindow

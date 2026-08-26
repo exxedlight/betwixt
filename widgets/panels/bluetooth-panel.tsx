@@ -1,12 +1,25 @@
 import { Gtk } from "ags/gtk4";
 import Bluetooth from "gi://AstalBluetooth"
 import { createBinding, For } from "ags"
+import RevealerPanel from "../primitives/revealer-panel";
+import { activeNexusPanel, closeNexusPanel, NexusPanelKey } from "../../lib/global-states";
 
 type Props = {
     onClose: () => void
 }
 
-export default function BluetoothPanelContent({ onClose }: Props) {
+export default function BluetoothPanel(){
+    return RevealerPanel({
+        name: "nexus-bluetooth-panel",
+        visible: activeNexusPanel.as(k => k === NexusPanelKey.BLUETOOTH),
+        children: <BluetoothPanelContent onClose={closeNexusPanel} />,
+        transition: Gtk.RevealerTransitionType.SWING_UP,
+        classes: ["nexus-panel-window"],
+        revealerClasses: ["bar-revealer", "nexus-bluetooth-revealer"]
+    })
+}
+
+function BluetoothPanelContent({ onClose }: Props) {
     const bluetooth = Bluetooth.get_default()
     const devices = createBinding(bluetooth, "devices")
 

@@ -1,41 +1,31 @@
-import { Gtk } from "ags/gtk4";
+import { Astal, Gtk } from "ags/gtk4";
 import { cycleLoop, isPlaying, loopStatus, loopSupported, nextTrack, playerVolume, prevTrack, setVolume, shuffleEnabled, shuffleSupported, togglePlayPause, toggleShuffle, trackArtist, trackTitle } from "../../lib/services/mpris";
 import { onClick, onDrag } from "../../lib/core/gestures";
 import PlayerProgressBar from "../bar-modules/player/progress";
 import { createComputed } from "ags";
 import Pango from "gi://Pango";
+import RevealerPanel from "../primitives/revealer-panel";
+import { playerPanelVisible } from "../../lib/global-states";
+
 
 const VOLUME_SLIDER_WIDTH = 100
 
-function VolumeSlider({ width = VOLUME_SLIDER_WIDTH }: { width?: number }) {
-    const handlePos = (self: Gtk.Widget, x: number) => {
-        const w = self.get_allocated_width() || width
-        const pct = Math.max(0, Math.min(1, x / w))
-        setVolume(pct)
-    }
 
-    return (
-        <box
-            class="slider volume-slider"
-            widthRequest={width}
-            $={onDrag((x) => {
-                const pct = Math.max(0, Math.min(1, x / width))
-                setVolume(pct)
-            })}
-        >
-            <box class="volume-slider-track">
-                <box
-                    class="volume-slider-fill"
-                    widthRequest={playerVolume.as(v => Math.round(v * width))}
-                    halign={Gtk.Align.START}
-                />
-            </box>
-        </box>
-    )
+export default function BarPlayerPanel(){
+    return RevealerPanel({
+        name: "player-panel",
+        visible: playerPanelVisible,
+        children: <BarPlayerPanelContent />,
+        anchor: Astal.WindowAnchor.TOP,
+        classes: ["player-window"],
+        transition: Gtk.RevealerTransitionType.SLIDE_LEFT,
+        transitionDuration: 150,
+        revealerClasses: ["player-revealer"],
+    })
 }
 
 
-export default function BarPlayerPanelContent(){
+function BarPlayerPanelContent(){
     const metaTitle = createComputed(() => 
         `${trackTitle()}${trackArtist() !== "Unknown Artist" ? ` - ${trackArtist()}` : ""}`
     )
@@ -110,6 +100,27 @@ export default function BarPlayerPanelContent(){
 
             <PlayerProgressBar barWidth={500}/>
 
+        </box>
+    )
+}
+
+function VolumeSlider({ width = VOLUME_SLIDER_WIDTH }: { width?: number }) {
+    return (
+        <box
+            class="slider volume-slider"
+            widthRequest={width}
+            $={onDrag((x) => {
+                const pct = Math.max(0, Math.min(1, x / width))
+                setVolume(pct)
+            })}
+        >
+            <box class="volume-slider-track">
+                <box
+                    class="volume-slider-fill"
+                    widthRequest={playerVolume.as(v => Math.round(v * width))}
+                    halign={Gtk.Align.START}
+                />
+            </box>
         </box>
     )
 }
