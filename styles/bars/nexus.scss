@@ -8,7 +8,7 @@
 
     .small {
         font-size: 11px;
-        border: 1px solid $accent-1;
+        border: 1px solid $outline;
         border-radius: 5px;
         border-left: none; border-bottom: none;
         border-top-left-radius: 0; border-bottom-right-radius: 0;
@@ -20,6 +20,7 @@
         .small { min-width: 35px; }
         & > label {
             margin-right: 5px;
+            text-shadow: 2px 1px 2px $text-shade-color;
 
             &.gpu-icon {
                 font-size: 16px;
@@ -29,8 +30,8 @@
                 border-radius: 100%;
 
                 &.available {
-                    color: $accent-2; 
-                    text-shadow: 0 0 5px Alpha($highlight-3, .6);
+                    color: $color-available;
+                    text-shadow: 0 0 5px Alpha($glow, .6);
                 }
             }
 
@@ -40,7 +41,7 @@
                 border-bottom-right-radius: 0; 
                 border-bottom-left-radius: 0;
                 padding-left: 5px;
-                border: 1px solid $accent-1;
+                border: 1px solid $outline;
                 border-bottom: none; 
                 border-right: none;
             }
@@ -52,7 +53,7 @@
                 border-bottom-right-radius: 0;
                 padding: 0 5px;
                 padding-right: 10px;
-                border: 1px solid $accent-1;
+                border: 1px solid $outline;
                 border-right: none; 
                 border-bottom: none;
                 margin-right: 0;
@@ -64,7 +65,7 @@
                 border-bottom-left-radius: 0; 
                 border-bottom-right-radius: 0;
                 padding-right: 5px;
-                border: 1px solid $accent-1;
+                border: 1px solid $outline;
                 border-bottom: none; 
                 border-left: none;
             }
@@ -73,43 +74,39 @@
 
 
     .center {
-        //@include hexagon-shape(15px, Alpha(Shade($surface-2, 1.2), .35));
         @include skew(-15deg);
         padding: 0 10px;
                 
-        background: //radial-gradient(ellipse 100% 80% at -50% 50%, $surface-2, transparent),
-                    //radial-gradient(ellipse 100% 80% at 150% 50%, $surface-2, transparent),
-                    radial-gradient(ellipse 50% 55% at 50% 90%, Alpha(Shade($accent-2, .8), .5), transparent),
-                    //radial-gradient(ellipse 50% 55% at 50% 10%, Alpha(Shade($accent-2, .8), .5), transparent),
-                    radial-gradient(ellipse 100% 50% at 50% 50%, Alpha(Shade($accent-3, .7), .95) 30%, transparent 85%)
+        background: 
+                    radial-gradient(ellipse 50% 55% at 50% 90%, Alpha($accent-2, .4), transparent),
+                    radial-gradient(ellipse 100% 50% at 50% 50%, Alpha($accent-3, .95) 30%, transparent 85%)
                     ;
             
         .ram{
             padding-left: 10px; padding-right: 4px; padding-top: 4px;
             border-radius: 10px;
             border-bottom-left-radius: 0; border-bottom-right-radius: 0;
-            border: 1px solid $accent-1;
+            border: 1px solid $outline;
             border-bottom: none; border-right: none;
-
-
-            background: radial-gradient(ellipse 50% 50% at 50% 60%, Shade($surface-2, .85), transparent);
+            background: radial-gradient(ellipse 50% 50% at 50% 60%, $surface-2, transparent);
         }
+
         .menu-button {
             padding: 0 31px;
             font-size: 16px;
             padding-bottom: 1px;
 
             background: radial-gradient(ellipse 20% 60% at 50% 50%, $accent-3 60%, transparent), 
-                        radial-gradient(ellipse 50% 150% at 50% 100%, Shade($accent-3, 1.1) 50%, transparent);
+                        radial-gradient(ellipse 50% 150% at 50% 100%, $accent-3 50%, transparent);
             transition: background $anim-duration linear, padding $anim-duration linear;
 
 
             &:hover { 
                 padding: 0 40px; 
-                //padding-right: 43px; 
                 padding-bottom: 1px; 
                 background: radial-gradient(ellipse 20% 60% at 50% 50%, Alpha($accent-2, .8) 5%, transparent), 
-                            radial-gradient(ellipse 50% 150% at 50% 100%, Alpha(Shade($accent-2, 1.1), .15) 50%, transparent);
+                            radial-gradient(ellipse 50% 150% at 50% 100%, Alpha($accent-2, .15) 50%, transparent)
+                ;
             }
         }
 
@@ -117,12 +114,13 @@
         .small { min-width: 30px; }
         .time { min-width: 100px; }
 
-        text-shadow: 2px 1px 2px $surface-1;
+        text-shadow: 2px 1px 2px $text-shade-color;
     }
     
     
     .right {
         padding-right: 10px;
+        text-shadow: 2px 1px 2px $text-shade-color;
         
         .date {
             margin-right: 5px;

@@ -1,31 +1,6 @@
 @use "colors" as *;
 
-@mixin hexagon-shape($cut-size: 16px, $bg: $surface-1) {
-    background: linear-gradient(135deg, transparent $cut-size, $bg $cut-size),
-                linear-gradient(225deg, transparent $cut-size, $bg $cut-size),
-                linear-gradient(45deg,  transparent $cut-size, $bg $cut-size),
-                linear-gradient(315deg, transparent $cut-size, $bg $cut-size);
-    
-    background-position: top left, top right, bottom left, bottom right;
-    background-size: 50% 50%;
-    background-repeat: no-repeat;
-}
-
 @mixin skew($amount: 10deg) {
     transform: skew($amount, 0);
     &>*{ transform: skew(-$amount, 0); }
-}
-
-
-@mixin cut-corners($corner-size: 10px) {
-  clip-path: polygon(
-    $corner-size 0,
-    calc(100% - $corner-size) 0,
-    100% $corner-size,
-    100% calc(100% - $corner-size),
-    calc(100% - $corner-size) 100%,
-    $corner-size 100%,
-    0 calc(100% - $corner-size),
-    0 $corner-size
-  );
 }

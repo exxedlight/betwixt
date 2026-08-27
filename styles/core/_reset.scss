@@ -1,9 +1,11 @@
 @use "colors" as *;
+//@use "../themes/white" as *;
 @use "fonts" as *;
 
 * {
   padding: 0;
   margin: 0;
+  color: $font-base-color;
   font-family: $regular-font;
-  outline-color: Alpha(Shade($accent-1, .8), .45);
+  outline-color: Alpha($outline, .65);
 }

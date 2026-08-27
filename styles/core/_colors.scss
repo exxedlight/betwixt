@@ -2,23 +2,26 @@ $bar-background:          rgba(0, 0, 0, 0);
 
 /* SURFACES */
 $surface-1:               rgb(20, 10, 30);
-$surface-2:               rgb(82, 50, 124);
+$surface-2:               rgb(69, 39, 104);
 
 /* ACCENTS */
-$accent-1:                rgb(140, 79, 184);
+$accent-1:                rgb(92, 35, 133);
 $accent-2:                rgb(173, 59, 243);
 $accent-3:                rgb(41, 0, 67);
 
 /* HIGHLIGHTS */
-$highlight-1:             rgb(222, 222, 222);
-$highlight-2:             rgb(168, 114, 207);
-$highlight-3:             rgb(0, 217, 255);
+$light:                   rgb(222,222,222);
+$outline:                 rgb(168, 114, 207);
+$glow:                    rgb(184, 69, 226);
+
 
 /* TEXT */
 $font-base-color:         rgb(197, 214, 238);
-$font-workspaces-color:   rgb(217, 222, 255);
+$font-shaded-color:       rgb(217, 222, 255);
 $font-light-color:        rgb(180, 190, 254);
+$text-shade-color:        rgb(40, 6, 48);
 
 /* STATES */
 $color-warning:           rgb(230, 173, 15);
 $color-critical:          rgb(170, 18, 18);
+$color-available:         rgb(139, 42, 236);

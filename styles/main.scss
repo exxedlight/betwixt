@@ -70,8 +70,8 @@ tooltip{
     background: Alpha(Shade($surface-2, .85), .75);
     font-size: 13px;
     opacity: .95;
-    border: 1px solid Alpha($highlight-1, .5);
-    box-shadow: inset 0 0 5px Alpha($highlight-1, .5);
+    border: 1px solid Alpha($outline, .5);
+    box-shadow: inset 0 0 5px Alpha($outline, .5);
 }
 scrollbar{
     trough { outline: none; }

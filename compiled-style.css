@@ -6,8 +6,9 @@
 * {
   padding: 0;
   margin: 0;
+  color: rgb(197, 214, 238);
   font-family: "Commit Mono Nerd Font";
-  outline-color: Alpha(Shade(rgb(140, 79, 184), 0.8), 0.45);
+  outline-color: Alpha(rgb(168, 114, 207), 0.65);
 }
 
 .nexus {
@@ -17,7 +18,7 @@
 }
 .nexus .small {
   font-size: 11px;
-  border: 1px solid rgb(140, 79, 184);
+  border: 1px solid rgb(168, 114, 207);
   border-radius: 5px;
   border-left: none;
   border-bottom: none;
@@ -32,6 +33,7 @@
 }
 .nexus .left > label {
   margin-right: 5px;
+  text-shadow: 2px 1px 2px rgb(40, 6, 48);
 }
 .nexus .left > label.gpu-icon {
   font-size: 16px;
@@ -41,8 +43,8 @@
   border-radius: 100%;
 }
 .nexus .left > label.gpu-icon.available {
-  color: rgb(173, 59, 243);
-  text-shadow: 0 0 5px Alpha(rgb(0, 217, 255), 0.6);
+  color: rgb(139, 42, 236);
+  text-shadow: 0 0 5px Alpha(rgb(184, 69, 226), 0.6);
 }
 .nexus .left > label.cpu {
   margin-right: 0px;
@@ -50,7 +52,7 @@
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
   padding-left: 5px;
-  border: 1px solid rgb(140, 79, 184);
+  border: 1px solid rgb(168, 114, 207);
   border-bottom: none;
   border-right: none;
 }
@@ -61,7 +63,7 @@
   border-bottom-right-radius: 0;
   padding: 0 5px;
   padding-right: 10px;
-  border: 1px solid rgb(140, 79, 184);
+  border: 1px solid rgb(168, 114, 207);
   border-right: none;
   border-bottom: none;
   margin-right: 0;
@@ -72,7 +74,7 @@
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   padding-right: 5px;
-  border: 1px solid rgb(140, 79, 184);
+  border: 1px solid rgb(168, 114, 207);
   border-bottom: none;
   border-left: none;
 }
@@ -84,7 +86,7 @@
 }
 .nexus .center {
   padding: 0 10px;
-  background: radial-gradient(ellipse 50% 55% at 50% 90%, Alpha(Shade(rgb(173, 59, 243), 0.8), 0.5), transparent), radial-gradient(ellipse 100% 50% at 50% 50%, Alpha(Shade(rgb(41, 0, 67), 0.7), 0.95) 30%, transparent 85%);
+  background: radial-gradient(ellipse 50% 55% at 50% 90%, Alpha(rgb(173, 59, 243), 0.4), transparent), radial-gradient(ellipse 100% 50% at 50% 50%, Alpha(rgb(41, 0, 67), 0.95) 30%, transparent 85%);
 }
 .nexus .center .ram {
   padding-left: 10px;
@@ -93,22 +95,22 @@
   border-radius: 10px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  border: 1px solid rgb(140, 79, 184);
+  border: 1px solid rgb(168, 114, 207);
   border-bottom: none;
   border-right: none;
-  background: radial-gradient(ellipse 50% 50% at 50% 60%, Shade(rgb(82, 50, 124), 0.85), transparent);
+  background: radial-gradient(ellipse 50% 50% at 50% 60%, rgb(69, 39, 104), transparent);
 }
 .nexus .center .menu-button {
   padding: 0 31px;
   font-size: 16px;
   padding-bottom: 1px;
-  background: radial-gradient(ellipse 20% 60% at 50% 50%, rgb(41, 0, 67) 60%, transparent), radial-gradient(ellipse 50% 150% at 50% 100%, Shade(rgb(41, 0, 67), 1.1) 50%, transparent);
+  background: radial-gradient(ellipse 20% 60% at 50% 50%, rgb(41, 0, 67) 60%, transparent), radial-gradient(ellipse 50% 150% at 50% 100%, rgb(41, 0, 67) 50%, transparent);
   transition: background 0.3s linear, padding 0.3s linear;
 }
 .nexus .center .menu-button:hover {
   padding: 0 40px;
   padding-bottom: 1px;
-  background: radial-gradient(ellipse 20% 60% at 50% 50%, Alpha(rgb(173, 59, 243), 0.8) 5%, transparent), radial-gradient(ellipse 50% 150% at 50% 100%, Alpha(Shade(rgb(173, 59, 243), 1.1), 0.15) 50%, transparent);
+  background: radial-gradient(ellipse 20% 60% at 50% 50%, Alpha(rgb(173, 59, 243), 0.8) 5%, transparent), radial-gradient(ellipse 50% 150% at 50% 100%, Alpha(rgb(173, 59, 243), 0.15) 50%, transparent);
 }
 .nexus .center .ram {
   min-width: 100px;
@@ -120,10 +122,11 @@
   min-width: 100px;
 }
 .nexus .center {
-  text-shadow: 2px 1px 2px rgb(20, 10, 30);
+  text-shadow: 2px 1px 2px rgb(40, 6, 48);
 }
 .nexus .right {
   padding-right: 10px;
+  text-shadow: 2px 1px 2px rgb(40, 6, 48);
 }
 .nexus .right .date {
   margin-right: 5px;
@@ -141,14 +144,11 @@
 }
 
 @keyframes player-playing-pulse {
-  0% {
-    background: radial-gradient(circle at center, Alpha(rgb(140, 79, 184), 0.9) 0%, transparent);
+  0%, 100% {
+    background: radial-gradient(50% 50% at center, Alpha(rgb(92, 35, 133), 0.7) 0%, transparent);
   }
   50% {
-    background: radial-gradient(circle at center, Alpha(rgb(140, 79, 184), 0.9) 50%, transparent 40%);
-  }
-  100% {
-    background: radial-gradient(circle at center, Alpha(rgb(140, 79, 184), 0.9) 0%, transparent);
+    background: radial-gradient(80% 80% at center, Alpha(rgb(173, 59, 243), 0.4) 50%, transparent 40%);
   }
 }
 @keyframes player-playing-pulse-big {
@@ -156,13 +156,13 @@
     box-shadow: inset 0 0 15px rgb(173, 59, 243);
   }
   10%, 90% {
-    box-shadow: inset 0 0 10px rgb(140, 79, 184);
+    box-shadow: inset 0 0 10px rgb(92, 35, 133);
   }
   20%, 80% {
-    box-shadow: inset 0 0 12px rgb(140, 79, 184);
+    box-shadow: inset 0 0 12px rgb(92, 35, 133);
   }
   30%, 70% {
-    box-shadow: inset 0 0 16px rgb(140, 79, 184);
+    box-shadow: inset 0 0 16px rgb(92, 35, 133);
   }
   40%, 60% {
     box-shadow: inset 0 0 22px rgb(173, 59, 243);
@@ -175,14 +175,14 @@
   border-radius: 7px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  box-shadow: inset 0 -3px 5px Alpha(rgb(140, 79, 184), 0.5);
-  border: 1px solid Alpha(rgb(168, 114, 207), 0.3);
+  box-shadow: inset 0 -3px 5px Alpha(rgb(92, 35, 133), 0.45);
+  border: 1px solid Alpha(rgb(168, 114, 207), 0.45);
   border-top: none;
 }
 
 .bar-player.opened {
-  box-shadow: inset 0 0 5px Alpha(rgb(140, 79, 184), 0.5);
-  border: 1px solid Alpha(rgb(168, 114, 207), 0.3);
+  box-shadow: inset 0 0 5px Alpha(rgb(92, 35, 133), 0.45);
+  border: 1px solid Alpha(rgb(168, 114, 207), 0.45);
   border-top: none;
   border-bottom: none;
 }
@@ -194,12 +194,6 @@
 
 .bar-player {
   transition: all 0.3s ease;
-  /*background: 
-      radial-gradient(50% 70% at 0% 50%, $surface-2, transparent),
-      radial-gradient(60% 280% at 100% 50%, $surface-2, transparent),
-      radial-gradient(50% 100% at 50% 100%, $surface-1, transparent),
-      radial-gradient(50% 70% at 10% 0%, Shade($surface-2, .7), transparent)
-  ;*/
   background-color: Alpha(rgb(20, 10, 30), 0.75);
 }
 .bar-player .play-pause {
@@ -218,7 +212,7 @@
 }
 .bar-player .play-pause.stopped {
   animation: none;
-  text-shadow: 2px 2px 10px rgb(41, 0, 67);
+  text-shadow: 2px 2px 10px rgb(184, 69, 226);
 }
 .bar-player .play-pause:hover {
   opacity: 0.8;
@@ -238,10 +232,10 @@
   padding: 1px 2px;
 }
 .bar-player .bar-player-button:hover label {
-  box-shadow: 0 0 10px rgb(140, 79, 184);
+  box-shadow: inset 0 0 5px rgb(184, 69, 226);
 }
 .bar-player .meta-progress {
-  background: radial-gradient(40% 50% at 50% 50%, Alpha(rgb(82, 50, 124), 0.75), transparent), radial-gradient(50% 50% at 100% 50%, rgb(41, 0, 67), transparent);
+  background: radial-gradient(40% 50% at 50% 50%, rgb(92, 35, 133), transparent), radial-gradient(50% 50% at 100% 50%, rgb(41, 0, 67), transparent);
   border-radius: 5px;
   border-top-left-radius: 0;
   border-bottom-right-radius: 0;
@@ -254,48 +248,41 @@
   font-family: "FantasqueSansM Nerd Font", "Pixellari", "MesloLGSDZ Nerd Font Mono", monospace;
   font-style: italic;
   font-weight: 600;
-  text-shadow: 1px 1px 1px rgb(41, 0, 67);
+  text-shadow: 1px 1px 1px rgb(40, 6, 48);
 }
 .bar-player .visualizer-container {
-  background: radial-gradient(30% 50% at 60% 70%, Alpha(rgb(82, 50, 124), 0.55), transparent), radial-gradient(50% 50% at 0% 50%, rgb(41, 0, 67), transparent);
+  background: radial-gradient(30% 50% at 60% 70%, Alpha(rgb(69, 39, 104), 0.7), transparent), radial-gradient(50% 50% at 0% 50%, rgb(41, 0, 67), transparent);
 }
 
 .progress-bar-container {
   min-height: 2px;
 }
 .progress-bar-container .progress-fill {
-  background: linear-gradient(to left, rgb(168, 114, 207) 1%, rgb(173, 59, 243) 25%, rgb(82, 50, 124) 70%);
+  background: linear-gradient(to left, rgb(184, 69, 226) 10%, rgb(41, 0, 67) 65%, rgb(20, 10, 30) 95%);
 }
 
 .cava-left {
-  color: Shade(rgb(41, 0, 67), 2);
+  color: rgb(184, 69, 226);
 }
 
 .cava-right {
-  color: Shade(rgb(41, 0, 67), 6);
+  color: rgb(168, 114, 207);
 }
 
 .player-window .player-revealer {
   padding: 0 10px;
 }
 .player-window .player-revealer .bar-player-panel-content {
-  /*background: 
-      radial-gradient(60% 60% at 50% 50%, $surface-1, transparent),
-      radial-gradient(30% 70% at 0% 50%, $surface-1, transparent),
-      radial-gradient(30% 70% at 100% 50%, $surface-1, transparent),
-      linear-gradient(to bottom, Alpha(Shade($surface-2, .7), .85), transparent),
-      linear-gradient(to top, Alpha($surface-2, .65), transparent, transparent),
-      radial-gradient(50% 50% at 50% 100%, $accent-1, transparent),
-      radial-gradient(50% 50% at 50% 0%, $accent-1, transparent),
-  ;*/
   background-color: Alpha(rgb(20, 10, 30), 0.75);
-  box-shadow: inset 0 -5px 10px rgb(41, 0, 67);
   border-radius: 0 0 7px 7px;
   padding-top: 10px;
   padding-bottom: 10px;
+  border: 1px solid Alpha(rgb(168, 114, 207), 0.55);
+  border-top: none;
+  box-shadow: inset 0 -3px 5px Alpha(rgb(92, 35, 133), 0.75);
 }
 .player-window .player-revealer .bar-player-panel-content .track-title {
-  background: radial-gradient(70% 50% at 50% 50%, rgb(82, 50, 124), transparent);
+  background: radial-gradient(70% 50% at 50% 50%, rgb(69, 39, 104), transparent);
   padding: 1px 5px;
   border-radius: 15px 0 15px 0;
 }
@@ -303,7 +290,7 @@
   font-family: "FantasqueSansM Nerd Font", "Pixellari", "MesloLGSDZ Nerd Font Mono", monospace;
   font-style: italic;
   font-weight: 600;
-  text-shadow: 1px 1px 1px rgb(41, 0, 67);
+  text-shadow: 1px 1px 1px rgb(40, 6, 48);
 }
 .player-window .player-revealer .bar-player-panel-content .player-controls {
   margin: 10px 0;
@@ -318,7 +305,7 @@
   margin: 3px 0;
   padding: 8px;
   border-radius: 100%;
-  box-shadow: inset 0 0 10px Shade(rgb(140, 79, 184), 0.5);
+  box-shadow: inset 0 0 10px Alpha(rgb(184, 69, 226), 0.5);
   transition: transform 0.3s ease;
 }
 .player-window .player-revealer .bar-player-panel-content .player-controls .left .player-button:hover {
@@ -330,27 +317,27 @@
   font-size: 28px;
   transition: all 0.3s ease;
   padding: 3px 15px;
-  border: 1px solid rgb(140, 79, 184);
+  border: 1px solid Alpha(rgb(168, 114, 207), 0.65);
 }
 .player-window .player-revealer .bar-player-panel-content .player-controls .center .skip.prev {
   border-radius: 15px 0 10px 0;
   border-right: none;
-  box-shadow: -2px 0 5px rgb(140, 79, 184);
+  box-shadow: -2px 0 4px rgb(92, 35, 133);
 }
 .player-window .player-revealer .bar-player-panel-content .player-controls .center .skip.next {
   border-radius: 0 15px 0 10px;
   border-left: none;
-  box-shadow: 2px 0 5px rgb(140, 79, 184);
+  box-shadow: 2px 0 4px rgb(92, 35, 133);
 }
 .player-window .player-revealer .bar-player-panel-content .player-controls .center .skip:hover {
-  background: radial-gradient(50% 50% at 50% 50%, rgb(140, 79, 184), transparent);
+  background: radial-gradient(50% 50% at 50% 50%, rgb(92, 35, 133), transparent);
   border-color: rgb(173, 59, 243);
 }
 .player-window .player-revealer .bar-player-panel-content .player-controls .center .skip:hover.prev {
-  box-shadow: -3px 0 10px rgb(140, 79, 184), inset 5px 0 5px rgb(173, 59, 243);
+  box-shadow: -3px 0 10px rgb(92, 35, 133), inset 5px 0 5px rgb(168, 114, 207);
 }
 .player-window .player-revealer .bar-player-panel-content .player-controls .center .skip:hover.next {
-  box-shadow: 3px 0 10px rgb(140, 79, 184), inset -5px 0 5px rgb(173, 59, 243);
+  box-shadow: 3px 0 10px rgb(92, 35, 133), inset -5px 0 5px rgb(168, 114, 207);
 }
 .player-window .player-revealer .bar-player-panel-content .player-controls .center .play-pause {
   font-family: "Symbols Nerd Font";
@@ -358,13 +345,13 @@
   font-size: 52px;
   margin: 0 10px;
   padding: 5px;
-  box-shadow: 0 0 0 rgb(140, 79, 184), inset 0 0 10px rgb(140, 79, 184);
+  box-shadow: 0 0 0 rgb(92, 35, 133), inset 0 0 10px rgb(168, 114, 207);
   border-radius: 100%;
   min-width: 60px;
   transition: all 0.3s ease;
 }
 .player-window .player-revealer .bar-player-panel-content .player-controls .center .play-pause:hover {
-  box-shadow: 0 0 5px rgb(140, 79, 184), inset 0 0 15px rgb(173, 59, 243);
+  box-shadow: 0 0 5px rgb(92, 35, 133), inset 0 0 15px rgb(168, 114, 207);
 }
 .player-window .player-revealer .bar-player-panel-content .player-controls .right .slider {
   min-width: 80px;
@@ -381,7 +368,7 @@
 }
 .player-window .player-revealer .bar-player-panel-content .player-controls .right .slider.volume-slider .volume-slider-fill {
   border-radius: 30px;
-  background: linear-gradient(to left, rgb(168, 114, 207) 1%, rgb(173, 59, 243) 25%, rgb(82, 50, 124) 70%);
+  background: linear-gradient(to left, rgb(184, 69, 226) 2%, rgb(173, 59, 243) 25%, rgb(69, 39, 104) 70%);
 }
 .player-window .player-revealer .bar-player-panel-content .player-controls .right label {
   color: rgb(180, 190, 254);
@@ -390,7 +377,7 @@
   transform: rotate(-35deg);
 }
 .player-window .player-revealer .bar-player-panel-content .progress-bar-container {
-  background-color: Shade(rgb(173, 59, 243), 0.3);
+  background-color: Alpha(rgb(173, 59, 243), 0.2);
   min-height: 5px;
   border-radius: 5px;
   transition: transform 0.3s ease;
@@ -411,7 +398,7 @@
 }
 .power-hub .power-modes {
   border-radius: 10px;
-  border: 1px solid rgb(222, 222, 222);
+  border: 1px solid Alpha(rgb(168, 114, 207), 0.75);
   border-top: none;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -421,63 +408,47 @@
 }
 .power-hub .power-modes .power-button {
   padding: 0;
-  background: transparent;
-  border-radius: 5px;
   margin: 0 2px;
   min-width: 25px;
-  font-size: 16px;
+  font-size: 15px;
   transition: all 0.3s ease;
+  font-family: "Symbols Nerd Font";
 }
 .power-hub .power-modes .power-button:hover {
-  background: radial-gradient(40% 40% at 50% 50%, rgb(140, 79, 184), transparent), radial-gradient(50% 50% at 50% 50%, rgb(41, 0, 67), transparent);
+  background: radial-gradient(40% 40% at 50% 50%, rgb(92, 35, 133), transparent), radial-gradient(50% 50% at 50% 50%, rgb(41, 0, 67), transparent);
   padding: 0 10px;
-}
-.power-hub .power-modes label {
-  font-family: "Symbols Nerd Font";
 }
 .power-hub .power-modes .eco-modes {
   border-radius: 10px;
 }
 .power-hub .power-modes .eco-modes.ultra-eco-mode {
-  box-shadow: inset 0 0 1px 2px rgb(140, 79, 184);
-}
-.power-hub .power-modes .ultra-eco-button {
-  border-radius: 10px;
+  box-shadow: inset 0 1px 1px 1px rgb(168, 114, 207);
 }
 .power-hub .power-modes .ultra-eco-button.ultra-eco-mode {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   margin-right: 0;
-  background: radial-gradient(100% 50% at 100% 50%, rgb(140, 79, 184), transparent);
+  background: radial-gradient(100% 50% at 100% 50%, rgb(184, 69, 226), transparent);
   padding: 0;
-}
-.power-hub .power-modes .eco-button {
-  border-radius: 10px;
 }
 .power-hub .power-modes .eco-button.active, .power-hub .power-modes .eco-button:hover.active {
-  background: radial-gradient(60% 60% at 50% 50%, rgb(140, 79, 184), transparent);
   padding: 0;
+  background: radial-gradient(50% 50% at 50% 50%, rgb(184, 69, 226), transparent);
 }
 .power-hub .power-modes .eco-button.ultra-eco-mode {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   margin-left: 0;
-  background: radial-gradient(100% 50% at 0% 50%, rgb(140, 79, 184), transparent);
+  background: radial-gradient(100% 50% at 0% 50%, rgb(184, 69, 226), transparent);
   padding: 0;
-}
-.power-hub .power-modes .ballanced-button {
-  border-radius: 100%;
 }
 .power-hub .power-modes .ballanced-button.active, .power-hub .power-modes .ballanced-button:hover.active {
-  background: radial-gradient(60% 60% at 50% 50%, rgb(140, 79, 184), transparent);
   padding: 0;
-}
-.power-hub .power-modes .performance-button {
-  border-radius: 100%;
+  background: radial-gradient(50% 50% at 50% 50%, rgb(184, 69, 226), transparent);
 }
 .power-hub .power-modes .performance-button.active, .power-hub .power-modes .performance-button:hover.active {
-  background: radial-gradient(60% 60% at 50% 50%, rgb(140, 79, 184), transparent);
   padding: 0;
+  background: radial-gradient(50% 50% at 50% 50%, rgb(184, 69, 226), transparent);
 }
 .power-hub .idle-indicator {
   margin-right: 5px;
@@ -490,8 +461,8 @@
   font-family: "Symbols Nerd Font";
 }
 .power-hub .idle-indicator.active {
-  background: radial-gradient(70% 70% at 45% 50%, Alpha(rgb(0, 217, 255), 0.3), transparent);
-  text-shadow: 0 0 10px rgb(140, 79, 184);
+  background: radial-gradient(70% 70% at 45% 50%, Alpha(rgb(184, 69, 226), 0.45), transparent);
+  text-shadow: 0 0 10px rgb(40, 6, 48);
 }
 .power-hub .idle-indicator:hover {
   opacity: 0.8;
@@ -499,7 +470,7 @@
   transform: scale(1.2);
 }
 .power-hub .idle-indicator:hover.active {
-  background: radial-gradient(50% 50% at 45% 50%, Alpha(rgb(0, 217, 255), 0.3), transparent);
+  background: radial-gradient(50% 50% at 45% 50%, Alpha(rgb(184, 69, 226), 0.45), transparent);
 }
 .power-hub .battery-indicator {
   transform: skew(-10deg, 0);
@@ -508,7 +479,7 @@
   transform: skew(10deg, 0);
 }
 .power-hub .battery-indicator {
-  background-color: Shade(rgb(82, 50, 124), 0.5);
+  background-color: Alpha(rgb(69, 39, 104), 0.45);
   transition: text-shadow 0.3s linear, color 0.3s linear;
   min-width: 70px;
 }
@@ -524,14 +495,14 @@
   color: Alpha(Shade(rgb(170, 18, 18), 1.5), 0.75);
 }
 .power-hub .power-menu-button {
-  background-color: transparent;
   padding: 0 10px;
   font-size: 16px;
   color: rgb(180, 190, 254);
   transition: all 0.3s linear;
+  background: radial-gradient(40% 40% at 50% 50%, transparent, transparent), radial-gradient(50% 50% at 50% 50%, transparent, transparent);
 }
 .power-hub .power-menu-button:hover {
-  background: radial-gradient(40% 40% at 50% 50%, rgb(140, 79, 184), transparent), radial-gradient(50% 50% at 50% 50%, rgb(41, 0, 67), transparent);
+  background: radial-gradient(40% 40% at 50% 50%, rgb(92, 35, 133), transparent), radial-gradient(50% 50% at 50% 50%, rgb(41, 0, 67), transparent);
   transform: scale(1.1);
   min-width: 35px;
 }
@@ -569,12 +540,12 @@
 }
 
 .video-capture-indicator-v1 {
-  color: Shade(rgb(140, 79, 184), 1.2);
-  text-shadow: 1px 1px 2px black;
+  color: rgb(180, 190, 254);
+  text-shadow: 1px 1px 2px rgb(40, 6, 48);
   font-size: 14px;
   font-weight: 800;
   font-family: "Symbols Nerd Font";
-  border: 1px solid rgb(140, 79, 184);
+  border: 1px solid rgb(168, 114, 207);
   padding: 0 5px;
   border-top: none;
   border-bottom: none;
@@ -582,14 +553,14 @@
   animation: video-record-anim 2.5s infinite linear;
 }
 .video-capture-indicator-v1:hover {
-  color: Shade(rgb(140, 79, 184), 1.7);
+  color: rgb(173, 59, 243);
   padding: 0 8px;
   animation: video-record-anim 5.5s infinite linear;
 }
 
 .video-capture-indicator-v2 {
   color: Shade(red, 1.2);
-  text-shadow: 1px 1px 2px black;
+  text-shadow: 1px 1px 2px rgb(40, 6, 48);
   font-size: 14px;
   font-weight: 800;
   font-family: "Symbols Nerd Font";
@@ -606,13 +577,13 @@
 
 @keyframes video-record-anim {
   0%, 100% {
-    background: radial-gradient(30% 20% at 50% 50%, rgb(140, 79, 184), transparent);
+    background: radial-gradient(30% 20% at 50% 50%, rgb(92, 35, 133), transparent);
     border-radius: 10px;
     border-top-right-radius: 0;
     border-bottom-left-radius: 0;
   }
   50% {
-    background: radial-gradient(80% 60% at 50% 50%, Alpha(rgb(140, 79, 184), 0.8), transparent);
+    background: radial-gradient(80% 60% at 50% 50%, Alpha(rgb(92, 35, 133), 0.8), transparent);
     border-radius: 10px;
     border-bottom-right-radius: 0;
     border-top-left-radius: 0;
@@ -630,13 +601,11 @@
   background-color: transparent;
 }
 .tray-item popover > contents {
-  background-color: Alpha(rgb(20, 10, 30), 0.75);
-  border: 1px solid Alpha(rgb(173, 59, 243), 0.5);
-  box-shadow: inset 0 0 3px 0 Alpha(rgb(173, 59, 243), 0.45);
-  border-radius: 20px;
-  border-bottom-right-radius: 0;
-  border-top-left-radius: 0;
-  padding: 5px 7px;
+  background-color: Alpha(rgb(20, 10, 30), 0.65);
+  border: 1px solid Alpha(rgb(168, 114, 207), 0.75);
+  box-shadow: inset 0 0 3px rgb(168, 114, 207);
+  border-radius: 5px 20px 5px 20px;
+  padding: 10px 7px;
 }
 .tray-item popover modelbutton {
   padding: 0 10px;
@@ -647,8 +616,9 @@
 }
 .tray-item popover menuitem:hover,
 .tray-item popover modelbutton:hover {
-  background-color: Shade(Alpha(rgb(140, 79, 184), 0.25), 0.67);
-  box-shadow: inset 0 0 2px 2px Alpha(rgb(140, 79, 184), 0.55);
+  background-color: rgb(20, 10, 30);
+  box-shadow: inset 0 0 5px 1px rgb(168, 114, 207);
+  border-radius: 5px 10px 5px 10px;
 }
 
 .hider-btn {
@@ -672,16 +642,13 @@
 .workspaces .tab-box {
   padding: 0 7px;
   min-width: 16px;
-  border-radius: 10px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
   border: 1px solid transparent;
   border-top: none;
   border-bottom: none;
   transition: background 0.3s linear;
 }
 .workspaces .tab-box:hover {
-  background: radial-gradient(circle at center, Alpha(rgb(168, 114, 207), 0.65), transparent);
+  background: radial-gradient(circle at center, Alpha(rgb(92, 35, 133), 0.75), transparent);
 }
 .workspaces .tab-box.active {
   transform: skew(-10deg, 0);
@@ -691,10 +658,8 @@
 }
 .workspaces .tab-box.active {
   padding: 0 10px;
-  background: radial-gradient(circle at center, Alpha(rgb(168, 114, 207), 0.65), transparent);
-  background-color: black;
-  border-radius: 0px;
-  border-color: rgb(82, 50, 124);
+  background: radial-gradient(50% 50% at 50% 50%, Alpha(rgb(184, 69, 226), 0.5), transparent);
+  border-color: rgb(168, 114, 207);
   border-top: none;
   border-bottom: none;
 }
@@ -704,6 +669,7 @@
 .workspaces .tab-box label {
   font-family: "Symbols Nerd Font";
   color: rgb(217, 222, 255);
+  text-shadow: 1px 1px 1px rgb(40, 6, 48);
   margin: 0 3px;
 }
 
@@ -716,7 +682,7 @@
 }
 .desktop-button:hover {
   opacity: 1;
-  text-shadow: 0 0 5px rgb(140, 79, 184);
+  text-shadow: 0 0 5px rgb(40, 6, 48);
 }
 
 .desktop-panel {
@@ -733,9 +699,9 @@
 }
 .desktop-panel .desktop-revealer .desktop-panel-content {
   padding: 0 50px;
-  background: radial-gradient(45% 10% at 10% 100%, Alpha(rgb(41, 0, 67), 0.5), transparent), radial-gradient(45% 5% at 80% 0%, Alpha(rgb(82, 50, 124), 0.25), transparent), radial-gradient(50% 50% at 50% 50%, Alpha(rgb(41, 0, 67), 0.45), transparent);
-  background-color: Alpha(rgb(20, 10, 30), 0.75);
-  box-shadow: inset 5px 2px 5px rgb(82, 50, 124), inset -2px -2px 5px rgb(82, 50, 124);
+  background: radial-gradient(45% 10% at 10% 100%, Alpha(rgb(92, 35, 133), 0.25), transparent), radial-gradient(45% 5% at 80% 0%, Alpha(rgb(92, 35, 133), 0.25), transparent), radial-gradient(50% 50% at 50% 50%, Alpha(rgb(20, 10, 30), 0.65), transparent);
+  background-color: Alpha(rgb(20, 10, 30), 0.55);
+  box-shadow: inset 5px 2px 5px Alpha(rgb(168, 114, 207), 0.25), inset -2px -2px 5px Alpha(rgb(168, 114, 207), 0.25);
 }
 
 .desktop-wrapper {
@@ -772,7 +738,7 @@
 }
 .desktop-icon:hover {
   transform: scale(1.2);
-  box-shadow: 0 0 30px rgb(82, 50, 124);
+  box-shadow: 0 0 15px Alpha(rgb(173, 59, 243), 0.5), inset 0 0 5px Alpha(rgb(92, 35, 133), 0.3);
 }
 .desktop-icon:hover .desktop-icon-glyph {
   transform: scale(0.7);
@@ -846,7 +812,7 @@
   margin: 0 5px;
   padding: 5px;
   padding-right: 15px;
-  background: radial-gradient(circle at center, Alpha(Shade(rgb(82, 50, 124), 0.8), 0.8), transparent);
+  background: radial-gradient(circle at center, Alpha(Shade(rgb(69, 39, 104), 0.8), 0.8), transparent);
 }
 .wifi-panel .wifi-scrollbox .wifi-networks-scroll .items-box .wifi-network-item {
   transform: skew(-15deg, 0);
@@ -861,11 +827,11 @@
   transition: all 0.3s linear;
 }
 .wifi-panel .wifi-scrollbox .wifi-networks-scroll .items-box .wifi-network-item:hover {
-  background-color: Alpha(Shade(rgb(140, 79, 184), 0.3), 0.5);
+  background-color: Alpha(Shade(rgb(92, 35, 133), 0.3), 0.5);
   padding-left: 10px;
 }
 .wifi-panel .wifi-scrollbox .wifi-networks-scroll .items-box .wifi-network-item.active {
-  background-color: Alpha(Shade(rgb(140, 79, 184), 0.75), 0.25);
+  background-color: Alpha(Shade(rgb(92, 35, 133), 0.75), 0.25);
   border: 1px solid white;
   border-left: none;
   border-right: none;
@@ -901,7 +867,7 @@
 .wifi-panel .wifi-prompt-box .wifi-password-entry {
   padding: 0 20px;
   font-size: 16px;
-  outline-color: Alpha(Shade(rgb(140, 79, 184), 0.5), 0.5);
+  outline-color: Alpha(Shade(rgb(92, 35, 133), 0.5), 0.5);
 }
 .wifi-panel .wifi-prompt-box .confirm-buttons {
   padding: 0 10px;
@@ -910,8 +876,8 @@
 .wifi-panel .wifi-prompt-box .confirm-buttons:hover {
   padding: 0 20px;
   margin: 0 5px;
-  box-shadow: inset 0 0 10px Shade(rgb(140, 79, 184), 0.5);
-  border-color: rgb(140, 79, 184);
+  box-shadow: inset 0 0 10px Shade(rgb(92, 35, 133), 0.5);
+  border-color: rgb(92, 35, 133);
 }
 
 .app-launcher-panel .app-search-entry {
@@ -940,7 +906,7 @@
 }
 .app-launcher-panel .app-list-scroll .items-box .app-item {
   padding-left: 10px;
-  background: Alpha(rgb(140, 79, 184), 0.2);
+  background: Alpha(rgb(92, 35, 133), 0.2);
   font-weight: 600;
   border: 1px solid transparent;
   transition: all 0.3s linear;
@@ -949,8 +915,8 @@
   padding-left: 10px;
 }
 .app-launcher-panel .app-list-scroll .items-box .app-item:hover {
-  background: Alpha(rgb(140, 79, 184), 0.3);
-  border-color: Alpha(rgb(140, 79, 184), 0.3);
+  background: Alpha(rgb(92, 35, 133), 0.3);
+  border-color: Alpha(rgb(92, 35, 133), 0.3);
 }
 .app-launcher-panel .app-list-scroll .items-box .app-item:focus {
   transform: skew(-10deg, 0);
@@ -959,7 +925,7 @@
   transform: skew(10deg, 0);
 }
 .app-launcher-panel .app-list-scroll .items-box .app-item:focus {
-  border-color: rgb(140, 79, 184);
+  border-color: rgb(92, 35, 133);
   margin-left: 10px;
   min-height: 35px;
 }
@@ -989,7 +955,7 @@
   margin: 0 5px;
   padding: 5px;
   padding-right: 15px;
-  background: radial-gradient(circle at center, Alpha(Shade(rgb(82, 50, 124), 0.8), 0.8), transparent);
+  background: radial-gradient(circle at center, Alpha(Shade(rgb(69, 39, 104), 0.8), 0.8), transparent);
 }
 .bluetooth-panel .bluetooth-devices-scroll .items-box .bluetooth-device-item {
   transform: skew(-15deg, 0);
@@ -1004,11 +970,11 @@
   transition: all 0.3s linear;
 }
 .bluetooth-panel .bluetooth-devices-scroll .items-box .bluetooth-device-item:hover {
-  background-color: Alpha(Shade(rgb(140, 79, 184), 0.3), 0.5);
+  background-color: Alpha(Shade(rgb(92, 35, 133), 0.3), 0.5);
   padding-left: 10px;
 }
 .bluetooth-panel .bluetooth-devices-scroll .items-box .bluetooth-device-item.active {
-  background-color: Alpha(Shade(rgb(140, 79, 184), 0.75), 0.25);
+  background-color: Alpha(Shade(rgb(92, 35, 133), 0.75), 0.25);
   border: 1px solid white;
   border-left: none;
   border-right: none;
@@ -1035,7 +1001,7 @@
   background: linear-gradient(to bottom, Alpha(rgb(20, 10, 30), 0.5), Alpha(rgb(20, 10, 30), 0.75));
 }
 .power-menu-panel .power-menu-revealer .power-menu-box label {
-  background: radial-gradient(40% 40% at 50% 50%, rgb(140, 79, 184), transparent);
+  background: radial-gradient(40% 40% at 50% 50%, rgb(92, 35, 133), transparent);
   font-family: "Symbols Nerd Font";
   font-size: 32px;
   margin-bottom: 10px;
@@ -1044,7 +1010,7 @@
   transition: all 0.3s ease;
 }
 .power-menu-panel .power-menu-revealer .power-menu-box label:hover {
-  background: radial-gradient(60% 60% at 50% 50%, rgb(140, 79, 184), transparent);
+  background: radial-gradient(60% 60% at 50% 50%, rgb(92, 35, 133), transparent);
   transform: scale(1.2) translateX(-5px);
 }
 .power-menu-panel .power-menu-revealer .power-menu-box .close-panel {
@@ -1082,9 +1048,9 @@
 .sidepanel .sidepanel-revealer .sidepanel-content {
   padding: 10px 30px;
   padding-right: 70px;
-  background: radial-gradient(45% 10% at 10% 100%, Alpha(rgb(41, 0, 67), 0.5), transparent), radial-gradient(45% 5% at 80% 0%, Alpha(rgb(82, 50, 124), 0.25), transparent), radial-gradient(50% 50% at 50% 50%, Alpha(rgb(41, 0, 67), 0.45), transparent);
-  background-color: Alpha(rgb(20, 10, 30), 0.75);
-  box-shadow: inset -5px 2px 5px rgb(82, 50, 124), inset 2px -2px 5px rgb(82, 50, 124);
+  background: radial-gradient(45% 10% at 10% 100%, Alpha(rgb(92, 35, 133), 0.25), transparent), radial-gradient(45% 5% at 80% 0%, Alpha(rgb(92, 35, 133), 0.25), transparent), radial-gradient(50% 50% at 50% 50%, Alpha(rgb(20, 10, 30), 0.65), transparent);
+  background-color: Alpha(rgb(20, 10, 30), 0.55);
+  box-shadow: inset -5px 2px 5px Alpha(rgb(168, 114, 207), 0.25), inset 2px -2px 5px Alpha(rgb(168, 114, 207), 0.25);
 }
 
 .sidepanel-content .weather-row .weather-day-pill .pill-content {
@@ -1092,8 +1058,8 @@
   border-radius: 20px;
   border-top-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  background: radial-gradient(50% 40% at 50% 50%, Alpha(Shade(rgb(173, 59, 243), 0.7), 0.5), transparent);
-  box-shadow: inset 0 0 5px rgb(173, 59, 243);
+  background: radial-gradient(50% 50% at 50% 50%, Alpha(rgb(69, 39, 104), 0.75), transparent);
+  box-shadow: inset 0 0 5px rgb(168, 114, 207);
 }
 .sidepanel-content .weather-row .weather-day-pill .pill-content .weather-day-name {
   font-size: 11px;
@@ -1119,7 +1085,7 @@
   min-width: 250px;
   min-height: 250px;
   margin-right: 10px;
-  box-shadow: inset 0 0 25px Alpha(rgb(140, 79, 184), 0.5), inset 0 0 10px rgb(173, 59, 243);
+  box-shadow: inset 0 0 25px Alpha(rgb(92, 35, 133), 0.5), inset 0 0 10px rgb(173, 59, 243);
 }
 .sidepanel-content .date-time-block .clock-circle .wrapper {
   padding-top: 40px;
@@ -1160,7 +1126,7 @@
   min-width: 25px;
 }
 .sidepanel-content .date-time-block .calendar .calendar-header button:hover {
-  background-color: Shade(rgb(173, 59, 243), 0.5);
+  background: radial-gradient(50% 50% at 50% 50%, rgb(92, 35, 133), transparent);
 }
 .sidepanel-content .date-time-block .calendar .calendar-weekdays label {
   min-width: 25px;
@@ -1171,7 +1137,7 @@
   margin-bottom: 3px;
 }
 .sidepanel-content .date-time-block .calendar .calendar-row .calendar-day {
-  box-shadow: inset 0 0 5px rgb(140, 79, 184);
+  box-shadow: inset 0 0 5px Alpha(rgb(168, 114, 207), 0.75);
   font-size: 12px;
   min-width: 25px;
   border-radius: 5px;
@@ -1179,7 +1145,8 @@
   border-radius: 10px 0 10px 0;
 }
 .sidepanel-content .date-time-block .calendar .calendar-row .calendar-day.today {
-  background-color: Alpha(Shade(rgb(140, 79, 184), 0.75), 0.75);
+  border-radius: 12px 5px 12px 5px;
+  background-color: Alpha(rgb(92, 35, 133), 0.75);
 }
 
 window.Bar {
@@ -1204,8 +1171,8 @@ window.Bar {
 }
 .close-button:hover {
   transform: rotate(180deg);
-  background: radial-gradient(50% 50%, Alpha(rgb(140, 79, 184), 0.5) 35%, transparent 90%);
-  border-color: Alpha(rgb(140, 79, 184), 0.75);
+  background: radial-gradient(50% 50%, Alpha(rgb(92, 35, 133), 0.5) 35%, transparent 90%);
+  border-color: Alpha(rgb(92, 35, 133), 0.75);
 }
 
 .bar-surface-bottom {
@@ -1240,18 +1207,18 @@ window.Bar {
 
 tooltip {
   padding: 5px 10px;
-  background: Alpha(Shade(rgb(82, 50, 124), 0.85), 0.75);
+  background: Alpha(Shade(rgb(69, 39, 104), 0.85), 0.75);
   font-size: 13px;
   opacity: 0.95;
-  border: 1px solid Alpha(rgb(222, 222, 222), 0.5);
-  box-shadow: inset 0 0 5px Alpha(rgb(222, 222, 222), 0.5);
+  border: 1px solid Alpha(rgb(168, 114, 207), 0.5);
+  box-shadow: inset 0 0 5px Alpha(rgb(168, 114, 207), 0.5);
 }
 
 scrollbar trough {
   outline: none;
 }
 scrollbar slider {
-  background-color: rgb(140, 79, 184);
+  background-color: rgb(92, 35, 133);
   border: none;
 }
 

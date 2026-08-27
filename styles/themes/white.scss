@@ -1,24 +1,27 @@
 $bar-background:          rgba(0, 0, 0, 0);
 
 /* SURFACES */
-$surface-1:               rgb(184, 184, 184);
-$surface-2:               rgb(154, 171, 160);
+$surface-1:               rgb(202, 202, 202);
+$surface-2:               rgb(172, 172, 172);
 
 /* ACCENTS */
-$accent-1:                rgb(127, 121, 155);
-$accent-2:                rgb(0, 0, 0);
-$accent-3:                rgb(124, 124, 187);
+$accent-1:                rgb(168, 168, 168);
+$accent-2:                rgb(72, 69, 69);
+$accent-3:                rgb(200, 194, 206);
 
 /* HIGHLIGHTS */
-$highlight-1:             rgb(0, 0, 0);
-$highlight-2:             rgb(189, 188, 188);
-$highlight-3:             rgb(76, 31, 88);
+$light:                   rgb(116, 104, 104);
+$outline:                 rgb(5, 5, 5);
+$glow:                    rgb(197, 153, 211);
+
 
 /* TEXT */
-$font-base-color:         rgb(0, 0, 0);
-$font-workspaces-color:   rgb(31, 32, 35);
-$font-light-color:        rgb(0, 0, 0);
+$font-base-color:         rgb(19, 19, 19);
+$font-shaded-color:       rgb(41, 42, 45);
+$font-light-color:        rgb(74, 75, 81);
+$text-shade-color:        rgb(211, 211, 211);
 
 /* STATES */
 $color-warning:           rgb(230, 173, 15);
-$color-critical:          rgb(165, 18, 170);
+$color-critical:          rgb(170, 18, 18);
+$color-available:         rgb(168, 83, 183);

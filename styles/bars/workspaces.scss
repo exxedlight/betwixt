@@ -8,9 +8,7 @@
     font-family: $symbols-font;
     font-size: 18px;
 
-    &:hover {
-        opacity: 1;
-    }
+    &:hover { opacity: 1; }
 }
 
 .workspaces {
@@ -22,25 +20,19 @@
     .tab-box {
         padding: 0 7px;
         min-width: 16px;
-        border-radius: 10px;
-        border-bottom-left-radius: 0; 
-        border-bottom-right-radius: 0;
         border: 1px solid transparent;
         border-top: none; border-bottom: none;
         transition: background $anim-duration linear;
 
         &:hover {
-            background: radial-gradient(circle at center, Alpha($highlight-2, .65), transparent);
+            background: radial-gradient(circle at center, Alpha($accent-1, .75), transparent);
         }
 
         &.active {
             @include skew(-10deg);
             padding: 0 10px;
-            background: radial-gradient(circle at center, Alpha($highlight-2, .65), transparent);
-            background-color: black;
-
-            border-radius: 0px;
-            border-color: $surface-2;
+            background: radial-gradient(50% 50% at 50% 50%, Alpha($glow, .5), transparent);
+            border-color: $outline;
             border-top: none; border-bottom: none;
 
             label { font-size: 17px; }
@@ -48,7 +40,8 @@
 
         label {
             font-family: $symbols-font;
-            color: $font-workspaces-color;
+            color: $font-shaded-color;
+            text-shadow: 1px 1px 1px $text-shade-color;
             margin: 0 3px;
         }
     }
