@@ -25,7 +25,7 @@
         transition: background $anim-duration linear;
 
         &:hover {
-            background: radial-gradient(circle at center, Alpha($accent-1, .75), transparent);
+            background: radial-gradient(circle at center, Alpha($accent-2, .75), transparent);
         }
 
         &.active {

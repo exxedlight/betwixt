@@ -13,7 +13,7 @@
             background: linear-gradient(to bottom, Alpha($surface-1, .5), Alpha($surface-1, .75));
 
             & label{
-                background: radial-gradient(40% 40% at 50% 50%, $accent-1, transparent);
+                background: radial-gradient(40% 40% at 50% 50%, $accent-2, transparent);
                 font-family: $symbols-font;
                 font-size: 32px;
                 margin-bottom: 10px;
@@ -22,7 +22,7 @@
                 padding: 3px;
                 transition: all $anim-duration ease;
                 &:hover{
-                    background: radial-gradient(60% 60% at 50% 50%, $accent-1, transparent);
+                    background: radial-gradient(60% 60% at 50% 50%, $accent-2, transparent);
                     transform: scale(1.2) translateX(-5px);
                 }
             }

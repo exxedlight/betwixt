@@ -5,6 +5,11 @@
     font-family: $symbols-font, monospace;
     font-weight: 600;
     
+    background-color: Alpha($surface-1, .75);
+    box-shadow: inset 0 3px 5px Alpha($accent-2, .45);
+    border: 1px solid Alpha($outline, .45);
+    border-radius: 10px 10px 0 0;
+    border-bottom: none;
 
     .small {
         font-size: 11px;
@@ -78,8 +83,8 @@
         padding: 0 10px;
                 
         background: 
-                    radial-gradient(ellipse 50% 55% at 50% 90%, Alpha($accent-2, .4), transparent),
-                    radial-gradient(ellipse 100% 50% at 50% 50%, Alpha($accent-3, .95) 30%, transparent 85%)
+                    radial-gradient(ellipse 50% 55% at 50% 90%, Alpha($accent-3, .4), transparent),
+                    radial-gradient(ellipse 100% 50% at 50% 50%, Alpha($accent-1, .95) 30%, transparent 85%)
                     ;
             
         .ram{
@@ -96,16 +101,16 @@
             font-size: 16px;
             padding-bottom: 1px;
 
-            background: radial-gradient(ellipse 20% 60% at 50% 50%, $accent-3 60%, transparent), 
-                        radial-gradient(ellipse 50% 150% at 50% 100%, $accent-3 50%, transparent);
+            background: radial-gradient(ellipse 20% 60% at 50% 50%, $accent-1 60%, transparent), 
+                        radial-gradient(ellipse 50% 150% at 50% 100%, $accent-1 50%, transparent);
             transition: background $anim-duration linear, padding $anim-duration linear;
 
 
             &:hover { 
                 padding: 0 40px; 
                 padding-bottom: 1px; 
-                background: radial-gradient(ellipse 20% 60% at 50% 50%, Alpha($accent-2, .8) 5%, transparent), 
-                            radial-gradient(ellipse 50% 150% at 50% 100%, Alpha($accent-2, .15) 50%, transparent)
+                background: radial-gradient(ellipse 20% 60% at 50% 50%, Alpha($accent-3, .8) 5%, transparent), 
+                            radial-gradient(ellipse 50% 150% at 50% 100%, Alpha($accent-3, .15) 50%, transparent)
                 ;
             }
         }

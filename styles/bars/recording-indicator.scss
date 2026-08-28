@@ -1,7 +1,7 @@
 @use "../core" as *;
 
 .video-capture-indicator-v1{
-    color: $font-light-color;//Alpha($accent-2, .75);
+    color: $font-light-color;//Alpha($accent-3, .75);
     text-shadow: 1px 1px 2px $text-shade-color;
     font-size: 14px;
     font-weight: 800;
@@ -13,7 +13,7 @@
     animation: video-record-anim 2.5s infinite linear;
 
     &:hover{
-        color: $accent-2;
+        color: $accent-3;
         padding: 0 8px;
         animation: video-record-anim 5.5s infinite linear;
     }
@@ -46,12 +46,12 @@
 
 @keyframes video-record-anim {
 	0%,100% {
-		background: radial-gradient(30% 20% at 50% 50%, $accent-1, transparent);
+		background: radial-gradient(30% 20% at 50% 50%, $accent-2, transparent);
 		border-radius: 10px;
     	border-top-right-radius: 0; border-bottom-left-radius: 0;
 	}
 	50% {
-		background: radial-gradient(80% 60% at 50% 50%, Alpha($accent-1, .8), transparent);
+		background: radial-gradient(80% 60% at 50% 50%, Alpha($accent-2, .8), transparent);
 		border-radius: 10px;
     	border-bottom-right-radius: 0; border-top-left-radius: 0;
 	}

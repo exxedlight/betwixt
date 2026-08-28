@@ -24,8 +24,8 @@
             padding: 0 50px;
             
             background: 
-                radial-gradient(45% 10% at 10% 100%, Alpha($accent-1, .25), transparent),
-                radial-gradient(45% 5% at 80% 0%, Alpha($accent-1, .25), transparent),
+                radial-gradient(45% 10% at 10% 100%, Alpha($accent-2, .25), transparent),
+                radial-gradient(45% 5% at 80% 0%, Alpha($accent-2, .25), transparent),
                 radial-gradient(50% 50% at 50% 50%, Alpha($surface-1, .65), transparent)
             ;
             background-color: Alpha($surface-1, .55);
@@ -72,7 +72,7 @@
 
     &:hover{
         transform: scale(1.2); //rotate(-45deg);
-        box-shadow: 0 0 15px Alpha($accent-2, .5), inset 0 0 5px Alpha($accent-1, .3);
+        box-shadow: 0 0 15px Alpha($accent-3, .5), inset 0 0 5px Alpha($accent-2, .3);
         
         .desktop-icon-glyph{
             transform: scale(.7) ;//rotate(45deg);

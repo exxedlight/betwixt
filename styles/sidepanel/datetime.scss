@@ -11,8 +11,8 @@
         margin-right: 10px;
 
         box-shadow: 
-            inset 0 0 25px Alpha($accent-1, .5),
-            inset 0 0 10px $accent-2,
+            inset 0 0 25px Alpha($accent-2, .5),
+            inset 0 0 10px $accent-3,
             ;
 
         .wrapper{
@@ -39,7 +39,7 @@
 
 
     .calendar{
-        box-shadow: inset 0 0 5px Alpha($accent-2, .75);
+        box-shadow: inset 0 0 5px Alpha($accent-3, .75);
         background-color: $surface-1;
         padding: 5px 20px 5px 10px;
         border-radius: 10px 0 0 10px;
@@ -54,7 +54,7 @@
                 background-color: transparent;
                 border-radius: 100%;
                 min-width: 25px;
-                &:hover { background: radial-gradient(50% 50% at 50% 50%, $accent-1, transparent); }
+                &:hover { background: radial-gradient(50% 50% at 50% 50%, $accent-2, transparent); }
                 
             }
         }
@@ -62,7 +62,7 @@
         //.days-grid{ }
 
         .calendar-weekdays{
-            //background: radial-gradient(70% 50% at 50% 90%, Alpha($accent-2, .55), transparent);
+            //background: radial-gradient(70% 50% at 50% 90%, Alpha($accent-3, .55), transparent);
 
             label{
                 //background-color: blue;
@@ -85,7 +85,7 @@
 
                 &.today{
                     border-radius: 12px 5px 12px 5px;
-                    background-color: Alpha($accent-1, .75);
+                    background-color: Alpha($accent-2, .75);
                 }
             }
         }

@@ -26,8 +26,8 @@
 
             &:hover{
                 background: 
-                    radial-gradient(40% 40% at 50% 50%, $accent-1, transparent),    
-                    radial-gradient(50% 50% at 50% 50%, $accent-3, transparent),
+                    radial-gradient(40% 40% at 50% 50%, $accent-2, transparent),    
+                    radial-gradient(50% 50% at 50% 50%, $accent-1, transparent),
                 ;
                 padding: 0 10px;
             }
@@ -97,14 +97,14 @@
         min-width: 70px;
         
         &.charging{
-            text-shadow: 1px 1px 1px $accent-2;
+            text-shadow: 1px 1px 1px $accent-3;
         }
         &.warning{
-            text-shadow: 0 0 10px $accent-3;
+            text-shadow: 0 0 10px $accent-1;
             color: Alpha(Shade($color-warning, 1.4), .75);
         }
         &.critical {
-            text-shadow: 0 0 10px $accent-3;
+            text-shadow: 0 0 10px $accent-1;
             color: Alpha(Shade($color-critical, 1.5), .75);
         }
     }
@@ -122,8 +122,8 @@
 
         &:hover {
             background: 
-                radial-gradient(40% 40% at 50% 50%, $accent-1, transparent),    
-                radial-gradient(50% 50% at 50% 50%, $accent-3, transparent),
+                radial-gradient(40% 40% at 50% 50%, $accent-2, transparent),    
+                radial-gradient(50% 50% at 50% 50%, $accent-1, transparent),
             ;
             transform: scale(1.1);
             min-width: 35px;

@@ -29,8 +29,8 @@ window {
 
     &:hover{
         transform: rotate(180deg);
-        background: radial-gradient(50% 50%, Alpha($accent-1, .5) 35%, transparent 90%);
-        border-color: Alpha($accent-1, .75);
+        background: radial-gradient(50% 50%, Alpha($accent-2, .5) 35%, transparent 90%);
+        border-color: Alpha($accent-2, .75);
     }
 }
 
@@ -38,10 +38,11 @@ window {
 
 .bar-surface-bottom {
     min-height: 22px;
-    background: radial-gradient(ellipse 10% 100% at 5% 50%, $surface-1, transparent),
-                radial-gradient(30% 100% at 40% 60%, Shade($surface-1, .75), transparent),
-                radial-gradient(20% 100% at 70% 80%, $surface-1, transparent),
-                ;
+    /*background: radial-gradient(ellipse 10% 100% at 5% 50%, $surface-1, transparent),
+                //radial-gradient(30% 100% at 40% 60%, Shade($surface-1, .75), transparent),
+                radial-gradient(20% 100% at 40% 70%, $surface-1, transparent),
+                radial-gradient(20% 100% at 70% 70%, $surface-1, transparent),
+                ;*/
     
 }
 .bar-surface-top {
@@ -75,5 +76,5 @@ tooltip{
 }
 scrollbar{
     trough { outline: none; }
-    slider { background-color: $accent-1; border: none; }
+    slider { background-color: $accent-2; border: none; }
 }
