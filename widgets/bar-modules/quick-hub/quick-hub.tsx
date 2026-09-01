@@ -5,6 +5,9 @@ import BrightnessIndicator from "./indicator-brightness";
 import VolumeInputIndicator from "./indicator-volume-input";
 import VolumeOutputIndicator from "./indicator-volume-output";
 import { SidepanelButton } from "../../sidepanel/sidepanel";
+import WifiButton from "../buttons/wifi-button";
+import BluetoothButton from "../buttons/bluetooth-button";
+import UpdateButton from "../buttons/updates-button";
 
 
 export default function QuickHub() {
@@ -30,7 +33,11 @@ export default function QuickHub() {
     return (
         <box class="quick-hub">
 
-            <SidepanelButton/>
+            <WifiButton/>
+            <BluetoothButton/>
+            <UpdateButton/>
+
+            {/*<SidepanelButton/>*/}
 
             <InputSourceIndicator/>
             <BrightnessIndicator/>

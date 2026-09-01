@@ -11,7 +11,7 @@
     //.volume-output-indicator { }
 
     .input-source-indicator{
-        margin-right: 15px;
+        margin: 0 15px;
         transition: opacity $anim-duration linear;
 
         &:hover { opacity: .7; }

@@ -12,140 +12,92 @@
 }
 
 .nexus {
-  font-size: 14px;
+  font-size: 13px;
   font-family: "Symbols Nerd Font", monospace;
   font-weight: 600;
   background-color: Alpha(rgb(20, 10, 30), 0.75);
   box-shadow: inset 0 3px 5px Alpha(rgb(92, 35, 133), 0.45);
-  border: 1px solid Alpha(rgb(176, 125, 213), 0.45);
-  border-radius: 10px 10px 0 0;
+  border: 2px solid Alpha(rgb(176, 125, 213), 0.45);
+  border-radius: 20px 20px 5px 5px;
+  border-top: none;
   border-bottom: none;
+  min-height: 20px;
+  text-shadow: 2px 1px 2px rgb(40, 6, 48);
+  padding: 0 10px;
+}
+.nexus > * {
+  min-height: 18px;
 }
 .nexus .small {
   font-size: 11px;
   border: 1px solid rgb(176, 125, 213);
-  border-radius: 5px;
+  border-radius: 0px 5px 7px 0;
   border-left: none;
   border-bottom: none;
-  border-top-left-radius: 0;
-  border-bottom-right-radius: 0;
-  padding-right: 3px;
-  padding-left: 5px;
-  padding-top: 2px;
+  padding: 2px 3px 0 5px;
 }
-.nexus .left .small {
-  min-width: 35px;
-}
-.nexus .left > label {
+.nexus .stats-label {
   margin-right: 5px;
-  text-shadow: 2px 1px 2px rgb(40, 6, 48);
 }
-.nexus .left > label.gpu-icon {
+.nexus .gpu-icon {
   font-size: 16px;
-  margin: 0 10px;
+  margin: 0 5px;
   min-width: 16px;
   padding: 0 5px;
   border-radius: 100%;
 }
-.nexus .left > label.gpu-icon.available {
+.nexus .gpu-icon.available {
   color: rgb(139, 42, 236);
   text-shadow: 0 0 5px Alpha(rgb(115, 56, 203), 0.6);
 }
-.nexus .left > label.cpu {
-  margin-right: 0px;
-  border-radius: 10px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-  padding-left: 5px;
-  border: 1px solid rgb(176, 125, 213);
-  border-bottom: none;
-  border-right: none;
-}
-.nexus .left > label.temp-gpu {
-  border-radius: 10px;
-  border-bottom-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  padding: 0 5px;
-  padding-right: 10px;
-  border: 1px solid rgb(176, 125, 213);
-  border-right: none;
-  border-bottom: none;
-  margin-right: 0;
-}
-.nexus .left > label.temp-cpu {
-  border-radius: 10px;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  padding-right: 5px;
-  border: 1px solid rgb(176, 125, 213);
-  border-bottom: none;
-  border-left: none;
-}
-.nexus .center {
-  transform: skew(-15deg, 0);
-}
-.nexus .center > * {
-  transform: skew(15deg, 0);
-}
-.nexus .center {
+.nexus .temps {
   padding: 0 10px;
-  background: radial-gradient(ellipse 50% 55% at 50% 90%, Alpha(rgb(173, 59, 243), 0.4), transparent), radial-gradient(ellipse 100% 50% at 50% 50%, Alpha(rgb(41, 0, 67), 0.95) 30%, transparent 85%);
+  border-radius: 15px 5px 15px 5px;
+  border: 1px solid rgb(176, 125, 213);
+  border-bottom: none;
+  box-shadow: inset 0 0 6px rgb(92, 35, 133);
 }
-.nexus .center .ram {
-  padding-left: 10px;
-  padding-right: 4px;
-  padding-top: 4px;
-  border-radius: 10px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+.nexus .cpu .load, .nexus .ram .load {
+  border-radius: 13px 13px 0 5px;
   border: 1px solid rgb(176, 125, 213);
   border-bottom: none;
   border-right: none;
-  background: radial-gradient(ellipse 50% 50% at 50% 60%, rgb(69, 39, 104), transparent);
+  margin-right: -3px;
+  font-size: 13px;
 }
-.nexus .center .menu-button {
-  padding: 0 31px;
+.nexus .cpu .load {
+  padding-left: 8px;
+}
+.nexus .ram .load {
+  min-width: 85px;
+  padding-left: 12px;
+}
+.nexus .cpu .small {
+  min-width: 35px;
+}
+.nexus .ram .small {
+  min-width: 40px;
+}
+.nexus .menu-button {
+  padding: 0 30px;
   font-size: 16px;
-  padding-bottom: 1px;
-  background: radial-gradient(ellipse 20% 60% at 50% 50%, rgb(41, 0, 67) 60%, transparent), radial-gradient(ellipse 50% 150% at 50% 100%, rgb(41, 0, 67) 50%, transparent);
-  transition: background 0.3s linear, padding 0.3s linear;
+  font-family: "Symbols Nerd Font";
+  background: radial-gradient(ellipse 20% 60% at 50% 50%, rgb(41, 0, 67) 60%, transparent), radial-gradient(ellipse 50% 100% at 50% 70%, rgb(41, 0, 67) 50%, transparent);
+  transition: all 0.3s linear;
 }
-.nexus .center .menu-button:hover {
-  padding: 0 40px;
-  padding-bottom: 1px;
-  background: radial-gradient(ellipse 20% 60% at 50% 50%, Alpha(rgb(173, 59, 243), 0.8) 5%, transparent), radial-gradient(ellipse 50% 150% at 50% 100%, Alpha(rgb(173, 59, 243), 0.15) 50%, transparent);
+.nexus .menu-button:hover {
+  padding: 0 50px;
+  background: radial-gradient(ellipse 30% 40% at 50% 55%, Alpha(rgb(115, 56, 203), 0.5) 30%, transparent 90%), radial-gradient(20% 60% at 50% 55%, Alpha(rgb(115, 56, 203), 0.65) 50%, transparent), radial-gradient(ellipse 40% 80% at 50% 70%, rgb(41, 0, 67) 50%, transparent);
 }
-.nexus .center .ram {
-  min-width: 100px;
+.nexus .time {
+  margin: 0 5px;
 }
-.nexus .center .small {
-  min-width: 30px;
-}
-.nexus .center .time {
-  min-width: 100px;
-}
-.nexus .center {
-  text-shadow: 2px 1px 2px rgb(40, 6, 48);
-}
-.nexus .right {
-  padding-right: 10px;
-  text-shadow: 2px 1px 2px rgb(40, 6, 48);
-}
-.nexus .right .date {
-  margin-right: 5px;
-}
-.nexus .right .nexus-button {
-  padding: 0 5px;
-  margin: 0 3px;
-  transition: opacity 0.3s ease-in-out;
-}
-.nexus .right .nexus-button:hover {
-  opacity: 0.5;
-}
-.nexus .right .nexus-button label {
-  font-family: "Symbols Nerd Font", monospace;
+.nexus .date {
+  padding: 0 10px;
+  border-radius: 15px 5px 15px 5px;
+  border: 1px solid rgb(176, 125, 213);
+  border-bottom: none;
+  box-shadow: inset 0 0 6px rgb(92, 35, 133);
 }
 
 @keyframes player-playing-pulse {
@@ -177,9 +129,7 @@
   }
 }
 .bar-player.closed {
-  border-radius: 7px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  border-radius: 5px 5px 15px 15px;
   box-shadow: inset 0 -3px 5px Alpha(rgb(92, 35, 133), 0.45);
   border: 1px solid Alpha(rgb(176, 125, 213), 0.45);
   border-top: none;
@@ -274,126 +224,6 @@
   color: rgb(176, 125, 213);
 }
 
-.player-window .player-revealer {
-  padding: 0 10px;
-}
-.player-window .player-revealer .bar-player-panel-content {
-  background-color: Alpha(rgb(20, 10, 30), 0.75);
-  border-radius: 0 0 7px 7px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border: 1px solid Alpha(rgb(176, 125, 213), 0.55);
-  border-top: none;
-  box-shadow: inset 0 -3px 5px Alpha(rgb(92, 35, 133), 0.75);
-}
-.player-window .player-revealer .bar-player-panel-content .track-title {
-  background: radial-gradient(70% 50% at 50% 50%, rgb(69, 39, 104), transparent);
-  padding: 1px 5px;
-  border-radius: 15px 0 15px 0;
-}
-.player-window .player-revealer .bar-player-panel-content .track-title .track-title-label {
-  font-family: "FantasqueSansM Nerd Font", "Pixellari", "MesloLGSDZ Nerd Font Mono", monospace;
-  font-style: italic;
-  font-weight: 600;
-  text-shadow: 1px 1px 1px rgb(40, 6, 48);
-}
-.player-window .player-revealer .bar-player-panel-content .player-controls {
-  margin: 10px 0;
-}
-.player-window .player-revealer .bar-player-panel-content .player-controls .left {
-  min-width: 80px;
-}
-.player-window .player-revealer .bar-player-panel-content .player-controls .left .player-button {
-  min-width: 10px;
-  font-family: "Symbols Nerd Font";
-  font-size: 18px;
-  margin: 3px 0;
-  padding: 8px;
-  border-radius: 100%;
-  box-shadow: inset 0 0 10px Alpha(rgb(115, 56, 203), 0.5);
-  transition: transform 0.3s ease;
-}
-.player-window .player-revealer .bar-player-panel-content .player-controls .left .player-button:hover {
-  transform: scale(1.2);
-}
-.player-window .player-revealer .bar-player-panel-content .player-controls .center .skip {
-  font-family: "Symbols Nerd Font";
-  color: rgb(180, 190, 254);
-  font-size: 28px;
-  transition: all 0.3s ease;
-  padding: 3px 15px;
-  border: 1px solid Alpha(rgb(176, 125, 213), 0.65);
-}
-.player-window .player-revealer .bar-player-panel-content .player-controls .center .skip.prev {
-  border-radius: 15px 0 10px 0;
-  border-right: none;
-  box-shadow: -2px 0 4px rgb(92, 35, 133);
-}
-.player-window .player-revealer .bar-player-panel-content .player-controls .center .skip.next {
-  border-radius: 0 15px 0 10px;
-  border-left: none;
-  box-shadow: 2px 0 4px rgb(92, 35, 133);
-}
-.player-window .player-revealer .bar-player-panel-content .player-controls .center .skip:hover {
-  background: radial-gradient(50% 50% at 50% 50%, rgb(92, 35, 133), transparent);
-  border-color: rgb(173, 59, 243);
-}
-.player-window .player-revealer .bar-player-panel-content .player-controls .center .skip:hover.prev {
-  box-shadow: -3px 0 10px rgb(92, 35, 133), inset 5px 0 5px rgb(176, 125, 213);
-}
-.player-window .player-revealer .bar-player-panel-content .player-controls .center .skip:hover.next {
-  box-shadow: 3px 0 10px rgb(92, 35, 133), inset -5px 0 5px rgb(176, 125, 213);
-}
-.player-window .player-revealer .bar-player-panel-content .player-controls .center .play-pause {
-  font-family: "Symbols Nerd Font";
-  color: rgb(180, 190, 254);
-  font-size: 52px;
-  margin: 0 10px;
-  padding: 5px;
-  box-shadow: 0 0 0 rgb(92, 35, 133), inset 0 0 10px rgb(176, 125, 213);
-  border-radius: 100%;
-  min-width: 60px;
-  transition: all 0.3s ease;
-}
-.player-window .player-revealer .bar-player-panel-content .player-controls .center .play-pause:hover {
-  box-shadow: 0 0 5px rgb(92, 35, 133), inset 0 0 15px rgb(176, 125, 213);
-}
-.player-window .player-revealer .bar-player-panel-content .player-controls .right .slider {
-  min-width: 80px;
-  min-height: 5px;
-  transform: rotate(-35deg);
-  transition: transform 0.3s linear;
-}
-.player-window .player-revealer .bar-player-panel-content .player-controls .right .slider:hover {
-  transform: rotate(-35deg) scaleY(2);
-}
-.player-window .player-revealer .bar-player-panel-content .player-controls .right .slider.volume-slider {
-  border-radius: 30px;
-  background-color: rgb(41, 0, 67);
-}
-.player-window .player-revealer .bar-player-panel-content .player-controls .right .slider.volume-slider .volume-slider-fill {
-  border-radius: 30px;
-  background: linear-gradient(to left, rgb(115, 56, 203) 2%, rgb(173, 59, 243) 25%, rgb(69, 39, 104) 70%);
-}
-.player-window .player-revealer .bar-player-panel-content .player-controls .right label {
-  color: rgb(180, 190, 254);
-  margin-top: 5px;
-  font-size: 18px;
-  transform: rotate(-35deg);
-}
-.player-window .player-revealer .bar-player-panel-content .progress-bar-container {
-  background-color: Alpha(rgb(173, 59, 243), 0.2);
-  min-height: 5px;
-  border-radius: 5px;
-  transition: transform 0.3s ease;
-}
-.player-window .player-revealer .bar-player-panel-content .progress-bar-container .progress-fill {
-  border-radius: 5px;
-}
-.player-window .player-revealer .bar-player-panel-content .progress-bar-container:hover {
-  transform: scaleY(2);
-}
-
 .power-hub {
   padding-right: 10px;
   font-size: 14px;
@@ -402,11 +232,9 @@
   font-weight: 600;
 }
 .power-hub .power-modes {
-  border-radius: 10px;
+  border-radius: 5px 15px 5px 15px;
   border: 1px solid Alpha(rgb(176, 125, 213), 0.75);
   border-top: none;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
   padding: 0 10px;
   margin: 0 10px;
   transition: all 0.3s linear;
@@ -421,7 +249,7 @@
 }
 .power-hub .power-modes .power-button:hover {
   background: radial-gradient(40% 40% at 50% 50%, rgb(92, 35, 133), transparent), radial-gradient(50% 50% at 50% 50%, rgb(41, 0, 67), transparent);
-  padding: 0 10px;
+  padding: 0 5px;
 }
 .power-hub .power-modes .eco-modes {
   border-radius: 10px;
@@ -537,7 +365,7 @@
   padding-right: 5px;
 }
 .quick-hub .input-source-indicator {
-  margin-right: 15px;
+  margin: 0 15px;
   transition: opacity 0.3s linear;
 }
 .quick-hub .input-source-indicator:hover {
@@ -676,6 +504,19 @@
   color: rgb(217, 222, 255);
   text-shadow: 1px 1px 1px rgb(40, 6, 48);
   margin: 0 3px;
+}
+
+.nexus-button {
+  padding: 0 7px;
+  margin: 0 2px;
+  transition: opacity 0.3s ease-in-out;
+  font-family: "Symbols Nerd Font";
+}
+.nexus-button:hover {
+  opacity: 0.5;
+}
+.nexus-button label {
+  font-family: "Symbols Nerd Font";
 }
 
 .desktop-button {
@@ -1024,6 +865,150 @@
 }
 .power-menu-panel .power-menu-revealer .power-menu-box .close-panel:hover {
   transform: none;
+}
+
+.player-window .player-revealer {
+  padding: 0 10px;
+}
+.player-window .player-revealer .bar-player-panel-content {
+  background-color: Alpha(rgb(20, 10, 30), 0.9);
+  border-radius: 0 0 7px 7px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid Alpha(rgb(176, 125, 213), 0.55);
+  border-top: none;
+  box-shadow: inset 0 -3px 5px Alpha(rgb(92, 35, 133), 0.75);
+}
+.player-window .player-revealer .bar-player-panel-content .track-title {
+  background: radial-gradient(70% 50% at 50% 50%, rgb(69, 39, 104), transparent);
+  padding: 1px 5px;
+  border-radius: 15px 0 15px 0;
+}
+.player-window .player-revealer .bar-player-panel-content .track-title .track-title-label {
+  font-family: "FantasqueSansM Nerd Font", "Pixellari", "MesloLGSDZ Nerd Font Mono", monospace;
+  font-style: italic;
+  font-weight: 600;
+  text-shadow: 1px 1px 1px rgb(40, 6, 48);
+}
+.player-window .player-revealer .bar-player-panel-content .player-controls {
+  margin: 10px 0;
+}
+.player-window .player-revealer .bar-player-panel-content .player-controls .left {
+  min-width: 80px;
+}
+.player-window .player-revealer .bar-player-panel-content .player-controls .left .player-button {
+  min-width: 10px;
+  font-family: "Symbols Nerd Font";
+  font-size: 18px;
+  margin: 3px 0;
+  padding: 8px;
+  border-radius: 100%;
+  box-shadow: inset 0 0 10px Alpha(rgb(115, 56, 203), 0.5);
+  transition: transform 0.3s ease;
+}
+.player-window .player-revealer .bar-player-panel-content .player-controls .left .player-button:hover {
+  transform: scale(1.2);
+}
+.player-window .player-revealer .bar-player-panel-content .player-controls .center .skip {
+  font-family: "Symbols Nerd Font";
+  color: rgb(180, 190, 254);
+  font-size: 28px;
+  transition: all 0.3s ease;
+  padding: 3px 15px;
+  border: 1px solid Alpha(rgb(176, 125, 213), 0.65);
+}
+.player-window .player-revealer .bar-player-panel-content .player-controls .center .skip.prev {
+  border-radius: 15px 0 10px 0;
+  border-right: none;
+  box-shadow: -2px 0 4px rgb(92, 35, 133);
+}
+.player-window .player-revealer .bar-player-panel-content .player-controls .center .skip.next {
+  border-radius: 0 15px 0 10px;
+  border-left: none;
+  box-shadow: 2px 0 4px rgb(92, 35, 133);
+}
+.player-window .player-revealer .bar-player-panel-content .player-controls .center .skip:hover {
+  background: radial-gradient(50% 50% at 50% 50%, rgb(92, 35, 133), transparent);
+  border-color: rgb(173, 59, 243);
+}
+.player-window .player-revealer .bar-player-panel-content .player-controls .center .skip:hover.prev {
+  box-shadow: -3px 0 10px rgb(92, 35, 133), inset 5px 0 5px rgb(176, 125, 213);
+}
+.player-window .player-revealer .bar-player-panel-content .player-controls .center .skip:hover.next {
+  box-shadow: 3px 0 10px rgb(92, 35, 133), inset -5px 0 5px rgb(176, 125, 213);
+}
+.player-window .player-revealer .bar-player-panel-content .player-controls .center .play-pause {
+  font-family: "Symbols Nerd Font";
+  color: rgb(180, 190, 254);
+  font-size: 52px;
+  margin: 0 10px;
+  padding: 5px;
+  box-shadow: 0 0 0 rgb(92, 35, 133), inset 0 0 10px rgb(176, 125, 213);
+  border-radius: 100%;
+  min-width: 60px;
+  transition: all 0.3s ease;
+}
+.player-window .player-revealer .bar-player-panel-content .player-controls .center .play-pause:hover {
+  box-shadow: 0 0 5px rgb(92, 35, 133), inset 0 0 15px rgb(176, 125, 213);
+}
+.player-window .player-revealer .bar-player-panel-content .player-controls .right .slider {
+  min-width: 80px;
+  min-height: 5px;
+  transform: rotate(-35deg);
+  transition: transform 0.3s linear;
+}
+.player-window .player-revealer .bar-player-panel-content .player-controls .right .slider:hover {
+  transform: rotate(-35deg) scaleY(2);
+}
+.player-window .player-revealer .bar-player-panel-content .player-controls .right .slider.volume-slider {
+  border-radius: 30px;
+  background-color: rgb(41, 0, 67);
+}
+.player-window .player-revealer .bar-player-panel-content .player-controls .right .slider.volume-slider .volume-slider-fill {
+  border-radius: 30px;
+  background: linear-gradient(to left, rgb(115, 56, 203) 2%, rgb(173, 59, 243) 25%, rgb(69, 39, 104) 70%);
+}
+.player-window .player-revealer .bar-player-panel-content .player-controls .right label {
+  color: rgb(180, 190, 254);
+  margin-top: 5px;
+  font-size: 18px;
+  transform: rotate(-35deg);
+}
+.player-window .player-revealer .bar-player-panel-content .progress-bar-container {
+  margin-bottom: 5px;
+  background-color: Alpha(rgb(173, 59, 243), 0.2);
+  min-height: 5px;
+  border-radius: 5px;
+  transition: transform 0.3s ease;
+}
+.player-window .player-revealer .bar-player-panel-content .progress-bar-container .progress-fill {
+  border-radius: 5px;
+}
+.player-window .player-revealer .bar-player-panel-content .progress-bar-container:hover {
+  transform: scaleY(2);
+}
+
+.playlist {
+  padding: 0;
+}
+.playlist .playlist-box {
+  padding-right: 5px;
+}
+.playlist .track-row {
+  padding: 2px 10px;
+  border-radius: 15px 5px 15px 5px;
+  background: radial-gradient(80% 50% at 0% 50%, transparent, transparent);
+  transition: all 0.3s linear;
+}
+.playlist .track-row.active {
+  background: radial-gradient(80% 50% at 0% 50%, Alpha(rgb(115, 56, 203), 0.5), transparent);
+  background-color: rgb(20, 10, 30);
+  border: 1px solid Alpha(rgb(176, 125, 213), 0.45);
+  border-right: none;
+  border-top: none;
+}
+.playlist .track-row:hover {
+  background: radial-gradient(80% 50% at 50% 50%, Alpha(rgb(115, 56, 203), 0.75), transparent);
 }
 
 .sidebar-button {

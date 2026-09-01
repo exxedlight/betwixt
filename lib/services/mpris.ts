@@ -220,7 +220,16 @@ export const activePlayer = createComputed<MprisPlayer | null>(() => {
            ready.find(p => p.playback_status === "Paused") ||
            ready[0]
 })
+export const activePlayerName = createComputed<string | null>(() => {
+    const player = activePlayer()
+    if (!player) return null
+    return supportedNames.find(s => player.bus.includes(s)) ?? null
+})
 
+export const activePlayerConfig = createComputed<PlayerConfig | null>(() => {
+    const player = activePlayer()
+    return player ? getPlayerConfig(player.bus) : null
+})
 
 
 
@@ -235,7 +244,6 @@ export const loopStatus         = createComputed(() => activePlayer()?.loop_stat
 export const shuffleEnabled     = createComputed(() => activePlayer()?.shuffle || false)
 export const loopSupported      = createComputed(() => activePlayer()?.loop_supported ?? false)
 export const shuffleSupported   = createComputed(() => activePlayer()?.shuffle_supported ?? false)
-
 
 
 

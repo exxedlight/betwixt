@@ -1,144 +1,98 @@
 @use "../core" as *;
 
 .nexus {
-    font-size: 14px;
+    font-size: 13px;
     font-family: $symbols-font, monospace;
     font-weight: 600;
-    
     background-color: Alpha($surface-1, .75);
     box-shadow: inset 0 3px 5px Alpha($accent-2, .45);
-    border: 1px solid Alpha($outline, .45);
-    border-radius: 10px 10px 0 0;
-    border-bottom: none;
+    border: 2px solid Alpha($outline, .45);
+    border-radius: 20px 20px 5px 5px;
+    border-top: none; border-bottom: none;
+    min-height: 20px;
+    text-shadow: 2px 1px 2px $text-shade-color;
+    padding: 0 10px;
+
+    & > * { min-height: 18px; }
 
     .small {
         font-size: 11px;
         border: 1px solid $outline;
-        border-radius: 5px;
+        border-radius: 0px 5px 7px 0;
         border-left: none; border-bottom: none;
-        border-top-left-radius: 0; border-bottom-right-radius: 0;
-        padding-right: 3px; padding-left: 5px; padding-top: 2px;
+        padding: 2px 3px 0 5px;
     }
 
+    .stats-label{
+        margin-right: 5px;
+    }
 
-    .left {
-        .small { min-width: 35px; }
-        & > label {
-            margin-right: 5px;
-            text-shadow: 2px 1px 2px $text-shade-color;
+    .gpu-icon {
+        font-size: 16px;
+        margin: 0 5px;
+        min-width: 16px;
+        padding: 0 5px;
+        border-radius: 100%;
 
-            &.gpu-icon {
-                font-size: 16px;
-                margin: 0 10px;
-                min-width: 16px;
-                padding: 0 5px;
-                border-radius: 100%;
-
-                &.available {
-                    color: $color-available;
-                    text-shadow: 0 0 5px Alpha($glow, .6);
-                }
-            }
-
-            &.cpu {
-                margin-right: 0px;
-                border-radius: 10px;
-                border-bottom-right-radius: 0; 
-                border-bottom-left-radius: 0;
-                padding-left: 5px;
-                border: 1px solid $outline;
-                border-bottom: none; 
-                border-right: none;
-            }
-
-            &.temp-gpu {
-                border-radius: 10px;
-                border-bottom-left-radius: 0; 
-                border-top-right-radius: 0; 
-                border-bottom-right-radius: 0;
-                padding: 0 5px;
-                padding-right: 10px;
-                border: 1px solid $outline;
-                border-right: none; 
-                border-bottom: none;
-                margin-right: 0;
-            }
-
-            &.temp-cpu {
-                border-radius: 10px;
-                border-top-left-radius: 0; 
-                border-bottom-left-radius: 0; 
-                border-bottom-right-radius: 0;
-                padding-right: 5px;
-                border: 1px solid $outline;
-                border-bottom: none; 
-                border-left: none;
-            }
+        &.available {
+            color: $color-available;
+            text-shadow: 0 0 5px Alpha($glow, .6);
         }
     }
 
-
-    .center {
-        @include skew(-15deg);
+    .temps{
         padding: 0 10px;
-                
-        background: 
-                    radial-gradient(ellipse 50% 55% at 50% 90%, Alpha($accent-3, .4), transparent),
-                    radial-gradient(ellipse 100% 50% at 50% 50%, Alpha($accent-1, .95) 30%, transparent 85%)
-                    ;
-            
-        .ram{
-            padding-left: 10px; padding-right: 4px; padding-top: 4px;
-            border-radius: 10px;
-            border-bottom-left-radius: 0; border-bottom-right-radius: 0;
+        border-radius: 15px 5px 15px 5px;
+        border: 1px solid $outline;
+        border-bottom: none;
+        box-shadow: inset 0 0 6px $accent-2;
+    }
+
+    
+    
+    .cpu, .ram {
+        .load{
+            border-radius: 13px 13px 0 5px;
             border: 1px solid $outline;
-            border-bottom: none; border-right: none;
-            background: radial-gradient(ellipse 50% 50% at 50% 60%, $surface-2, transparent);
-        }
-
-        .menu-button {
-            padding: 0 31px;
-            font-size: 16px;
-            padding-bottom: 1px;
-
-            background: radial-gradient(ellipse 20% 60% at 50% 50%, $accent-1 60%, transparent), 
-                        radial-gradient(ellipse 50% 150% at 50% 100%, $accent-1 50%, transparent);
-            transition: background $anim-duration linear, padding $anim-duration linear;
-
-
-            &:hover { 
-                padding: 0 40px; 
-                padding-bottom: 1px; 
-                background: radial-gradient(ellipse 20% 60% at 50% 50%, Alpha($accent-3, .8) 5%, transparent), 
-                            radial-gradient(ellipse 50% 150% at 50% 100%, Alpha($accent-3, .15) 50%, transparent)
-                ;
-            }
-        }
-
-        .ram { min-width: 100px; }
-        .small { min-width: 30px; }
-        .time { min-width: 100px; }
-
-        text-shadow: 2px 1px 2px $text-shade-color;
-    }
-    
-    
-    .right {
-        padding-right: 10px;
-        text-shadow: 2px 1px 2px $text-shade-color;
-        
-        .date {
-            margin-right: 5px;
-        }
-
-        .nexus-button{
-            padding: 0 5px;
-            margin: 0 3px;
-            transition: opacity $anim-duration ease-in-out;
-
-            &:hover { opacity: .5; }
-            label { font-family: $symbols-font, monospace; }
+            border-bottom: none; 
+            border-right: none;
+            margin-right: -3px;
+            font-size: 13px;
         }
     }
-    
+    .cpu .load  { padding-left: 8px; }
+    .ram .load  { min-width: 85px; padding-left: 12px; }
+    .cpu .small { min-width: 35px; }
+    .ram .small { min-width: 40px; }
+
+    .menu-button {
+        padding: 0 30px;
+        font-size: 16px;
+        font-family: $symbols-font;
+        background: 
+            radial-gradient(ellipse 20% 60% at 50% 50%, $accent-1 60%, transparent), 
+            radial-gradient(ellipse 50% 100% at 50% 70%, $accent-1 50%, transparent),
+        ;
+        transition: all $anim-duration linear;
+
+        &:hover { 
+            padding: 0 50px;  
+            background: 
+                radial-gradient(ellipse 30% 40% at 50% 55%, Alpha($glow, .5) 30%, transparent 90%),
+                radial-gradient(20% 60% at 50% 55%, Alpha($glow, .65) 50%, transparent), 
+                radial-gradient(ellipse 40% 80% at 50% 70%, $accent-1 50%, transparent),
+            ;
+        }
+    }
+
+    .time {
+        margin: 0 5px;
+    }
+    .date {
+        padding: 0 10px;
+        border-radius: 15px 5px 15px 5px;
+        border: 1px solid $outline;
+        border-bottom: none;
+        box-shadow: inset 0 0 6px $accent-2;
+    }
 }

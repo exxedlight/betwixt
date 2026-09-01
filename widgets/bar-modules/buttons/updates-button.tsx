@@ -1,6 +1,6 @@
 import { execAsync, subprocess } from "ags/process";
 import GLib from "gi://GLib";
-import { createState } from "gnim"
+import { createState } from "ags"
 import { onClick } from "../../../lib/core/gestures";
 import { launchCommand } from "../../../lib/services/hyprland-exec";
 

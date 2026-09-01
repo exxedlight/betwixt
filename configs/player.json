@@ -5,6 +5,7 @@
 
     "playlist-get": "audtool playlist-display",
     "playlist-name": "audtool current-playlist-name",
+    "playlist-position": "audtool playlist-position",
     "playlist-jump": "audtool playlist-jump {n}",
 
     "playlists-number": "audtool number-of-playlists",
@@ -15,7 +16,5 @@
 
     "repeat-status": "audtool playlist-repeat-status",
     "repeat-toggle": "audtool playlist-repeat-toggle"
-
-
   }
 }

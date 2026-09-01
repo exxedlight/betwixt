@@ -8,10 +8,10 @@
     font-weight: 600;
 
     .power-modes{
-        border-radius: 10px;
+        border-radius: 5px 15px 5px 15px;
         border: 1px solid Alpha($outline, .75);
         border-top: none;
-        border-top-left-radius: 0; border-top-right-radius: 0;
+        //border-top-left-radius: 0; border-top-right-radius: 0;
         padding: 0 10px;
         margin: 0 10px;
         transition: all $anim-duration linear;
@@ -29,7 +29,7 @@
                     radial-gradient(40% 40% at 50% 50%, $accent-2, transparent),    
                     radial-gradient(50% 50% at 50% 50%, $accent-1, transparent),
                 ;
-                padding: 0 10px;
+                padding: 0 5px;
             }
         }
 

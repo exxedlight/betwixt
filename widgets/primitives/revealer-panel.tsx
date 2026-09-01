@@ -7,7 +7,7 @@ import { onHover } from "../../lib/core/gestures"
 
 
 export default function RevealerPanel({
-  name, visible, children, anchor, classes: _classes, transition, revealerClasses, onEnter, onLeave, transitionDuration
+  name, visible, children, anchor, classes: _classes, transition, revealerClasses, onEnter, onLeave, transitionDuration, valign: _valign
 }: PanelProps) {
   // window must be visible longer from panel
   // to end of animation of <revealer>
@@ -28,6 +28,7 @@ export default function RevealerPanel({
       keymode={Astal.Keymode.ON_DEMAND}
       anchor={anchor ?? Astal.WindowAnchor.BOTTOM}
       cssClasses={_classes}
+      valign={_valign ?? undefined}
       $={(self) => {
         onHover({
             enter: () => onEnter?.(),

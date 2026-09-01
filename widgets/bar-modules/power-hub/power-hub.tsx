@@ -4,6 +4,7 @@ import PowerModes from "./power-modes"
 import IdleIndicator from "./idle-indicator"
 import { powermenuVisibilityToggle, powermenuVisible } from "../../../lib/global-states"
 import { onClick } from "../../../lib/core/gestures"
+import { SidepanelButton } from "../../sidepanel/sidepanel"
 
 //    󰟢
 
@@ -13,6 +14,7 @@ export default function PowerHub(){
 
             <PowerModes/>
             <IdleIndicator/>
+            <SidepanelButton/>
             <Battery/>
 
             <label 

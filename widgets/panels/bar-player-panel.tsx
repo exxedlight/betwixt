@@ -6,6 +6,7 @@ import { createComputed } from "ags";
 import Pango from "gi://Pango";
 import RevealerPanel from "../primitives/revealer-panel";
 import { playerPanelVisible } from "../../lib/global-states";
+import PlayerPlaylist from "./bar-player-playlist";
 
 
 const VOLUME_SLIDER_WIDTH = 100
@@ -21,6 +22,7 @@ export default function BarPlayerPanel(){
         transition: Gtk.RevealerTransitionType.SLIDE_LEFT,
         transitionDuration: 150,
         revealerClasses: ["player-revealer"],
+        valign: Gtk.Align.START
     })
 }
 
@@ -100,6 +102,8 @@ function BarPlayerPanelContent(){
 
             <PlayerProgressBar barWidth={500}/>
 
+
+            <PlayerPlaylist/>
         </box>
     )
 }

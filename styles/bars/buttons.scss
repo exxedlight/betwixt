@@ -1,0 +1,11 @@
+@use "../core" as *;
+
+.nexus-button{
+    padding: 0 7px;
+    margin: 0 2px;
+    transition: opacity $anim-duration ease-in-out;
+    font-family: $symbols-font;
+
+    &:hover { opacity: .5; }
+    label { font-family: $symbols-font; }
+}
