@@ -19,7 +19,7 @@ export default function BarPlayerPanel(){
         children: <BarPlayerPanelContent />,
         anchor: Astal.WindowAnchor.TOP,
         classes: ["player-window"],
-        transition: Gtk.RevealerTransitionType.SLIDE_LEFT,
+        transition: Gtk.RevealerTransitionType.FADE_SLIDE_DOWN,
         transitionDuration: 150,
         revealerClasses: ["player-revealer"],
         valign: Gtk.Align.START
@@ -100,7 +100,7 @@ function BarPlayerPanelContent(){
 
             </box>
 
-            <PlayerProgressBar barWidth={500}/>
+            <PlayerProgressBar barWidth={550}/>
 
 
             <PlayerPlaylist/>

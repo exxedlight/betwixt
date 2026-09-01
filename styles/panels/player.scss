@@ -120,7 +120,8 @@
 }
 
 .playlist{
-    padding: 0;
+    margin-top: 10px;
+    
     .playlist-box {
         padding-right: 5px;
     }
@@ -128,13 +129,19 @@
         padding: 2px 10px;
         border-radius: 15px 5px 15px 5px;
         background: radial-gradient(80% 50% at 0% 50%, transparent, transparent);
+        border: 1px solid transparent;
+        border-right: none; border-top: none;
         transition: all $anim-duration linear;
+        
+        label {
+            font-family: $player-font-1, $player-font-2, $player-font-3, monospace;
+            font-size: 14px;
+        }
 
         &.active {
             background: radial-gradient(80% 50% at 0% 50%, Alpha($glow, .5), transparent);
             background-color: $surface-1;
-            border: 1px solid Alpha($outline, .45);
-            border-right: none; border-top: none;
+            border-color: Alpha($outline, .45);
         }
 
         &:hover {
