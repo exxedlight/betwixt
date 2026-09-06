@@ -1,7 +1,6 @@
 @use "../core" as *;
 
 .power-hub{
-    padding-right: 10px;
     font-size: 14px;
     font-family: $symbols-font, monospace;
     color: $font-base-color;
@@ -11,9 +10,8 @@
         border-radius: 5px 15px 5px 15px;
         border: 1px solid Alpha($outline, .75);
         border-top: none;
-        //border-top-left-radius: 0; border-top-right-radius: 0;
         padding: 0 10px;
-        margin: 0 10px;
+        margin: 0 5px;
         transition: all $anim-duration linear;
 
         .power-button {
@@ -108,34 +106,4 @@
             color: Alpha(Shade($color-critical, 1.5), .75);
         }
     }
-
-    .power-menu-button{
-        
-        padding: 0 10px;
-        font-size: 16px;
-        color: $font-light-color;
-        transition: all $anim-duration linear;
-        background: 
-                radial-gradient(40% 40% at 50% 50%, transparent, transparent),    
-                radial-gradient(50% 50% at 50% 50%, transparent, transparent),
-            ;
-
-        &:hover {
-            background: 
-                radial-gradient(40% 40% at 50% 50%, $accent-2, transparent),    
-                radial-gradient(50% 50% at 50% 50%, $accent-1, transparent),
-            ;
-            transform: scale(1.1);
-            min-width: 35px;
-        }
-
-        &.menu-opened{
-            @include skew(-15deg);
-            min-width: 35px;
-            &:hover{
-                padding: 0 10px;
-            }
-        }
-    }
-    
 }

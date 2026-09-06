@@ -7,6 +7,9 @@ import { DesktopButton } from "./desktop/desktop";
 import PowerMenuPanel from "./panels/powermenu-panel";
 import BarPlayerPanel from "./panels/bar-player-panel";
 import BarPlayer from "./bar-modules/player/bar-player";
+import PowerButton from "./bar-modules/buttons/power-button";
+import SettingsButton from "./settings/settings-button";
+import { SidepanelButton } from "./sidepanel/sidepanel";
 
 const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
@@ -44,6 +47,9 @@ export default function TopBar(monitor = 0) {
         <box cssClasses={["bar-box", "bar-right-box"]} $type="end" spacing={6}>
             <RecordingIndicator/>
             <PowerHub/>
+            <SettingsButton/>
+            <SidepanelButton/>
+            <PowerButton/>
         </box>
 
       </centerbox>

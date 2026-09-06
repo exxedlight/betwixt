@@ -1,16 +1,18 @@
-import Gtk from "gi://Gtk?version=4.0"
+
 import { Accessor, createState, createComputed, For } from "ags"
 import { getWifiNetworks, connectWifi, WifiNetwork, SecretsRequiredError, scanWifi } from "../../lib/services/wifi"
 import RevealerPanel from "../primitives/revealer-panel"
 import { activeNexusPanel, closeNexusPanel, NexusPanelKey } from "../../lib/global-states"
+import { Astal, Gtk } from "ags/gtk4"
 
 
 export default function WifiPanel() {
   return RevealerPanel({
     name: "nexus-wifi-panel",
     visible: activeNexusPanel.as(k => k === NexusPanelKey.WIFI),
+    anchor: Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.RIGHT,
     children: <WifiPanelContent onClose={closeNexusPanel} />,
-    transition: Gtk.RevealerTransitionType.SWING_UP,
+    transition: Gtk.RevealerTransitionType.FADE_SLIDE_LEFT,
     classes: ["nexus-panel-window"],
     revealerClasses: ["bar-revealer", "nexus-wifi-revealer"]
   })

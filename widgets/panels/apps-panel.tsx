@@ -5,6 +5,7 @@ import { onEsc } from "../../lib/core/gestures"
 import { launchApp } from "../../lib/services/hyprland-exec"
 import RevealerPanel from "../primitives/revealer-panel";
 import { activeNexusPanel, closeNexusPanel, NexusPanelKey } from "../../lib/global-states";
+import { getSearchVariants } from "../../lib/core/dictionaries";
 
 type Props = {
     onClose: () => void
@@ -35,12 +36,27 @@ function AppsPanelContent({ onClose }: Props) {
         onClose()
     }
 
+    function appMatches(app: Apps.Application, query: string): boolean {
+        if (!query) return true
+        const variants = getSearchVariants(query).map(v => v.toLowerCase())
+        return variants.some(q =>
+            app.name.toLowerCase().includes(q) ||
+            (app.description && app.description.toLowerCase().includes(q))
+        )
+    }
+
     return (
         <box
             class="app-launcher-panel"
             orientation={Gtk.Orientation.VERTICAL}
             spacing={8}
-            $={onEsc(() => handleClose())}
+            //$={onEsc(() => handleClose())}
+            $={(self) => {
+                onEsc(() => handleClose())(self)
+                self.connect("map", () => {
+                    appsService.reload()
+                })
+            }}
         >
             <centerbox class="header">
                 <label $type="start" label="Applications" class="panel-title" />
@@ -62,15 +78,10 @@ function AppsPanelContent({ onClose }: Props) {
 
                     // Launch the first VISIBLE app on Enter
                     self.connect("activate", () => {
-                        const q = query().toLowerCase()
-                        const firstMatch = allApps().find(app =>
-                            !q ||
-                            app.name.toLowerCase().includes(q) ||
-                            (app.description && app.description.toLowerCase().includes(q))
-                        )
+                        const q = query()
+                        const firstMatch = allApps().find(app => appMatches(app, q))
                         if (firstMatch) {
-                            //launchApp(firstMatch)
-                            launchApp(firstMatch, handleClose);
+                            launchApp(firstMatch, handleClose)
                         }
                     })
 
@@ -87,12 +98,7 @@ function AppsPanelContent({ onClose }: Props) {
                 <box class="items-box" orientation={Gtk.Orientation.VERTICAL} spacing={4}>
                     <For each={allApps}>
                         {(app) => {
-                            const isVisible = createComputed(() => {
-                            const q = query().toLowerCase()
-                            if (!q) return true
-                            return app.name.toLowerCase().includes(q) ||
-                                (app.description && app.description.toLowerCase().includes(q)) || false
-                            })
+                            const isVisible = createComputed(() => appMatches(app, query()))
                             return (
                                 <button
                                     class="app-item"

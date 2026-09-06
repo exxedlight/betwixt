@@ -7,7 +7,8 @@ helper="$(command -v paru || command -v yay || command -v pikaur || command -v t
 [ -n "$helper" ] || { echo "No AUR helper found (paru/yay/pikaur/trizen)"; exit 1; }
 
 echo "==> Using helper: $helper"
-grep -vE '^\s*(#|$)' ./requirements.list | xargs "$helper" -S --needed
+mapfile -t pkgs < <(grep -vE '^\s*(#|$)' ./requirements.list)
+"$helper" -S --needed "${pkgs[@]}"
 
 fc-cache -f
 echo "==> Done"

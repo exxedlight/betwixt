@@ -23,9 +23,11 @@ import { PlayerConfig } from "../core/types"
 
 //  supported players list; listen ONLY this players
 //  ensure, that player supports MPRIS, then you may add it in this file
-//  supported players: 
+//  get MPRIS-supported players: 
 //  >> busctl --user list | grep org.mpris.MediaPlayer2
 const CONFIG_PATH = `${SRC}/configs/player.json`
+//  ~~~ put 3rd column (PROCESS NAME) to config file
+
 
 //  MPRIS interfaces
 const PLAYER_IFACE = "org.mpris.MediaPlayer2.Player"
@@ -47,7 +49,42 @@ function getSupportedPlayers(): Record<string, PlayerConfig> {
 const supported = getSupportedPlayers()
 const supportedNames = Object.keys(supported)
 const toBusName = (n: string) => n.startsWith("org.mpris.") ? n : `org.mpris.MediaPlayer2.${n}`
-const matches = (n: string) => supportedNames.length === 0 || supportedNames.some(s => n.includes(s))
+
+
+
+// ---- process-name resolution (busname -> real process name via /proc) ----
+const procNameCache = new Map<string, string | null>()
+
+function getProcessName(busName: string): string | null {
+    if (procNameCache.has(busName)) return procNameCache.get(busName)!
+    let name: string | null = null
+    try {
+        const [pid] = Gio.DBus.session.call_sync(
+            "org.freedesktop.DBus", "/org/freedesktop/DBus",
+            "org.freedesktop.DBus", "GetConnectionUnixProcessID",
+            new GLib.Variant("(s)", [busName]), null,
+            Gio.DBusCallFlags.NONE, -1, null,
+        ).deep_unpack() as [number]
+ 
+        const [ok, bytes] = GLib.file_get_contents(`/proc/${pid}/comm`)
+        if (ok) name = new TextDecoder().decode(bytes).trim()
+    } catch (e) {
+        console.warn("[MPRIS] failed to resolve process name for:", busName, e)
+    }
+    procNameCache.set(busName, name)
+    return name
+}
+
+// ---  v1.  match by PROCESS NAME
+const matches = (n: string) => {
+    if (supportedNames.length === 0) return true
+    const proc = getProcessName(n)
+    return proc ? supportedNames.some(s => proc.includes(s)) : false
+}
+//  --- v2. match by BUSNAME
+//const matches = (n: string) => supportedNames.length === 0 || supportedNames.some(s => n.includes(s))
+
+
 
 function getPlayerConfig(busName: string): PlayerConfig | null {
     const key = supportedNames.find(s => busName.includes(s))

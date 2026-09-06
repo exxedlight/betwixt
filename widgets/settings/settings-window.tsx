@@ -16,8 +16,8 @@ export function SettingsWindow(){
 
 export default function SettingsPanelContent(){
     return (
-        <box>
-            
+        <box class="settings-panel-content">
+            123
         </box>
     )
 }

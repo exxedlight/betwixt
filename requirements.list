@@ -39,7 +39,6 @@ ttf-nerd-fonts-symbols-common
 
 # Optional
 pavucontrol
-nvidia-utils
 mako
 audacious
-
+#nvidia-utils

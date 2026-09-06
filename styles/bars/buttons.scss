@@ -1,5 +1,13 @@
 @use "../core" as *;
 
+.bar-button {
+    font-size: 14px;
+    font-family: $symbols-font, monospace;
+    color: $font-light-color;
+    font-weight: 600;
+}
+
+
 .nexus-button{
     padding: 0 7px;
     margin: 0 2px;
@@ -8,4 +16,52 @@
 
     &:hover { opacity: .5; }
     label { font-family: $symbols-font; }
+}
+
+.power-menu-button{
+    padding: 0 10px;
+    margin-right: 5px;
+    
+    transition: all $anim-duration linear;
+    background: 
+            radial-gradient(40% 40% at 50% 50%, transparent, transparent),    
+            radial-gradient(50% 50% at 50% 50%, transparent, transparent),
+        ;
+
+    &:hover {
+        background: 
+            radial-gradient(40% 40% at 50% 50%, $accent-2, transparent),    
+            radial-gradient(50% 50% at 50% 50%, $accent-1, transparent),
+        ;
+        min-width: 44px;
+    }
+
+    &.opened{
+        min-width: 44px;
+    }
+}
+
+.settings-button{
+    padding: 0 6px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 3px Alpha($outline, .5);
+    transition: all $anim-duration linear;
+
+    &:hover { min-width: 40px; }
+
+    &.opened { min-width: 40px; }
+}
+
+.sidebar-button{
+    font-size: 16px;
+    font-family: $symbols-font;
+    margin: 0 5px;
+    padding: 0 4px;
+    transition: opacity $anim-duration ease;
+    transition: all $anim-duration linear;
+
+    &:hover { 
+        color: $outline;
+        text-shadow: 0 0 5px $glow;
+    }
 }

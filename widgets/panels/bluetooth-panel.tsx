@@ -1,4 +1,4 @@
-import { Gtk } from "ags/gtk4";
+import { Astal, Gtk } from "ags/gtk4";
 import Bluetooth from "gi://AstalBluetooth"
 import { createBinding, For } from "ags"
 import RevealerPanel from "../primitives/revealer-panel";
@@ -13,7 +13,8 @@ export default function BluetoothPanel(){
         name: "nexus-bluetooth-panel",
         visible: activeNexusPanel.as(k => k === NexusPanelKey.BLUETOOTH),
         children: <BluetoothPanelContent onClose={closeNexusPanel} />,
-        transition: Gtk.RevealerTransitionType.SWING_UP,
+        transition: Gtk.RevealerTransitionType.FADE_SLIDE_LEFT,
+        anchor: Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.RIGHT,
         classes: ["nexus-panel-window"],
         revealerClasses: ["bar-revealer", "nexus-bluetooth-revealer"]
     })
