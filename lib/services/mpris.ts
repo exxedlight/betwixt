@@ -2,7 +2,6 @@ import Gio from "gi://Gio"
 import GLib from "gi://GLib"
 import { createComputed, createState } from "ags"
 import { createPoll } from "ags/time"
-import { PlayerConfig } from "../core/types"
 
 
 //  Only God and I know what is written here. 
@@ -22,35 +21,30 @@ import { PlayerConfig } from "../core/types"
 
 
 //  supported players list; listen ONLY this players
-//  ensure, that player supports MPRIS, then you may add it in this file
-//  get MPRIS-supported players: 
+//  write PROCESS NAMES here (3rd column), not busnames:
 //  >> busctl --user list | grep org.mpris.MediaPlayer2
-const CONFIG_PATH = `${SRC}/configs/player.json`
-//  ~~~ put 3rd column (PROCESS NAME) to config file
-
+//  example configs/player.json: ["audacious", "vivaldi-bin", "TelegramDesktop"]
+const CONFIG_PATH = `${SRC}/configs/players.json`
 
 //  MPRIS interfaces
 const PLAYER_IFACE = "org.mpris.MediaPlayer2.Player"
 const PROPS_IFACE = "org.freedesktop.DBus.Properties"
 const OBJ_PATH = "/org/mpris/MediaPlayer2"
 
-//  Reading config file
-function getSupportedPlayers(): Record<string, PlayerConfig> {
+//  Reading config file — just a flat list of allowed process names
+function getSupportedPlayers(): string[] {
     try {
         const [ok, bytes] = GLib.file_get_contents(CONFIG_PATH)
-        if (!ok) return {}
+        if (!ok) return []
         const parsed = JSON.parse(new TextDecoder().decode(bytes))
-        return (parsed && typeof parsed === "object" && !Array.isArray(parsed)) ? parsed : {}
+        return Array.isArray(parsed) ? parsed.filter((x): x is string => typeof x === "string") : []
     } catch {
-        return {}
+        return []
     }
 }
 
-const supported = getSupportedPlayers()
-const supportedNames = Object.keys(supported)
+const supportedNames = getSupportedPlayers()
 const toBusName = (n: string) => n.startsWith("org.mpris.") ? n : `org.mpris.MediaPlayer2.${n}`
-
-
 
 // ---- process-name resolution (busname -> real process name via /proc) ----
 const procNameCache = new Map<string, string | null>()
@@ -65,7 +59,7 @@ function getProcessName(busName: string): string | null {
             new GLib.Variant("(s)", [busName]), null,
             Gio.DBusCallFlags.NONE, -1, null,
         ).deep_unpack() as [number]
- 
+
         const [ok, bytes] = GLib.file_get_contents(`/proc/${pid}/comm`)
         if (ok) name = new TextDecoder().decode(bytes).trim()
     } catch (e) {
@@ -75,20 +69,11 @@ function getProcessName(busName: string): string | null {
     return name
 }
 
-// ---  v1.  match by PROCESS NAME
+// match by PROCESS NAME, not by busname
 const matches = (n: string) => {
     if (supportedNames.length === 0) return true
     const proc = getProcessName(n)
     return proc ? supportedNames.some(s => proc.includes(s)) : false
-}
-//  --- v2. match by BUSNAME
-//const matches = (n: string) => supportedNames.length === 0 || supportedNames.some(s => n.includes(s))
-
-
-
-function getPlayerConfig(busName: string): PlayerConfig | null {
-    const key = supportedNames.find(s => busName.includes(s))
-    return key ? supported[key] : null
 }
 
 // Re-evaluation trigger for activePlayer. Fires ONLY on real D-Bus events.
@@ -102,9 +87,11 @@ class MprisPlayer {
     private props: Gio.DBusProxy
     private lastPos = 0
     readonly bus: string
+    readonly processName: string
 
     constructor(bus: string) {
         this.bus = bus
+        this.processName = getProcessName(bus) ?? bus
         const flags = Gio.DBusProxyFlags.DO_NOT_AUTO_START
         this.player = Gio.DBusProxy.new_for_bus_sync(
             Gio.BusType.SESSION, flags, null, bus, OBJ_PATH, PLAYER_IFACE, null,
@@ -231,9 +218,18 @@ Gio.DBus.session.signal_subscribe(
     Gio.DBusSignalFlags.NONE,
     (_c, _s, _p, _i, _m, params) => {
         const [name, , owner] = params.deep_unpack() as [string, string, string]
-        if (!name.startsWith("org.mpris.MediaPlayer2.") || !matches(name)) return
-        if (owner !== "") ensureName(name)
-        console.log(`[MPRIS] owner ${owner ? "UP" : "DOWN"}: ${name}`) // removable
+        if (!name.startsWith("org.mpris.MediaPlayer2.")) return
+        if (owner === "") {
+            // owner disappeared — drop cached process name so a relaunched
+            // process (possibly different PID) gets resolved fresh next time
+            procNameCache.delete(name)
+            console.log(`[MPRIS] owner DOWN: ${name}`) // removable
+            bump()
+            return
+        }
+        if (!matches(name)) return
+        ensureName(name)
+        console.log(`[MPRIS] owner UP: ${name}`) // removable
         bump()
     },
 )
@@ -257,15 +253,13 @@ export const activePlayer = createComputed<MprisPlayer | null>(() => {
            ready.find(p => p.playback_status === "Paused") ||
            ready[0]
 })
+
+// resolved process name of the active player (e.g. "audacious", "vivaldi-bin"),
+// intended to be fed into adapters/getPlayerAdapter()
 export const activePlayerName = createComputed<string | null>(() => {
     const player = activePlayer()
     if (!player) return null
-    return supportedNames.find(s => player.bus.includes(s)) ?? null
-})
-
-export const activePlayerConfig = createComputed<PlayerConfig | null>(() => {
-    const player = activePlayer()
-    return player ? getPlayerConfig(player.bus) : null
+    return supportedNames.find(s => player.processName.includes(s)) ?? null
 })
 
 

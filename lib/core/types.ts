@@ -61,7 +61,18 @@ export type Playlist = {
     totalLength?: string
 }
 
-export type PlayerAdapter = {
-    parsePlaylist: (raw: string) => Playlist
-    parsePosition: (raw: string) => number
+export interface PlayerAdapter {
+    toggleNativeWindow?(): void
+ 
+    getPlaylist?(): Promise<Playlist>
+    getPlaylistName?(): Promise<string>
+    getPlaylistsNumber?(): Promise<number>
+    getPlaylistPosition?(): Promise<number>
+    jumpToTrack?(index: number): void
+ 
+    getShuffleStatus?(): Promise<boolean>
+    toggleShuffle?(): void
+ 
+    getRepeatStatus?(): Promise<string>
+    toggleRepeat?(): void
 }

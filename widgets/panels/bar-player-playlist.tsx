@@ -1,30 +1,31 @@
-import { getPlayerAdapter, runPlayerAction, runPlayerQuery } from "../../lib/services/players"
-import { activePlayerName, activePlayerConfig, trackTitle, trackArtist } from "../../lib/services/mpris"
+import { getPlayerAdapter } from "../../lib/services/players"
+import { activePlayerName, trackTitle, trackArtist } from "../../lib/services/mpris"
 import { Playlist, PlaylistTrack } from "../../lib/core/types"
-import { createPoll } from "ags/time"
 import { Gtk } from "ags/gtk4"
-import { createComputed, createState, For } from "ags"
+import { createState, For } from "ags"
 import Pango from "gi://Pango"
 import { onClick } from "../../lib/core/gestures"
-import GLib from "gi://GLib"
 
 const emptyPlaylist: Playlist = { tracks: [], trackCount: 0 }
 
 async function fetchPlaylist(): Promise<Playlist> {
     const adapter = getPlayerAdapter(activePlayerName())
-    if (!adapter) return emptyPlaylist
-    return runPlayerQuery("playlist-get", adapter.parsePlaylist, emptyPlaylist)
+    if (!adapter?.getPlaylist) return emptyPlaylist
+    try { return await adapter.getPlaylist() }
+    catch { return emptyPlaylist }
 }
-
+ 
 async function fetchPlaylistPosition(): Promise<number> {
     const adapter = getPlayerAdapter(activePlayerName())
-    if (!adapter) return -1
-    return runPlayerQuery("playlist-position", adapter.parsePosition, -1)
+    if (!adapter?.getPlaylistPosition) return -1
+    try { return await adapter.getPlaylistPosition() }
+    catch { return -1 }
 }
-
+ 
 function jumpToTrack(index: number, currentPosition: number) {
     if (index === currentPosition) return
-    runPlayerAction("playlist-jump", { n: index })
+    const adapter = getPlayerAdapter(activePlayerName())
+    adapter?.jumpToTrack?.(index)
 }
 
 export default function PlayerPlaylist() {

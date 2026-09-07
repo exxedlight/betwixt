@@ -1,3 +1,4 @@
+import { execAsync } from "ags/process"
 import { PlayerAdapter, Playlist, PlaylistTrack } from "../../core/types"
 import { launchCommand } from "../hyprland-exec"
 
@@ -6,20 +7,39 @@ import { launchCommand } from "../hyprland-exec"
 const PLAYER_CLASS = "audacious"
 const PLAYER_TITLE = ".* - Audacious$"
 
-const PLAYER_SHOW_COMMAND = "audtool mainwin-show on"
-const PLAYER_HIDE_COMMAND = "audtool mainwin-show off"
+const COMMANDS = {
+    "show-window": "audtool mainwin-show on",
+    "hide-window": "audtool mainwin-show off",
+
+    "playlist-get": "audtool playlist-display",
+    "playlist-name": "audtool current-playlist-name",
+    "playlist-position": "audtool playlist-position",
+    "playlist-jump": "audtool playlist-jump {n}",
+
+    "playlists-number": "audtool number-of-playlists",
+
+
+    "shuffle-status": "audtool playlist-shuffle-status",
+    "shuffle-toggle": "audtool playlist-shuffle-toggle",
+
+    "repeat-status": "audtool playlist-repeat-status",
+    "repeat-toggle": "audtool playlist-repeat-toggle"
+}
 
 
 // audtool has no "toggle" or "is the main window visible" query of its own,
-// so I ask Hyprland whether an Audacious main window is currently mapped
-// and flip audtool's show state
+// so we ask Hyprland is Audacious main window currently mapped and flip audtool's show state
 const IS_MAIN_WINDOW_VISIBLE =
     `hyprctl clients -j | jq -e '.[] | select(.class == "${PLAYER_CLASS}" and (.title | test("${PLAYER_TITLE}")) and .mapped)' >/dev/null`
  
 export function tooglePlayerNativeWindow() {
-    launchCommand(`${IS_MAIN_WINDOW_VISIBLE} && ${PLAYER_HIDE_COMMAND} || ${PLAYER_SHOW_COMMAND}`)
+    launchCommand(`${IS_MAIN_WINDOW_VISIBLE} && ${COMMANDS["hide-window"]} || ${COMMANDS["show-window"]}`)
 }
 
+
+async function query(cmd: string): Promise<string> {
+    return execAsync(["bash", "-c", cmd])
+}
 
 // ---- playlist parsing ----
 
@@ -58,6 +78,45 @@ export function parsePosition(raw: string): number {
 }
 
 export const audaciousAdapter: PlayerAdapter = {
-    parsePlaylist,
-    parsePosition,
+    toggleNativeWindow() {
+        launchCommand(
+            `${IS_MAIN_WINDOW_VISIBLE} && ${COMMANDS["hide-window"]} || ${COMMANDS["show-window"]}`
+        )
+    },
+ 
+    async getPlaylist() {
+        return parsePlaylist(await query(COMMANDS["playlist-get"]))
+    },
+ 
+    async getPlaylistName() {
+        return (await query(COMMANDS["playlist-name"])).trim()
+    },
+ 
+    async getPlaylistsNumber() {
+        const n = Number((await query(COMMANDS["playlists-number"])).trim())
+        return Number.isFinite(n) ? n : 0
+    },
+ 
+    async getPlaylistPosition() {
+        return parsePosition(await query(COMMANDS["playlist-position"]))
+    },
+ 
+    jumpToTrack(index) {
+        launchCommand(COMMANDS["playlist-jump"].replace("{n}", String(index)))
+    },
+ 
+    async getShuffleStatus() {
+        // TODO: подгони под реальный вывод audtool у себя (on/off? 1/0?)
+        return (await query(COMMANDS["shuffle-status"])).trim().toLowerCase() === "on"
+    },
+    toggleShuffle() {
+        launchCommand(COMMANDS["shuffle-toggle"])
+    },
+ 
+    async getRepeatStatus() {
+        return (await query(COMMANDS["repeat-status"])).trim()
+    },
+    toggleRepeat() {
+        launchCommand(COMMANDS["repeat-toggle"])
+    },
 }
