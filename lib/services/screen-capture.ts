@@ -5,6 +5,7 @@ import { launchCommand } from "./hyprland-exec"
 import config from "../../configs/screen-capture.json"
 import Gio from "gi://Gio"
 import { pathExpander } from "../core/format"
+import { notify } from "./notifications"
 
 type ScreenCaptureConfig = {
     video: {
@@ -53,7 +54,7 @@ function timestamp(withDash: boolean): string {
 }
 
 function playSound(path: string) {
-    execAsync(["canberra-gtk-play", "-f", pathExpander(path)]).catch((err) =>
+    execAsync(["pw-play", pathExpander(path)]).catch((err) =>
         console.error("[screen-capture] sound playback failed:", err)
     )
 }
@@ -85,6 +86,18 @@ function isWfRecorderRunning(): boolean {
     }
 }
 
+//  Resolves the current default audio output as a monitor source
+//  Returns "" on failure - caller decides how to degrade.
+async function getDefaultAudioMonitor(): Promise<string> {
+    try {
+        const sink = (await execAsync(["pactl", "get-default-sink"])).trim()
+        return sink ? `${sink}.monitor` : ""
+    } catch (err) {
+        console.error("[screen-capture] failed to resolve default sink:", err)
+        return ""
+    }
+}
+
 //  Reactive state - for bar indicator
 export const isVideoRecording = createPoll<boolean>(false, 1000, () => isWfRecorderRunning())
 
@@ -99,7 +112,19 @@ export async function toggleVideoRecording() {
     ensureDir(dir)
 
     const file = `${dir}/videorecord-${timestamp(true)}.mp4`
-    const command = cfg.video["start-command"].replace("{file}", shQuote(file))
+    const audioMonitor = await getDefaultAudioMonitor()
+
+    const command = audioMonitor
+        ? cfg.video["start-command"]
+            .replace("{file}", shQuote(file))
+            .replace("{sink}", shQuote(audioMonitor))
+        : cfg.video["start-command"]
+            .replace("{file}", shQuote(file))
+            .replace(/--audio=\{sink\}\s*/, "")
+
+    if (!audioMonitor) {
+        notify("Screen recording", "Default audio sink not found, recording without sound", true)
+    }
 
     playSound(cfg.video["start-sound"])
     launchCommand(command)
@@ -145,13 +170,7 @@ const TRANSLATE_TMP_IMAGE = "/tmp/screen-translate-shot.png"
 const TRANSLATE_TMP_TEXT_BASE = "/tmp/screen-translate-text"
 const TRANSLATE_TMP_TEXT = `${TRANSLATE_TMP_TEXT_BASE}.txt`
  
-function notify(summary: string, body: string, critical = false) {
-    const args = ["notify-send"]
-    if (critical) args.push("-u", "critical", "-t", "0")
-    args.push(summary, body)
- 
-    execAsync(args).catch((err) => console.error("[screen-capture] notify-send failed:", err))
-}
+
 
 function execWithInput(argv: string[], input: string): Promise<void> {
     return new Promise((resolve, reject) => {

@@ -44,8 +44,8 @@ function BluetoothPanelContent({ onClose }: Props) {
             spacing={8}
             $={(self) => {
                 // scan, while panel visible
-                self.connect("map", () => bluetooth.adapter?.start_discovery())
-                self.connect("unmap", () => bluetooth.adapter?.stop_discovery())
+                self.connect("map", () => { bluetooth.adapter?.start_discovery(); console.log("Bluetooth panel map") })
+                self.connect("unmap", () => { bluetooth.adapter?.stop_discovery(); console.log("Bluetooth panel unmap") })
             }}
         >
             <centerbox class="header">

@@ -21,8 +21,9 @@
         padding: 0 7px;
         min-width: 16px;
         border: 1px solid transparent;
+        border-color: transparent;
         border-top: none; border-bottom: none;
-        transition: background $anim-duration linear;
+        transition: all $anim-duration ease;
 
         &:hover {
             background: radial-gradient(circle at center, Alpha($accent-2, .75), transparent);
@@ -30,10 +31,10 @@
 
         &.active {
             @include skew(-10deg);
+            //@include leaf();
             padding: 0 10px;
             background: radial-gradient(50% 50% at 50% 50%, Alpha($glow, .5), transparent);
             border-color: $outline;
-            border-top: none; border-bottom: none;
 
             label { font-size: 17px; }
         }
@@ -43,6 +44,7 @@
             color: $font-shaded-color;
             text-shadow: 1px 1px 1px $text-shade-color;
             margin: 0 3px;
+            transition: font-size $anim-duration ease;
         }
     }
 }

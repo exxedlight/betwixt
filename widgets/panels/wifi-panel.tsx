@@ -68,7 +68,7 @@ function WifiPanelContent({ onClose }: Props) {
   const [networks, setNetworks] = createState<WifiNetwork[]>([])
   let pollTimer: ReturnType<typeof setInterval> | null = null
 
-  const refresh = () => getWifiNetworks().then(setNetworks).catch(() => { })
+  const refresh = () => { getWifiNetworks().then(setNetworks).catch(() => { }); }
   const startPoll = () => {
     if (pollTimer) return
     refresh()
@@ -105,8 +105,8 @@ function WifiPanelContent({ onClose }: Props) {
       orientation={Gtk.Orientation.VERTICAL}
       spacing={8}
       $={(self) => {
-        self.connect("map", async () => { await scanWifi(); startPoll() })
-        self.connect("unmap", () => stopPoll())
+        self.connect("map", async () => { await scanWifi(); startPoll(); console.log("WiFi panel map") })
+        self.connect("unmap", () => { stopPoll(); console.log("WiFi panel unmap") })
       }}
     >
       <centerbox class="header">

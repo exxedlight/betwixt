@@ -1,109 +1,110 @@
 @use "../core" as *;
 
-.power-hub{
+
+.power-modes{
+    @include leaf();
+    border: 1px solid Alpha($outline, .75);
+    border-top: none;
+    padding: 0 10px;
+    margin: 0 5px;
+    transition: all $anim-duration linear;
+
+    .power-button {
+        padding: 0;
+        margin: 0 2px;
+        min-width: 25px;
+        font-size: 15px;
+        transition: all $anim-duration ease;
+        font-family: $symbols-font;
+
+        &:hover{
+            background: 
+                radial-gradient(40% 40% at 50% 50%, $accent-2, transparent),    
+                radial-gradient(50% 50% at 50% 50%, $accent-1, transparent),
+            ;
+            padding: 0 5px;
+        }
+    }
+
+    .eco-modes{
+        border-radius: 10px;
+        &.ultra-eco-mode { box-shadow: inset 0 1px 1px 1px $outline; }
+    }
+    .ultra-eco-button{
+        &.ultra-eco-mode {
+            border-top-right-radius: 0; border-bottom-right-radius: 0;
+            margin-right: 0;
+            background: radial-gradient(100% 50% at 100% 50%, $glow, transparent);
+            padding: 0;
+        }
+    }
+    .eco-button{
+        &.active, &:hover.active { padding: 0; background: radial-gradient(50% 50% at 50% 50%, $glow, transparent); }
+        
+        &.ultra-eco-mode {
+            border-top-left-radius: 0; border-bottom-left-radius: 0;
+            margin-left: 0;
+            background: radial-gradient(100% 50% at 0% 50%, $glow, transparent);
+            padding: 0;
+        }
+    }
+    .ballanced-button{
+        &.active, &:hover.active { padding: 0; background: radial-gradient(50% 50% at 50% 50%, $glow, transparent); }//background: radial-gradient(60% 60% at 50% 50%, $glow, transparent); padding: 0; }
+    }
+    .performance-button{
+        &.active, &:hover.active { padding: 0; background: radial-gradient(50% 50% at 50% 50%, $glow, transparent); }
+    }
+}
+
+
+.battery-indicator{
+    @include leaf();
     font-size: 14px;
     font-family: $symbols-font, monospace;
     color: $font-base-color;
     font-weight: 600;
+    background-color: Alpha($surface-2, .45);
+    transition: text-shadow $anim-duration linear, color $anim-duration linear;
+    min-width: 70px;
+    padding: 0 5px;
 
-    .power-modes{
-        border-radius: 5px 15px 5px 15px;
-        border: 1px solid Alpha($outline, .75);
-        border-top: none;
+    &.charging{
+        text-shadow: 1px 1px 1px $accent-3;
+    }
+    &.warning{
+        text-shadow: 0 0 10px $accent-1;
+        color: Alpha(Shade($color-warning, 1.4), .75);
+    }
+    &.critical {
+        text-shadow: 0 0 10px $accent-1;
+        color: Alpha(Shade($color-critical, 1.5), .75);
+    }
+}
+
+
+.idle-indicator{
+    margin-right: 5px;
+    padding: 0 6px;
+    font-size: 16px;
+    box-shadow: inset 0 0 3px Alpha($outline, .5);
+    border-radius: 10px;
+    transition: all $anim-duration ease;
+
+    label{ font-family: $symbols-font; transition: all $anim-duration linear; }
+
+    &.active {
+        background: radial-gradient(70% 70% at 45% 50%, Alpha($glow, .45), transparent);
+        text-shadow: 0 0 10px $text-shade-color;
+    }
+    &:hover{
+        opacity: .8;
         padding: 0 10px;
-        margin: 0 5px;
-        transition: all $anim-duration linear;
 
-        .power-button {
-            padding: 0;
-            margin: 0 2px;
-            min-width: 25px;
-            font-size: 15px;
-            transition: all $anim-duration ease;
-            font-family: $symbols-font;
+        label { color: $outline; text-shadow: 0 0 5px $glow; }
 
-            &:hover{
-                background: 
-                    radial-gradient(40% 40% at 50% 50%, $accent-2, transparent),    
-                    radial-gradient(50% 50% at 50% 50%, $accent-1, transparent),
-                ;
-                padding: 0 5px;
-            }
-        }
-
-        .eco-modes{
-            border-radius: 10px;
-            &.ultra-eco-mode { box-shadow: inset 0 1px 1px 1px $outline; }
-        }
-        .ultra-eco-button{
-            &.ultra-eco-mode {
-                border-top-right-radius: 0; border-bottom-right-radius: 0;
-                margin-right: 0;
-                background: radial-gradient(100% 50% at 100% 50%, $glow, transparent);
-                padding: 0;
-            }
-        }
-        .eco-button{
-            &.active, &:hover.active { padding: 0; background: radial-gradient(50% 50% at 50% 50%, $glow, transparent); }
-            
-            &.ultra-eco-mode {
-                border-top-left-radius: 0; border-bottom-left-radius: 0;
-                margin-left: 0;
-                background: radial-gradient(100% 50% at 0% 50%, $glow, transparent);
-                padding: 0;
-            }
-        }
-        .ballanced-button{
-            &.active, &:hover.active { padding: 0; background: radial-gradient(50% 50% at 50% 50%, $glow, transparent); }//background: radial-gradient(60% 60% at 50% 50%, $glow, transparent); padding: 0; }
-        }
-        .performance-button{
-            &.active, &:hover.active { padding: 0; background: radial-gradient(50% 50% at 50% 50%, $glow, transparent); }
-        }
-    }
-
-
-    .idle-indicator{
-        margin-right: 5px;
-        padding: 0 6px;
-        font-size: 16px;
-        border-radius: 100%;
-        transition: all $anim-duration ease;
-
-        label{ font-family: $symbols-font; }
-
-        &.active {
-            background: radial-gradient(70% 70% at 45% 50%, Alpha($glow, .45), transparent);
-            text-shadow: 0 0 10px $text-shade-color;
-        }
-        &:hover{
-            opacity: .8;
-            padding: 0 10px;
-            transform: scale(1.2);
-
-            &.active{
-                background: radial-gradient(50% 50% at 45% 50%, Alpha($glow, .45), transparent);
-            }
-        }
-    }
-
-
-
-    .battery-indicator{
-        @include skew(-10deg);
-        background-color: Alpha($surface-2, .45);
-        transition: text-shadow $anim-duration linear, color $anim-duration linear;
-        min-width: 70px;
-        
-        &.charging{
-            text-shadow: 1px 1px 1px $accent-3;
-        }
-        &.warning{
-            text-shadow: 0 0 10px $accent-1;
-            color: Alpha(Shade($color-warning, 1.4), .75);
-        }
-        &.critical {
-            text-shadow: 0 0 10px $accent-1;
-            color: Alpha(Shade($color-critical, 1.5), .75);
+        &.active{
+            background: radial-gradient(50% 50% at 45% 50%, Alpha($glow, .45), transparent);
+            label { color: inherit; text-shadow: 0 0 5px $glow; }
         }
     }
 }

@@ -8,6 +8,8 @@ import BottomBar from "./widgets/bar-bottom"
 import { SettingsWindow } from "./widgets/settings/settings-window"
 import DesktopWindow from "./widgets/desktop/desktop"
 import SidePanelWindow from "./widgets/sidepanel/sidepanel"
+import GLib from "gi://GLib"
+import System from "system"
 
 
 // --- Hot Reload start:
@@ -37,5 +39,10 @@ app.start({
       DesktopWindow();
       SidePanelWindow();
     }
+
+      GLib.timeout_add(GLib.PRIORITY_HIGH, 2000, () => {
+        System.gc()
+        return GLib.SOURCE_REMOVE
+    })
   },
 })

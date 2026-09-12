@@ -9,9 +9,7 @@ export default function PowerHub(){
     return (
         <box orientation={Gtk.Orientation.HORIZONTAL} spacing={5} class="power-hub">
 
-            <PowerModes/>
-            <IdleIndicator/>
-            <Battery/>
+            
         </box>
     )
 }

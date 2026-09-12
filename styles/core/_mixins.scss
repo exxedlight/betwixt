@@ -4,3 +4,7 @@
     transform: skew($amount, 0);
     &>*{ transform: skew(-$amount, 0); }
 }
+
+@mixin leaf(){
+    border-radius: 15px 5px 15px 5px;
+}

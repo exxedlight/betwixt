@@ -36,25 +36,15 @@ window {
 
 
 
-.bar-surface-bottom {
-    min-height: 22px;
-    /*background: radial-gradient(ellipse 10% 100% at 5% 50%, $surface-1, transparent),
-                //radial-gradient(30% 100% at 40% 60%, Shade($surface-1, .75), transparent),
-                radial-gradient(20% 100% at 40% 70%, $surface-1, transparent),
-                radial-gradient(20% 100% at 70% 70%, $surface-1, transparent),
-                ;*/
-    
-}
-.bar-surface-top {
-    min-height: 22px;
-    
-}
-.bar-box{
+.bar-surface-bottom { min-height: 22px; }
+.bar-surface-top    { min-height: 22px; }
+.bar-box {
     @include skew(-25deg);
-    
-    &.bar-left-box  { margin-left: -5px; padding-left: 5px; background-color: Alpha($surface-1, .5); }
+    transition: all $anim-duration ease;
+
+    &.bar-left-box   { margin: 0 0 0 -5px; padding: 0 5px; background-color: Alpha($surface-1, .5); }
     &.bar-center-box { background: radial-gradient(50% 100% at 50% 0%, $surface-1, transparent); }
-    &.bar-right-box { margin-right: -10px; background-color: Alpha($surface-1, .5); padding-left: 15px; transition: all $anim-duration ease; }
+    &.bar-right-box  { margin: 0 -5px 0 0; padding: 0 5px; background-color: Alpha($surface-1, .5); }
 }
 
 
