@@ -6,12 +6,12 @@
 
 
 ## DEMO
-![Bars](./demo/full.png)
+![Shell screen](./demo/full.png)
 ![Desktop](./demo/desktop.png)
-![Sidepanel](./demo/sidepanel.png)
-![PowerMenu](./demo/power_menu.png)
-![AppLauncher](./demo/app_launcher.png)
-![WiFiPanel](./demo/wifi_panel.png)
+![Launcher](./demo/app-launcher.png)
+![WiFi](./demo/wifi.png)
+![Player](./demo/player-power.png)
+
 
 
 ## KEY FEATURES
