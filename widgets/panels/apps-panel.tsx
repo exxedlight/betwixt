@@ -27,8 +27,7 @@ export default function AppsPanel(monitor: number){
         visible: activeNexusPanel.as((k) => k === NexusPanelKey.APPS),
         children: <AppsPanelContent onClose={closeNexusPanel} />,
         transition: Gtk.RevealerTransitionType.FADE_SLIDE_UP,
-        classes: ["nexus-panel-window"],
-        revealerClasses: ["bar-revealer", "nexus-apps-revealer"]
+        classes: ["apps-panel"]
     })
 }
 

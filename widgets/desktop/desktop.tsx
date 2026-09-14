@@ -14,9 +14,8 @@ export default function DesktopWindow(monitor: number){
         visible: desktopVisible.as(v => v), 
         children: <DesktopPanelContent/>, 
         anchor: Astal.WindowAnchor.LEFT | Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM, 
-        classes: ["desktop-panel"], 
-        transition: Gtk.RevealerTransitionType.FADE_SLIDE_RIGHT, 
-        revealerClasses: ["desktop-revealer"]
+        classes: ["desktop-window"],
+        transition: Gtk.RevealerTransitionType.FADE_SLIDE_RIGHT
     })
 }
 

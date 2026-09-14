@@ -13,7 +13,6 @@ export default function RevealerPanel({
   children,
   anchor,
   classes: _classes,
-  revealerClasses,
   transition,
   transitionDuration,
   onEnter,
@@ -37,11 +36,11 @@ export default function RevealerPanel({
       visible={windowVisible}
       application={app}
       layer={_layer ?? Astal.Layer.OVERLAY}
-      monitor={0}
+      monitor={monitor ?? 0}
       exclusivity={_exclusivity ?? Astal.Exclusivity.NORMAL}
       keymode={Astal.Keymode.ON_DEMAND}
       anchor={anchor ?? Astal.WindowAnchor.BOTTOM}
-      cssClasses={_classes}
+      cssClasses={_classes ?? undefined}
       valign={_valign ?? undefined}
       $={(self) => {
         onHover({
@@ -49,12 +48,13 @@ export default function RevealerPanel({
           leave: () => onLeave?.(),
         })(self)
       }}
+      css={"background: transparent;"}
     >
       <revealer
         transitionType={transition ?? Gtk.RevealerTransitionType.CROSSFADE}
         transitionDuration={transitionDuration ?? 250}
         revealChild={visible}
-        cssClasses={revealerClasses}
+        cssClasses={_classes ? [..._classes, "revealer"] : undefined}
         $={(self) => {
           self.connect("notify::child-revealed", () => {
             if (!self.get_child_revealed() && !visible()) {
@@ -66,7 +66,7 @@ export default function RevealerPanel({
           })
         }}
       >
-        {children}
+          {children} 
       </revealer>
     </window>
   )

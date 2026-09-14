@@ -1,0 +1,76 @@
+@use "../core" as *;
+
+.desktop-window{
+    margin-left: -35px;
+    .revealer { padding: 0 40px; }
+}
+
+.desktop-button{
+    font-family: $symbols-font;
+    font-size: 16px;
+    padding: 0 3px;
+    opacity: .7;
+    transition: all $anim-duration ease;
+
+    &:hover{
+        opacity: 1;
+        text-shadow: 0 0 5px $text-shade-color;
+    }
+}
+
+.desktop-panel-content{
+    @include skew(-3deg);
+    
+    margin: 5px 0;
+    padding: 0 50px;
+    
+    background: 
+        radial-gradient(45% 10% at 10% 100%, Alpha($accent-2, .25), transparent),
+        radial-gradient(45% 5% at 80% 0%, Alpha($accent-2, .25), transparent),
+        radial-gradient(50% 50% at 50% 50%, Alpha($surface-1, .65), transparent)
+    ;
+    background-color: Alpha($surface-1, .55);
+    box-shadow: 
+        inset 5px 2px 5px Alpha($outline, .25),
+        inset -2px -2px 5px Alpha($outline, .25),
+    ;
+
+    border: 2px solid Alpha($glow, .5);
+    border-radius: 0 20px 20px 0;
+}
+
+
+.desktop-wrapper{
+    padding-left: 20px;
+
+    .desktop-grid { 
+        @include skew(-3deg);
+        border-radius: 10px;
+        padding: 10px;
+    }
+}
+
+
+.desktop-icon{
+    border-radius: 15px;
+    transition: all $anim-duration ease;
+    box-shadow: 0 0 1px Alpha($light, .35);
+
+    .desktop-icon-glyph{
+        font-family: $symbols-font;
+        transition: all $anim-duration ease;
+    }
+    .desktop-icon-label{
+        font-size: 8px;
+        opacity: 0;
+        transition: all $anim-duration ease;
+    }
+
+    &:hover{
+        transform: scale(1.2);
+        box-shadow: 0 0 15px Alpha($accent-3, .5), inset 0 0 5px Alpha($accent-2, .3);
+        
+        .desktop-icon-glyph { transform: scale(.7); }
+        .desktop-icon-label { opacity: 1; }
+    }
+}

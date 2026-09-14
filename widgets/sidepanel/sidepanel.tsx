@@ -15,9 +15,8 @@ export default function SidePanelWindow(monitor: number){
         visible: sidepanelVisible.as(v => v),
         children: <SidepanelContent/>,
         anchor: RIGHT | TOP | BOTTOM,
-        classes: ["sidepanel"],
-        transition: Gtk.RevealerTransitionType.FADE_SLIDE_LEFT,
-        revealerClasses: ["sidepanel-revealer"]
+        classes: ["sidepanel-window"],
+        transition: Gtk.RevealerTransitionType.FADE_SLIDE_LEFT
     })
 }
 

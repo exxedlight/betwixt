@@ -8,7 +8,6 @@ export type PanelProps = {
     children?: JSX.Element | JSX.Element[]
     anchor?: Astal.WindowAnchor
     classes?: string[]
-    revealerClasses: string[]
     transition?: Gtk.RevealerTransitionType | Accessor<NonNullable<Gtk.RevealerTransitionType | undefined>> | undefined;
     transitionDuration?: number;
     valign?: Gtk.Align;
