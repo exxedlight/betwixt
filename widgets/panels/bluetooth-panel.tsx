@@ -8,9 +8,10 @@ type Props = {
     onClose: () => void
 }
 
-export default function BluetoothPanel(){
+export default function BluetoothPanel(monitor: number){
     return RevealerPanel({
-        name: "nexus-bluetooth-panel",
+        name: `nexus-bluetooth-panel-${monitor}`,
+        monitor: monitor,
         visible: activeNexusPanel.as(k => k === NexusPanelKey.BLUETOOTH),
         children: <BluetoothPanelContent onClose={closeNexusPanel} />,
         transition: Gtk.RevealerTransitionType.FADE_SLIDE_LEFT,

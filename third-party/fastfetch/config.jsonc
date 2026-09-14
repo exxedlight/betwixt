@@ -1,0 +1,96 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+  "logo": {
+      "type": "auto", // Logo type: auto, builtin, small, file, etc.
+      "source": "~/Env/fastfetch/liz-2.png",
+      "width": 37,
+      "height": 28,
+      "padding": {
+          "top": 1,
+          "left": 1,
+          "right": 3
+      }
+  },
+  "display": {
+      "separator": "\t",
+      "key": {
+          "width": 17,       // Aligns keys to this width
+          "type": "both",   // string, icon, both, or none
+          "paddingLeft": 2
+      },
+      "color": {
+          "keys": "#a15beb",
+          "title": "#a15beb",
+          "output": "#dbdbdb",
+          "separator": "#dbdbdb"
+      }
+  },
+  "modules": [
+    "break",
+    "break",
+    "break",
+    "break",
+    "break",
+    "break",
+
+
+    {
+        "type": "custom",
+        "format": "╭──── System ─────────────────────────────────────────╮"
+    },
+    {
+        "type": "os",         "key": "OS",        "format": "{pretty-name}"
+    },
+    {
+      "type": "kernel",       "key": "Kernel",    "format": "{release}"
+    },
+    {
+      "type": "packages",     "key": "Packages",  "format": "{pacman}"
+    },
+    {
+      "type": "uptime",       "key": "Uptime",    "format": "{formatted}"
+    },
+    {
+      "type": "custom",
+      "format": "├──── Hardware ───"
+    },
+    {
+      "type": "display",      "key": "Display",           "format": "{width}x{height} {refresh-rate}Hz"
+    },
+    {
+      "type": "cpu",                                      "format": "Intel i5-12450h"//"format": "{name}"
+    },
+    {
+      "type": "gpu",          "key": "GPU-{index}",       "format": "{name} ~ {type}"
+    },
+    {
+      "type": "memory",       "key": "RAM",               "format": "{used} / {total}"
+    },
+    {
+      "type": "disk",                                     "format": "{size-used} / {size-total} {size-percentage} {filesystem}"
+    },
+    {
+      "type": "custom",
+      "format": "├──── Env ────────"
+    },
+    {
+      "type": "wm",                                       "format": "{pretty-name} {version}"
+    },
+    {
+      "type": "terminal",                                 "format": "{pretty-name}"
+    },
+    {
+      "type": "shell",                                    "format": "{pretty-name}"
+    },
+    {
+      "type": "localip",      "key": "Local IP",          "format": "{ipv4}"
+    },
+    {
+      "type": "locale",                                   "format": "{result}"
+    },
+    {
+      "type": "custom",
+      "format": "╰─────────────────────────────────────────────────────╯"
+    }
+  ]
+}

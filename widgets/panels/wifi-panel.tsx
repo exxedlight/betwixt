@@ -6,9 +6,10 @@ import { activeNexusPanel, closeNexusPanel, NexusPanelKey } from "../../lib/glob
 import { Astal, Gtk } from "ags/gtk4"
 
 
-export default function WifiPanel() {
+export default function WifiPanel(monitor: number) {
   return RevealerPanel({
-    name: "nexus-wifi-panel",
+    name: `nexus-wifi-panel-${monitor}`,
+    monitor: monitor,
     visible: activeNexusPanel.as(k => k === NexusPanelKey.WIFI),
     anchor: Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.RIGHT,
     children: <WifiPanelContent onClose={closeNexusPanel} />,

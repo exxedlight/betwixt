@@ -10,9 +10,10 @@ type Props = {
 
 const {TOP, RIGHT} = Astal.WindowAnchor
 
-export default function PowerMenuPanel(){
+export default function PowerMenuPanel(monitor: number){
     return RevealerPanel({
-        name: "power-menu-panel",
+        name: `power-menu-panel-${monitor}`,
+        monitor: monitor,
         visible: powermenuVisible,
         children: <PowerMenuPanelContent onClose={() => setPowermenuVisible(false)} />,
         transition: Gtk.RevealerTransitionType.SWING_DOWN,

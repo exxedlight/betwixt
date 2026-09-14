@@ -12,9 +12,10 @@ import PlayerPlaylist from "./bar-player-playlist";
 const VOLUME_SLIDER_WIDTH = 100
 
 
-export default function BarPlayerPanel(){
+export default function BarPlayerPanel(monitor: number){
     return RevealerPanel({
-        name: "player-panel",
+        name: `player-panel-${monitor}`,
+        monitor: monitor,
         visible: playerPanelVisible,
         children: <BarPlayerPanelContent />,
         anchor: Astal.WindowAnchor.TOP,

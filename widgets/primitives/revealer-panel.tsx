@@ -7,8 +7,22 @@ import { onHover } from "../../lib/core/gestures"
 
 
 export default function RevealerPanel({
-  name, visible, children, anchor, classes: _classes, transition, revealerClasses, onEnter, onLeave, transitionDuration, valign: _valign
+  name,
+  monitor,
+  visible,
+  children,
+  anchor,
+  classes: _classes,
+  revealerClasses,
+  transition,
+  transitionDuration,
+  onEnter,
+  onLeave,
+  layer: _layer,
+  exclusivity: _exclusivity,
+  valign: _valign
 }: PanelProps) {
+
   // window must be visible longer from panel
   // to end of animation of <revealer>
   const [windowVisible, setWindowVisible] = createState(false)
@@ -22,17 +36,17 @@ export default function RevealerPanel({
       name={name}
       visible={windowVisible}
       application={app}
-      layer={Astal.Layer.OVERLAY}
+      layer={_layer ?? Astal.Layer.OVERLAY}
       monitor={0}
-      exclusivity={Astal.Exclusivity.NORMAL}
+      exclusivity={_exclusivity ?? Astal.Exclusivity.NORMAL}
       keymode={Astal.Keymode.ON_DEMAND}
       anchor={anchor ?? Astal.WindowAnchor.BOTTOM}
       cssClasses={_classes}
       valign={_valign ?? undefined}
       $={(self) => {
         onHover({
-            enter: () => onEnter?.(),
-            leave: () => onLeave?.(),
+          enter: () => onEnter?.(),
+          leave: () => onLeave?.(),
         })(self)
       }}
     >
@@ -42,19 +56,14 @@ export default function RevealerPanel({
         revealChild={visible}
         cssClasses={revealerClasses}
         $={(self) => {
-          /*self.connect("notify::child-revealed", () => {
+          self.connect("notify::child-revealed", () => {
             if (!self.get_child_revealed() && !visible()) {
-              setWindowVisible(false)
+              GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
+                setWindowVisible(false)
+                return GLib.SOURCE_REMOVE
+              })
             }
-          })*/
-         self.connect("notify::child-revealed", () => {
-          if (!self.get_child_revealed() && !visible()) {
-            GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
-              setWindowVisible(false)
-              return GLib.SOURCE_REMOVE
-            })
-          }
-        })
+          })
         }}
       >
         {children}

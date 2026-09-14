@@ -20,9 +20,10 @@ function appIcon(app: Apps.Application): Gio.Icon {
     }
 }
 
-export default function AppsPanel(){
+export default function AppsPanel(monitor: number){
     return RevealerPanel({
-        name: "nexus-apps-panel",
+        name: `nexus-apps-panel-${monitor}`,
+        monitor: monitor,
         visible: activeNexusPanel.as((k) => k === NexusPanelKey.APPS),
         children: <AppsPanelContent onClose={closeNexusPanel} />,
         transition: Gtk.RevealerTransitionType.FADE_SLIDE_UP,

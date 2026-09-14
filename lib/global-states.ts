@@ -1,4 +1,12 @@
 import { createState } from "ags"
+import { Gdk } from "ags/gtk4"
+import { Lock, Unlock } from "./services/lockscreen"
+
+//  MONITORS
+const display = Gdk.Display.get_default()
+export const monitors = display?.get_monitors()
+export const monitorsCount = monitors ? monitors.get_n_items() : 1
+
 
 //  KEYS
 export enum NexusPanelKey { WIFI, BLUETOOTH, APPS, NULL }
@@ -39,3 +47,7 @@ export const [playerPanelVisible, setPlayerPanelVisible] = createState(false);
 //  SETTINGS
 export const [settingsWindowVisible, setSettingsWindowVisible] = createState(false);
 export const toggleSettingsWindow = () => setSettingsWindowVisible(!settingsWindowVisible());
+
+//  LOCKSCREEN
+export const [lockscreenVisible, setLockscreenVisible] = createState(false);
+export const toggleLockscreen = () => lockscreenVisible() ? Unlock() : Lock();

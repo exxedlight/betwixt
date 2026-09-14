@@ -2,7 +2,6 @@ import app from "ags/gtk4/app"
 import { Astal } from "ags/gtk4"
 import SysTray from "./bar-modules/tray";
 import RecordingIndicator from "./bar-modules/rec-indicator";
-import PowerHub from "./bar-modules/power-hub/power-hub";
 import { DesktopButton } from "./desktop/desktop";
 import PowerMenuPanel from "./panels/powermenu-panel";
 import BarPlayerPanel from "./panels/bar-player-panel";
@@ -13,15 +12,19 @@ import { SidepanelButton } from "./sidepanel/sidepanel";
 import PowerModes from "./bar-modules/power-hub/power-modes";
 import IdleIndicator from "./bar-modules/power-hub/idle-indicator";
 import { Battery } from "./bar-modules/power-hub/battery";
+import { monitorsCount } from "../lib/global-states";
 
 const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
 export default function TopBar(monitor = 0) {
 
-  //  --- PANELS
-  BarPlayerPanel();
-  PowerMenuPanel();
-  //  -----------------------
+  for(let i = 0; i < monitorsCount; i++){
+    //  --- TOP PANELS
+    BarPlayerPanel(i);
+    PowerMenuPanel(i);
+    //  -----------------------
+  }
+  
 
   return (
     <window
@@ -49,7 +52,6 @@ export default function TopBar(monitor = 0) {
 
         <box cssClasses={["bar-box", "bar-right-box"]} $type="end" spacing={6}>
             <RecordingIndicator/>
-            {/*<PowerHub/>*/}
             <PowerModes/>
             <IdleIndicator/>
             <Battery/>

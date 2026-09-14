@@ -2,9 +2,10 @@ import { Astal, Gtk } from "ags/gtk4"
 import { settingsWindowVisible } from "../../lib/global-states"
 import RevealerPanel from "../primitives/revealer-panel"
 
-export function SettingsWindow(){
+export function SettingsWindow(monitor: number){
     RevealerPanel({
-        name: "settings-window",
+        name: `settings-window-${monitor}`,
+        monitor: monitor,
         visible: settingsWindowVisible.as(v => v),
         children: <SettingsPanelContent/>,
         anchor: Astal.WindowAnchor.RIGHT | Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT,

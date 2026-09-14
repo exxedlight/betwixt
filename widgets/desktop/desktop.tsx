@@ -7,9 +7,10 @@ import { desktopConfig } from "../../lib/services/desktop"
 import { getPrimaryMonitorWidth } from "../../lib/services/monitors"
 import RevealerPanel from "../primitives/revealer-panel"
 
-export default function DesktopWindow(){
+export default function DesktopWindow(monitor: number){
     return RevealerPanel({
-        name: "desktop-panel", 
+        name: `desktop-panel-${monitor}`,
+        monitor: monitor, 
         visible: desktopVisible.as(v => v), 
         children: <DesktopPanelContent/>, 
         anchor: Astal.WindowAnchor.LEFT | Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM, 

@@ -8,9 +8,10 @@ import { onClick } from "../../lib/core/gestures"
 
 const { TOP, BOTTOM, RIGHT } = Astal.WindowAnchor;
 
-export default function SidePanelWindow(){
+export default function SidePanelWindow(monitor: number){
     return RevealerPanel({
-        name: "sidepanel",
+        name: `sidepanel-${monitor}`,
+        monitor: monitor,
         visible: sidepanelVisible.as(v => v),
         children: <SidepanelContent/>,
         anchor: RIGHT | TOP | BOTTOM,

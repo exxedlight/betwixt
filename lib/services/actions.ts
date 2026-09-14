@@ -1,4 +1,4 @@
-import { toggleNexusPanel, NexusPanelKey, toggleDesktop, toggleSidepanel } from "../global-states"
+import { toggleNexusPanel, NexusPanelKey, toggleDesktop, toggleSidepanel, toggleLockscreen } from "../global-states"
 import { Screenshot, screenTranslate, toggleVideoRecording } from "./screen-capture"
 
 
@@ -38,5 +38,7 @@ const actions: Record<string, () => void> = {
     "screenshot-area-markup":   () => Screenshot.AreaMarkup(),              //  open screenshot markup tool (default: satty)
 
     "screen-area-translate":    () => screenTranslate(),                    //  translate selected screen area text (notification)
+
+    "lock":                     () => toggleLockscreen(),                   //  DEBUG: Toggle lockscreen
 
 }

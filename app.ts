@@ -1,5 +1,4 @@
 import app from "ags/gtk4/app"
-import { Gdk } from "ags/gtk4"
 import { loadStyles } from "./lib/core/styles-loader"
 import { handleKeybindRequest } from "./lib/services/actions"
 import { applyInitialPowerPlan } from "./lib/services/powerplans"
@@ -10,6 +9,8 @@ import DesktopWindow from "./widgets/desktop/desktop"
 import SidePanelWindow from "./widgets/sidepanel/sidepanel"
 import GLib from "gi://GLib"
 import System from "system"
+import { monitorsCount } from "./lib/global-states"
+import Lockscreen from "./widgets/lockscreen/lockscreen"
 
 
 // --- Hot Reload start:
@@ -24,25 +25,24 @@ app.start({
   requestHandler: handleKeybindRequest,
   main() {
     applyInitialPowerPlan()
-
     
-    const display = Gdk.Display.get_default()
-    const monitors = display?.get_monitors()
-    const count = monitors ? monitors.get_n_items() : 1
-    
-    for (let i = 0; i < count; i++) {
+    //  Per-monitor cycle
+    for (let i = 0; i < monitorsCount; i++) {
       TopBar(i)
       BottomBar(i)
 
-      SettingsWindow()
+      SettingsWindow(i)
 
-      DesktopWindow();
-      SidePanelWindow();
+      DesktopWindow(i)
+      SidePanelWindow(i)
+
+      Lockscreen(i)
     }
 
-      GLib.timeout_add(GLib.PRIORITY_HIGH, 2000, () => {
-        System.gc()
-        return GLib.SOURCE_REMOVE
+    //  force GarbageCollector call ==> 2s after startup
+    GLib.timeout_add(GLib.PRIORITY_HIGH, 2000, () => {
+      System.gc()
+      return GLib.SOURCE_REMOVE
     })
   },
 })

@@ -3,6 +3,7 @@ import { Astal, Gtk } from "ags/gtk4"
 
 export type PanelProps = {
     name: string
+    monitor: number | Accessor<number>
     visible: Accessor<boolean>
     children?: JSX.Element | JSX.Element[]
     anchor?: Astal.WindowAnchor
@@ -11,6 +12,8 @@ export type PanelProps = {
     transition?: Gtk.RevealerTransitionType | Accessor<NonNullable<Gtk.RevealerTransitionType | undefined>> | undefined;
     transitionDuration?: number;
     valign?: Gtk.Align;
+    layer?: Astal.Layer | Accessor<NonNullable<Astal.Layer | undefined>> | undefined
+    exclusivity?: Astal.Exclusivity | Accessor<NonNullable<Astal.Exclusivity | undefined>> | undefined
 
     onEnter?: () => void;
     onLeave?: () => void;

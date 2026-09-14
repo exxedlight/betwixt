@@ -3,6 +3,7 @@
 @use "desktop" as *;
 @use "panels" as *;
 @use "sidepanel" as *;
+@use "lockscreen" as *;
 
 window {
     &.Bar {
