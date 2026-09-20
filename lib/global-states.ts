@@ -1,6 +1,7 @@
 import { createState } from "ags"
 import { Gdk } from "ags/gtk4"
 import { Lock, Unlock } from "./services/lockscreen"
+import { pathExpander } from "./core/format"
 
 //  MONITORS
 const display = Gdk.Display.get_default()
@@ -12,6 +13,10 @@ export const monitorsCount = monitors ? monitors.get_n_items() : 1
 export enum NexusPanelKey { WIFI, BLUETOOTH, APPS, NULL }
 export enum PowerModes { ULTRA_ECO, ECO, BALANCED, PERFORMANCE }
 
+
+//  WALLPAPER PATH
+const WALLPAPER_PATH = "~/Env/Wallpapers/hyprwallpaper";
+export const WallpaperPath = pathExpander(WALLPAPER_PATH);
 
 //  NEXUS PANELS
 export const [activeNexusPanel, setActiveNexusPanel] = createState<NexusPanelKey>(NexusPanelKey.NULL)
@@ -51,3 +56,7 @@ export const toggleSettingsWindow = () => setSettingsWindowVisible(!settingsWind
 //  LOCKSCREEN
 export const [lockscreenVisible, setLockscreenVisible] = createState(false);
 export const toggleLockscreen = () => lockscreenVisible() ? Unlock() : Lock();
+
+//  WORKSPACES OVERVIEW
+export const [workspacesOverviewVisible, setWorkspacesOverviewVisible] = createState(false);
+export const toggleWorkspaceOverview = () => setWorkspacesOverviewVisible(!workspacesOverviewVisible());

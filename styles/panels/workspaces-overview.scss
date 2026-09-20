@@ -1,0 +1,54 @@
+@use "../core/" as *;
+
+.workspaces-overview-window{
+    @include skew(2deg);
+    padding: 0 20px;
+    margin: 5px 0;
+}
+.workspaces-overview{
+
+    
+    background: Alpha($surface-1, .85);
+    padding: 10px;
+    border-radius: 15px;
+    border: 2px solid Alpha($outline, .5);
+    border-top: none; border-bottom: none;
+
+    .row{
+    
+        .cell{
+            border: 2px solid transparent;
+            transition: all $anim-duration ease-in-out;
+            background: 
+                    radial-gradient(75% 75% at 50% 50%, transparent, transparent),
+                    radial-gradient(50% 50% at 50% 50%, transparent, transparent)
+                    ;
+
+            
+                
+            .index{
+                min-width: 30px; min-height: 30px;
+                font-size: 24px;
+                border-radius: 100%;
+                padding: 5px;
+                margin: 5px;
+            }
+    
+            .thumb{
+                min-height: 300px;
+            }
+
+            .picture{
+                border-radius: 10px;
+            }
+
+            &:hover{
+                //border-color: $accent-2;
+                background: 
+                    radial-gradient(75% 75% at 50% 50%, $accent-2, transparent),
+                    radial-gradient(50% 50% at 50% 50%, $glow, transparent)
+                    ;
+            }
+        }
+    }
+}

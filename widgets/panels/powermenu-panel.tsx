@@ -19,7 +19,6 @@ export default function PowerMenuPanel(monitor: number){
         transition: Gtk.RevealerTransitionType.SWING_DOWN,
         anchor: TOP | RIGHT,
         classes: ["power-menu-panel"],
-        revealerClasses: ["power-menu-revealer"]
     })
 }
 

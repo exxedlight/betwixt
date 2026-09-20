@@ -57,3 +57,10 @@ export const exitHyprland = (closeHandler?: () => void) => {
 export const swithToEmptyWorkspace = () => {
     exec(["hyprctl", "eval", `hl.dispatch(hl.dsp.focus({ workspace = "empty" }))`])
 }
+
+//  Switch workspace
+export function switchWorkspace(id: number) {
+    execAsync(["hyprctl", "eval", `hl.dispatch(hl.dsp.focus({ workspace = ${id} }))`]).catch((err) =>
+        console.error("[ws-overview] switch failed:", err)
+    )
+}

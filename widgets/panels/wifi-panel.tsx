@@ -15,7 +15,6 @@ export default function WifiPanel(monitor: number) {
     children: <WifiPanelContent onClose={closeNexusPanel} />,
     transition: Gtk.RevealerTransitionType.FADE_SLIDE_LEFT,
     classes: ["nexus-panel-window"],
-    revealerClasses: ["bar-revealer", "nexus-wifi-revealer"]
   })
 }
 

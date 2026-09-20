@@ -54,7 +54,7 @@ export default function RevealerPanel({
         transitionType={transition ?? Gtk.RevealerTransitionType.CROSSFADE}
         transitionDuration={transitionDuration ?? 250}
         revealChild={visible}
-        cssClasses={_classes ? [..._classes, "revealer"] : undefined}
+        cssClasses={_classes ? [`${_classes[0]}-revealer`] : undefined}
         $={(self) => {
           self.connect("notify::child-revealed", () => {
             if (!self.get_child_revealed() && !visible()) {

@@ -1,4 +1,4 @@
-import { toggleNexusPanel, NexusPanelKey, toggleDesktop, toggleSidepanel, toggleLockscreen } from "../global-states"
+import { toggleNexusPanel, NexusPanelKey, toggleDesktop, toggleSidepanel, toggleLockscreen, toggleWorkspaceOverview } from "../global-states"
 import { Screenshot, screenTranslate, toggleVideoRecording } from "./screen-capture"
 
 
@@ -41,4 +41,5 @@ const actions: Record<string, () => void> = {
 
     "lock":                     () => toggleLockscreen(),                   //  DEBUG: Toggle lockscreen
 
+    "workspaces-overview":      () => toggleWorkspaceOverview(),            //  Workspaces overview (cached thumbs)
 }

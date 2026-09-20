@@ -13,7 +13,6 @@ export default function Lockscreen(monitor: number){
         children: <LockscreenContent/>, 
         anchor: ( TOP | BOTTOM | RIGHT | LEFT ),
         classes: ["lockscreen-window"],
-        revealerClasses: ["lockscreen-revealer"],
         transition: Gtk.RevealerTransitionType.CROSSFADE,
         layer: Astal.Layer.TOP,
         exclusivity: Astal.Exclusivity.IGNORE

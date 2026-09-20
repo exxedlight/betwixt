@@ -22,7 +22,6 @@ export default function BarPlayerPanel(monitor: number){
         classes: ["player-window"],
         transition: Gtk.RevealerTransitionType.FADE_SLIDE_DOWN,
         transitionDuration: 150,
-        revealerClasses: ["player-revealer"],
         valign: Gtk.Align.START
     })
 }

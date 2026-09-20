@@ -45,7 +45,6 @@ async function query(cmd: string): Promise<string> {
 
 const HEADER_LINE = /^(\d+)\s+tracks?\.$/
 const TOTAL_LINE = /^Total length:\s*(.+)$/
-// хвостовой якорь на "число:число" в конце строки не даёт "|" в названии трека сломать разбор
 const TRACK_LINE = /^\s*(\d+)\s*\|\s*(.+?)\s*\|\s*(\d{1,2}:\d{2})\s*$/
 
 function parsePlaylist(raw: string): Playlist {
@@ -106,7 +105,6 @@ export const audaciousAdapter: PlayerAdapter = {
     },
  
     async getShuffleStatus() {
-        // TODO: подгони под реальный вывод audtool у себя (on/off? 1/0?)
         return (await query(COMMANDS["shuffle-status"])).trim().toLowerCase() === "on"
     },
     toggleShuffle() {

@@ -5,12 +5,14 @@ import { applyInitialPowerPlan } from "./lib/services/powerplans"
 import TopBar from "./widgets/bar-top"
 import BottomBar from "./widgets/bar-bottom"
 import { SettingsWindow } from "./widgets/settings/settings-window"
-import DesktopWindow from "./widgets/desktop/desktop"
+import DesktopWindow from "./widgets/panels/desktop"
 import SidePanelWindow from "./widgets/sidepanel/sidepanel"
 import GLib from "gi://GLib"
 import System from "system"
 import { monitorsCount } from "./lib/global-states"
 import Lockscreen from "./widgets/lockscreen/lockscreen"
+import { startWorkspaceWatcher } from "./lib/services/workspace-overview"
+import WorkspaceOverview from "./widgets/panels/workspaces-overview"
 
 
 // --- Hot Reload start:
@@ -37,7 +39,10 @@ app.start({
       SidePanelWindow(i)
 
       Lockscreen(i)
+      WorkspaceOverview(i)
     }
+
+    startWorkspaceWatcher();
 
     //  force GarbageCollector call ==> 2s after startup
     GLib.timeout_add(GLib.PRIORITY_HIGH, 2000, () => {

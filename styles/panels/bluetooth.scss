@@ -1,11 +1,13 @@
 @use "../core/" as *;
 
 .bluetooth-panel{
-    margin-right: -10px;
+    margin: 5px -10px 5px 0;
     border-radius: 10px 0 0 10px;
     padding: 0 20px;
+    min-width: 640px;
     box-shadow: 
                 inset 0 5px 10px Alpha($accent-1, .75),
+                670px 0 0px 5px Alpha($outline, .5),
                 ;
     background: 
                 radial-gradient(100% 20% at 50% 100%, $surface-1 5%, transparent 40%),

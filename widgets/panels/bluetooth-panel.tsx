@@ -17,7 +17,6 @@ export default function BluetoothPanel(monitor: number){
         transition: Gtk.RevealerTransitionType.FADE_SLIDE_LEFT,
         anchor: Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.RIGHT,
         classes: ["nexus-panel-window"],
-        revealerClasses: ["bar-revealer", "nexus-bluetooth-revealer"]
     })
 }
 
