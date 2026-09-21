@@ -7,47 +7,49 @@
 }
 .workspaces-overview{
 
-    
-    background: Alpha($surface-1, .85);
     padding: 10px;
     border-radius: 15px;
     border: 2px solid Alpha($outline, .5);
     border-top: none; border-bottom: none;
 
+    background: 
+        radial-gradient(70% 40% at 50% 50%, $accent-1, transparent),
+    ;
+    background-color: Alpha($surface-0, .85);
+
     .row{
     
         .cell{
-            border: 2px solid transparent;
-            transition: all $anim-duration ease-in-out;
-            background: 
-                    radial-gradient(75% 75% at 50% 50%, transparent, transparent),
-                    radial-gradient(50% 50% at 50% 50%, transparent, transparent)
-                    ;
+            
+            //.thumb { }
 
             
-                
-            .index{
-                min-width: 30px; min-height: 30px;
-                font-size: 24px;
-                border-radius: 100%;
-                padding: 5px;
-                margin: 5px;
+            .picture, .filter {
+                border: 2px solid transparent;
+                border-left: none; border-right: none;
+                border-radius: 10px 50px 10px 50px;
+                padding: 20px;
             }
-    
-            .thumb{
-                min-height: 300px;
-            }
-
             .picture{
-                border-radius: 10px;
+                transition: border-color $anim-duration ease;
+            }
+            .index{
+                font-size: 24px;
+                font-weight: 800;
+                border-radius: 100%;
+                border: 2px solid $font-shaded-color;
+                color: $font-shaded-color;
+                padding: 10px 15px;
+                transition:
+                    border-color $anim-duration linear,
+                    transform $anim-duration ease
+                    ;
             }
 
             &:hover{
-                //border-color: $accent-2;
-                background: 
-                    radial-gradient(75% 75% at 50% 50%, $accent-2, transparent),
-                    radial-gradient(50% 50% at 50% 50%, $glow, transparent)
-                    ;
+                .picture { border-color: Alpha($outline, .75); }
+                .index { border-color: $glow; transform: scale(1.5); }
+                .filter { opacity: 0; }
             }
         }
     }

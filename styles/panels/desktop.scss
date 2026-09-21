@@ -1,9 +1,7 @@
 @use "../core" as *;
 
-.desktop-window{
-    margin-left: -35px;
-    .revealer { padding: 0 40px; }
-}
+.desktop-window { margin-left: -70px; }
+.desktop-window-revealer { padding: 0 40px; }
 
 .desktop-button{
     font-family: $symbols-font;

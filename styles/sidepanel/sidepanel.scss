@@ -1,9 +1,7 @@
 @use "../core" as *;
 
-.sidepanel-window {
-    margin-right: -30px;
-    .revealer { padding: 0 30px; }
-}
+.sidepanel-window { margin-right: -60px; }
+.sidepanel-window-revealer { padding: 0 30px; }
 
 
 .sidepanel-content{

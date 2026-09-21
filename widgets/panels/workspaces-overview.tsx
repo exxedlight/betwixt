@@ -3,11 +3,11 @@ import { setWorkspacesOverviewVisible, WallpaperPath, workspacesOverviewVisible 
 import RevealerPanel from "../primitives/revealer-panel";
 import * as Hyprland from "../../lib/services/hyprland-exec";
 import { onClick } from "../../lib/core/gestures";
-import { wsTextures } from "../../lib/services/workspace-overview";
+import { wsTextures, wsTexturesGray } from "../../lib/services/workspace-overview";
 
 const {TOP, BOTTOM, RIGHT, LEFT} = Astal.WindowAnchor;
 
-const COLUMNS = 4
+const COLUMNS = 3
 const ROWS = 3
 
 const fallbackTexture = Gdk.Texture.new_from_filename(WallpaperPath)
@@ -32,14 +32,19 @@ export default function WorkspaceOverview(monitor: number){
     })
 }
 
+const ROWS_DATA = Array.from({ length: ROWS }, (_, r) =>
+    Array.from({ length: COLUMNS }, (_, c) => r * COLUMNS + c + 1)
+)
+
+
 function WorkspacesOverviewContent(){
-    const rows = Array.from({ length: ROWS }, (_, r) =>
-        Array.from({ length: COLUMNS }, (_, c) => r * COLUMNS + c + 1)
-    )
+    //const rows = Array.from({ length: ROWS }, (_, r) =>
+    //    Array.from({ length: COLUMNS }, (_, c) => r * COLUMNS + c + 1)
+    //)
 
     return (
         <box class="workspaces-overview" orientation={Gtk.Orientation.VERTICAL} spacing={12} hexpand vexpand>
-            {rows.map((row) => (
+            {ROWS_DATA.map((row) => (
                 <box class="row" spacing={12} hexpand>
                     {row.map((id) => (
                         <WorkspaceCell id={id} />
@@ -52,23 +57,28 @@ function WorkspacesOverviewContent(){
 
 function WorkspaceCell({ id }: { id: number }) {
     const paintable = wsTextures.as(t => t[id] ?? fallbackTexture)
-
+    const grayPaintable = wsTexturesGray.as(t => t[id] ?? fallbackTexture)
+    
     return (
         <box class="cell" $={onClick(() => switchWorkspace(id))}>
-            <overlay class="thumb" hexpand vexpand>
+            <overlay class="thumb" hexpand>
                 <Gtk.Picture
                     class="picture"
                     paintable={paintable}
-                    contentFit={Gtk.ContentFit.CONTAIN}
-                    hexpand
-                    vexpand
+                    contentFit={Gtk.ContentFit.COVER}
+                />
+                <Gtk.Picture
+                    class="filter"
+                    $type="overlay"
+                    paintable={grayPaintable}
+                    contentFit={Gtk.ContentFit.COVER}
                 />
                 <label
                     class="index"
                     $type="overlay"
                     label={String(id)}
-                    halign={Gtk.Align.START}
-                    valign={Gtk.Align.START}
+                    halign={Gtk.Align.CENTER}
+                    valign={Gtk.Align.CENTER}
                 />
             </overlay>
         </box>

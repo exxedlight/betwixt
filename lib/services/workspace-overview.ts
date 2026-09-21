@@ -3,6 +3,8 @@ import { execAsync } from "ags/process"
 import Gio from "gi://Gio"
 import GLib from "gi://GLib"
 import { Gdk } from "ags/gtk4"
+import { sleep } from "../core/helpers"
+import GdkPixbuf from "gi://GdkPixbuf"
 
 const RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR")
 const HYPR_SIG = GLib.getenv("HYPRLAND_INSTANCE_SIGNATURE")
@@ -12,8 +14,10 @@ const RELEVANT_EVENTS = ["workspace>>", "openwindow>>", "closewindow>>"]
 
 const THUMB_SCALE = 0.2
 const DEBOUNCE_MS = 100
+const SCREENSHOT_DELAY = 200
 
 export const [wsTextures, setWsTextures] = createState<Record<number, Gdk.Texture>>({})
+export const [wsTexturesGray, setWsTexturesGray] = createState<Record<number, Gdk.Texture>>({})
 
 let debounceTimer: number | null = null
 
@@ -48,14 +52,45 @@ async function resolveOutputName(wsId: number): Promise<string | null> {
     }
 }
 
+
+
+
+function toGrayscaleTexture(bytes: GLib.Bytes): Gdk.Texture {
+    const stream = Gio.MemoryInputStream.new_from_bytes(bytes)
+    const pixbuf = GdkPixbuf.Pixbuf.new_from_stream(stream, null)
+
+    const gray = GdkPixbuf.Pixbuf.new(
+        pixbuf.get_colorspace(),
+        pixbuf.get_has_alpha(),
+        pixbuf.get_bits_per_sample(),
+        pixbuf.get_width(),
+        pixbuf.get_height()
+    )
+
+    // saturation = 0 -> grayscale
+    pixbuf.saturate_and_pixelate(gray, 0.3, false)
+
+    return Gdk.Texture.new_for_pixbuf(gray)
+}
+
 async function snapshotWorkspace(wsId: number) {
     const outputName = await resolveOutputName(wsId)
     if (!outputName) return   // not active monitor
 
     try {
+        await sleep(SCREENSHOT_DELAY);
         const bytes = await captureBytes(["grim", "-o", outputName, "-s", String(THUMB_SCALE), "-"])
+        
         const texture = Gdk.Texture.new_from_bytes(bytes)
-        setWsTextures(prev => ({ ...prev, [wsId]: texture }))
+        const grayTexture = toGrayscaleTexture(bytes)
+        
+        
+        //setWsTextures(prev => ({ ...prev, [wsId]: texture }))
+    
+        // Direct mutation to avoid spreading the entire record
+        setWsTextures(prev => Object.assign({}, prev, { [wsId]: texture }))
+        setWsTexturesGray(prev => Object.assign({}, prev, { [wsId]: grayTexture }))
+
     } catch (err) {
         console.error(`[ws-overview] snapshot failed for ws ${wsId}:`, err)
     }
@@ -95,6 +130,11 @@ export function startWorkspaceWatcher() {
                         if (line === null) return
 
                         if (RELEVANT_EVENTS.some(prefix => line.startsWith(prefix))) {
+                            
+                            //  --- DEBUG -----
+                            //  console.log("Hyprland event:\t", line);
+                            //  -----------------------------------------
+
                             scheduleSnapshot()
                         }
                         readLoop()

@@ -7,12 +7,11 @@ import BottomBar from "./widgets/bar-bottom"
 import { SettingsWindow } from "./widgets/settings/settings-window"
 import DesktopWindow from "./widgets/panels/desktop"
 import SidePanelWindow from "./widgets/sidepanel/sidepanel"
-import GLib from "gi://GLib"
-import System from "system"
 import { monitorsCount } from "./lib/global-states"
 import Lockscreen from "./widgets/lockscreen/lockscreen"
 import { startWorkspaceWatcher } from "./lib/services/workspace-overview"
 import WorkspaceOverview from "./widgets/panels/workspaces-overview"
+import { gc_force_call } from "./lib/core/helpers"
 
 
 // --- Hot Reload start:
@@ -45,9 +44,6 @@ app.start({
     startWorkspaceWatcher();
 
     //  force GarbageCollector call ==> 2s after startup
-    GLib.timeout_add(GLib.PRIORITY_HIGH, 2000, () => {
-      System.gc()
-      return GLib.SOURCE_REMOVE
-    })
+    gc_force_call();
   },
 })
