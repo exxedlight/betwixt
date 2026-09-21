@@ -1,21 +1,22 @@
 @use "../core/" as *;
 
 .workspaces-overview-window{
-    @include skew(2deg);
-    padding: 0 20px;
+    @include skew(1deg);
+    padding: 15px;
     margin: 5px 0;
 }
 .workspaces-overview{
 
     padding: 10px;
-    border-radius: 15px;
-    border: 2px solid Alpha($outline, .5);
-    border-top: none; border-bottom: none;
-
+    border-radius: 10px;
+    box-shadow: 
+        0 0 15px 10px $surface-0,
+        inset 0 0 15px $surface-1,        
+        ;
     background: 
-        radial-gradient(70% 40% at 50% 50%, $accent-1, transparent),
+        radial-gradient(70% 70% at 50% 50%, $surface-0, $surface-0, transparent),
     ;
-    background-color: Alpha($surface-0, .85);
+    //background-color: Alpha($surface-0, .85);
 
     .row{
     
@@ -38,6 +39,7 @@
                 font-weight: 800;
                 border-radius: 100%;
                 border: 2px solid $font-shaded-color;
+                border-top: none; border-bottom: none;
                 color: $font-shaded-color;
                 padding: 10px 15px;
                 transition:
@@ -48,7 +50,7 @@
 
             &:hover{
                 .picture { border-color: Alpha($outline, .75); }
-                .index { border-color: $glow; transform: scale(1.5); }
+                .index { border-color: $glow; transform: scale(1.5); background: radial-gradient(70% 70% at 50% 50%, black, transparent); }
                 .filter { opacity: 0; }
             }
         }

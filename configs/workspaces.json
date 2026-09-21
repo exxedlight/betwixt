@@ -18,7 +18,7 @@
     { "class": ".*qpdfview|.*Evince",           "icon": "" },
 
     { "class": "thunar",                        "icon": "" },
-    { "class": "telegram",                      "icon": "" },
+    { "class": "telegram|.*ayugram.*",          "icon": "" },
     { "class": "lutris",                        "icon": "" },
     { "class": "drawio",                        "icon": "" },
     { "class": "subl",                          "icon": "" },

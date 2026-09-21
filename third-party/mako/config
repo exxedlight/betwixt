@@ -26,7 +26,7 @@ history=1
 max-history=100
 
 # === Sound
-on-notify=exec canberra-gtk-play -f ~/Env/Sounds/notification.wav >/dev/null 2>&1 &
+on-notify=exec pw-play ~/Env/Sounds/notification.wav >/dev/null 2>&1 &
 
 
 # === Notify without sound
