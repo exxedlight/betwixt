@@ -1,57 +1,54 @@
-import GLib from "gi://GLib"
+import { createEffect, createRoot } from "ags"
+import { workspacesConfig } from "../configs/workspaces"
+import { CompiledRule } from "../core/types"
 
-type Rule = {
-  class?: string
-  title?: string
-  icon: string
-}
 
-type Config = {
-  default: string
-  rules: Rule[]
-}
-
-type CompiledRule = {
-  classRe?: RegExp
-  titleRe?: RegExp
-  icon: string
-}
-
-let compiled: CompiledRule[] | null = null
+let compiled: CompiledRule[] = []
 let defaultIcon = ""
+let isHotReloadInitialized = false
 
-function load() {
-  const path = `${SRC}/configs/workspaces.json`
-  const [ok, bytes] = GLib.file_get_contents(path)
-  if (!ok) {
-    console.error(`windowIcons: can not read ${path}`)
-    compiled = []
-    return
-  }
-
-  const text = new TextDecoder().decode(bytes)
-  const config: Config = JSON.parse(text)
-
-  defaultIcon = config.default ?? ""
-  compiled = config.rules.map((rule) => ({
+function buildRules() {
+  
+  const config = workspacesConfig.bind() 
+  defaultIcon = config.default ?? ""
+  
+  compiled = (config.rules || []).map((rule) => ({
     classRe: rule.class ? new RegExp(rule.class, "i") : undefined,
     titleRe: rule.title ? new RegExp(rule.title, "i") : undefined,
     icon: rule.icon,
   }))
 }
 
-export function getWindowIcon(className: string, title = ""): string {
-  if (!compiled) load()
 
-  for (const rule of compiled!) {
+function getIcon(className: string, title = ""): string {
+
+  for (const rule of compiled) {
     const classOk = !rule.classRe || rule.classRe.test(className)
     const titleOk = !rule.titleRe || rule.titleRe.test(title)
     if (classOk && titleOk) return rule.icon
   }
-
   return defaultIcon
 }
 
-export function reloadWindowIcons() {
-  compiled = null
+const reloadIcons = () => buildRules()
+
+
+//  --- First build
+buildRules();
+
+const useHotReload = () => {
+  if(isHotReloadInitialized) return
+  isHotReloadInitialized = true
+
+  return createEffect(() => {
+    workspacesConfig.bind() // watch changes
+    buildRules()
+  })
+}
+
+
+export const  WorkspaceIcons = {
+  reload: reloadIcons,
+  get: getIcon,
+  useHotReload,
 }

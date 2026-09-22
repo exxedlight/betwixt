@@ -1,0 +1,81 @@
+@use "../core" as *;
+
+.settings-window {
+    min-width: 800px;
+    min-height: 720px;
+}
+
+//.settings-window-revealer {}
+
+.settings-panel {
+    @include leaf(20px, 15px);
+    background-color: Alpha($surface-0, .85);
+    border: 1px solid Alpha($outline, .75);
+    padding: 5px 5px 10px 10px;
+
+    .panel-header {
+        margin-bottom: 15px;
+
+        .title {
+            font-size: 22px;
+            font-weight: 800;
+            font-family: $settings-font;
+        }
+    }
+
+    .panel-content {
+
+        .categories {
+            border-right: 1px solid $outline;
+            border-radius: 0 10px 10px 0;
+            margin-right: 5px;
+            padding: 10px 5px 5px 5px;
+
+            .category {
+                @include leaf();
+                margin: 0 0 5px 0;
+                font-size: 20px;
+                font-family: $settings-font;
+                border: 1px solid transparent;
+                padding: 5px 5px 5px 10px;
+                transition: border-color $anim-duration ease;
+
+                &:hover {
+                    border-color: $outline;
+                    color: $glow;
+                }
+
+                &.active {
+                    background-color: $accent-1;
+                    border-color: $outline;
+                }
+            }
+        }
+
+        .category-content {
+            padding: 5px;
+
+            .header {
+                font-size: 25px;
+                font-weight: 800;
+                font-family: $settings-font;
+                margin-bottom: 10px;
+            }
+
+            .row {
+                border-bottom: 1px solid Alpha($outline, .45);
+                padding: 5px 0;
+
+                .name {
+                    font-size: 16px;
+                    font-weight: 600;
+                    font-family: $settings-font;
+                }
+
+                /*.setting{
+                    
+                }*/
+            }
+        }
+    }
+}

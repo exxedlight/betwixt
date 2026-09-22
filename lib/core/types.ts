@@ -18,6 +18,8 @@ export type PanelProps = {
     onLeave?: () => void;
 }
 
+//  --- Desktop
+
 export type DesktopPreferences = {
     "grid-size": [number, number]
     "icon-size": [number, number]
@@ -34,8 +36,10 @@ export type DesktopConfig = {
     preferences: DesktopPreferences
     items: DesktopItem[]
 }
+//  -----------------
 
 
+//  --- Player
 export type PlayerConfig = {
     "show-window"?: string
     "hide-window"?: string
@@ -78,3 +82,29 @@ export interface PlayerAdapter {
     getRepeatStatus?(): Promise<string>
     toggleRepeat?(): void
 }
+// --------------------------
+
+//  --- Weather
+export type DayForecast = {
+    day: string
+    date: string
+    icon: string
+    condition: string
+    tempHigh: number | string
+    tempLow: number | string
+}
+
+export type WeatherState = {
+    loading: boolean
+    days: DayForecast[]
+    error: string | null
+}
+//  -------------------------
+
+//  --- Workspace icons
+export type CompiledRule = {
+  classRe?: RegExp
+  titleRe?: RegExp
+  icon: string
+}
+//  -------------------------

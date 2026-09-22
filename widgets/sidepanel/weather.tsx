@@ -1,7 +1,9 @@
 import { For } from "ags";
 import { Gtk } from "ags/gtk4";
-import { DayForecast, weatherState } from "../../lib/services/weather";
 import { toShortDate } from "../../lib/core/format";
+import { DayForecast } from "../../lib/core/types";
+import { Weather } from "../../lib/services/weather";
+
 
 function DayPill({ day, date, icon, condition, tempHigh, tempLow }: DayForecast) {
     return (
@@ -45,7 +47,7 @@ const PLACEHOLDERS: DayForecast[] = Array.from({ length: 5 }, () => ({
 }))
 
 export default function WeatherRow(){
-    const days = weatherState.as((s) =>
+    const days = Weather.state.as((s) =>
         s.loading || s.days.length === 0 ? PLACEHOLDERS : s.days
     )
 
@@ -55,7 +57,6 @@ export default function WeatherRow(){
             orientation={Gtk.Orientation.HORIZONTAL}
             hexpand
             spacing={8}
-            
         >
             <For each={days}>
                 {(d) => <DayPill {...d} />}

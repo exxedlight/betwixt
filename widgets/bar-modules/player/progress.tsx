@@ -1,6 +1,6 @@
 import { Gtk } from "ags/gtk4"
 import { onClick } from "../../../lib/core/gestures"
-import { playbackPercentage, seekTo } from "../../../lib/services/mpris"
+import { Mpris } from "../../../lib/services/mpris"
 
 type Props = {
     barWidth: number
@@ -15,12 +15,12 @@ export default function PlayerProgressBar({ barWidth }: Props) {
             $={onClick((x) => {
                 if (barWidth === 0) return
                 const pct = Math.max(0, Math.min(1, x / barWidth))
-                seekTo(pct)
+                Mpris.seekTo(pct)
             })}
         >
             <box
                 class="progress-fill"
-                css={playbackPercentage.as(pct => `
+                css={Mpris.playbackPercentage.as(pct => `
                     min-width: ${Math.round((pct / 100) * barWidth)}px;
                 `)}
             />

@@ -1,5 +1,5 @@
 import { getPlayerAdapter } from "../../lib/services/players"
-import { activePlayerName, trackTitle, trackArtist } from "../../lib/services/mpris"
+import { Mpris } from "../../lib/services/mpris"
 import { Playlist, PlaylistTrack } from "../../lib/core/types"
 import { Gtk } from "ags/gtk4"
 import { createState, For } from "ags"
@@ -9,14 +9,14 @@ import { onClick } from "../../lib/core/gestures"
 const emptyPlaylist: Playlist = { tracks: [], trackCount: 0 }
 
 async function fetchPlaylist(): Promise<Playlist> {
-    const adapter = getPlayerAdapter(activePlayerName())
+    const adapter = getPlayerAdapter(Mpris.activePlayerName())
     if (!adapter?.getPlaylist) return emptyPlaylist
     try { return await adapter.getPlaylist() }
     catch { return emptyPlaylist }
 }
  
 async function fetchPlaylistPosition(): Promise<number> {
-    const adapter = getPlayerAdapter(activePlayerName())
+    const adapter = getPlayerAdapter(Mpris.activePlayerName())
     if (!adapter?.getPlaylistPosition) return -1
     try { return await adapter.getPlaylistPosition() }
     catch { return -1 }
@@ -24,7 +24,7 @@ async function fetchPlaylistPosition(): Promise<number> {
  
 function jumpToTrack(index: number, currentPosition: number) {
     if (index === currentPosition) return
-    const adapter = getPlayerAdapter(activePlayerName())
+    const adapter = getPlayerAdapter(Mpris.activePlayerName())
     adapter?.jumpToTrack?.(index)
 }
 
@@ -36,7 +36,7 @@ export default function PlayerPlaylist() {
     let unsubscribe: (() => void) | null = null
 
     async function onTrackMaybeChanged() {
-        const key = `${trackTitle()}::${trackArtist()}`
+        const key = `${Mpris.trackTitle()}::${Mpris.trackArtist()}`
         if (key === lastKey) return
         lastKey = key
 
@@ -59,7 +59,7 @@ export default function PlayerPlaylist() {
                     self.connect("map", () => {
                         lastKey = ""
                         onTrackMaybeChanged()
-                        unsubscribe = trackTitle.subscribe(onTrackMaybeChanged)
+                        unsubscribe = Mpris.trackTitle.subscribe(onTrackMaybeChanged)
                     })
                     self.connect("unmap", () => {
                         unsubscribe?.()

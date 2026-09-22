@@ -1,5 +1,5 @@
 import { Astal, Gtk } from "ags/gtk4";
-import { cycleLoop, isPlaying, loopStatus, loopSupported, nextTrack, playerVolume, prevTrack, setVolume, shuffleEnabled, shuffleSupported, togglePlayPause, toggleShuffle, trackArtist, trackTitle } from "../../lib/services/mpris";
+import { Mpris } from "../../lib/services/mpris";
 import { onClick, onDrag } from "../../lib/core/gestures";
 import PlayerProgressBar from "../bar-modules/player/progress";
 import { createComputed } from "ags";
@@ -29,19 +29,19 @@ export default function BarPlayerPanel(monitor: number){
 
 function BarPlayerPanelContent(){
     const metaTitle = createComputed(() => 
-        `${trackTitle()}${trackArtist() !== "Unknown Artist" ? ` - ${trackArtist()}` : ""}`
+        `${Mpris.trackTitle()}${Mpris.trackArtist() !== "Unknown Artist" ? ` - ${Mpris.trackArtist()}` : ""}`
     )
 
     const loopClass = createComputed(() => {
-        if (!loopSupported()) return "player-button loop unavailable"
-        const status = loopStatus()
+        if (!Mpris.loopSupported()) return "player-button loop unavailable"
+        const status = Mpris.loopStatus()
         const active = status !== "None" ? "active" : ""
         return `player-button loop ${active} loop-${status.toLowerCase()}`.trim()
     })
 
     const shuffleClass = createComputed(() => {
-        if (!shuffleSupported()) return "player-button shuffle unavailable"
-        return `player-button shuffle ${shuffleEnabled() ? "active" : ""}`.trim()
+        if (!Mpris.shuffleSupported()) return "player-button shuffle unavailable"
+        return `player-button shuffle ${Mpris.shuffleEnabled() ? "active" : ""}`.trim()
     })
 
 
@@ -73,22 +73,22 @@ function BarPlayerPanelContent(){
             >
 
                 <centerbox class="left" orientation={Gtk.Orientation.VERTICAL} vexpand>
-                    <label $type="start" halign={Gtk.Align.CENTER} hexpand={false} label="" class={loopClass}     $={onClick(() => cycleLoop())}/>
-                    <label $type="end"   halign={Gtk.Align.CENTER} hexpand={false} label="" class={shuffleClass}  $={onClick(() => toggleShuffle())}/>
+                    <label $type="start" halign={Gtk.Align.CENTER} hexpand={false} label="" class={loopClass}     $={onClick(() => Mpris.toggleLoop())}/>
+                    <label $type="end"   halign={Gtk.Align.CENTER} hexpand={false} label="" class={shuffleClass}  $={onClick(() => Mpris.toggleShuffle())}/>
                 </centerbox>
 
                 <box class="center" orientation={Gtk.Orientation.HORIZONTAL} valign={Gtk.Align.CENTER} halign={Gtk.Align.CENTER} hexpand>
                     
                     <centerbox orientation={Gtk.Orientation.VERTICAL}>
-                        <label $type="center" xalign={0.5} label="" class="skip prev" $={onClick(() => prevTrack())}/>
+                        <label $type="center" xalign={0.5} label="" class="skip prev" $={onClick(() => Mpris.prevTrack())}/>
                     </centerbox>
                     
-                    <box class={isPlaying.as(p => `play-pause ${p ? "playing" : "stopped"}`)} $={onClick(() => togglePlayPause())} orientation={Gtk.Orientation.VERTICAL} valign={Gtk.Align.CENTER} halign={Gtk.Align.CENTER}>
-                        <label xalign={0.5} label={isPlaying.as(p => p ? "" : "")}  />
+                    <box class={Mpris.isPlaying.as(p => `play-pause ${p ? "playing" : "stopped"}`)} $={onClick(() => Mpris.togglePlayPause())} orientation={Gtk.Orientation.VERTICAL} valign={Gtk.Align.CENTER} halign={Gtk.Align.CENTER}>
+                        <label xalign={0.5} label={Mpris.isPlaying.as(p => p ? "" : "")}  />
                     </box>
 
                     <centerbox orientation={Gtk.Orientation.VERTICAL}>
-                        <label $type="center" xalign={0.5} label="" class="skip next" $={onClick(() => nextTrack())}/>
+                        <label $type="center" xalign={0.5} label="" class="skip next" $={onClick(() => Mpris.nextTrack())}/>
                     </centerbox>
                     
                 </box>
@@ -115,13 +115,13 @@ function VolumeSlider({ width = VOLUME_SLIDER_WIDTH }: { width?: number }) {
             widthRequest={width}
             $={onDrag((x) => {
                 const pct = Math.max(0, Math.min(1, x / width))
-                setVolume(pct)
+                Mpris.setVolume(pct)
             })}
         >
             <box class="volume-slider-track">
                 <box
                     class="volume-slider-fill"
-                    widthRequest={playerVolume.as(v => Math.round(v * width))}
+                    widthRequest={Mpris.playerVolume.as(v => Math.round(v * width))}
                     halign={Gtk.Align.START}
                 />
             </box>

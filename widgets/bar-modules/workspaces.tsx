@@ -1,10 +1,9 @@
 import Hyprland from "gi://AstalHyprland"
-import { createBinding, createComputed, For } from "ags"
+import { createBinding, createComputed, createEffect, For } from "ags"
 import { exec } from "ags/process"
 import { onClick } from "../../lib/core/gestures"
-import { getWindowIcon } from "../../lib/services/workspace-icons"
+import { WorkspaceIcons } from "../../lib/services/workspace-icons"
 
-type HyprClient = Hyprland.Client
 const WORKSPACE_COUNT = 10
 
 export default function Workspaces() {
@@ -12,11 +11,13 @@ export default function Workspaces() {
   const clients = createBinding(hypr, "clients")
   const focusedWorkspace = createBinding(hypr, "focusedWorkspace")
 
+  WorkspaceIcons.useHotReload();
+
   const workspaces = createComputed(() => {
     const list = clients()
     focusedWorkspace()
 
-    const map = new Map<number, HyprClient[]>()
+    const map = new Map<number, Hyprland.Client[]>()
     for (let id = 1; id <= WORKSPACE_COUNT; id++) {
       map.set(id, [])
     }
@@ -41,9 +42,9 @@ export default function Workspaces() {
             class={focusedWorkspace.as(fw => fw?.id === ws.id ? "tab-box active" : "tab-box")}
             $={onClick(() => exec(["hyprctl", "eval", `hl.dispatch(hl.dsp.focus({ workspace = ${ws.id} }))`]))}
           >
-            {ws.clients.map((client: HyprClient) => {
+            {ws.clients.map((client: Hyprland.Client) => {
               const title = createBinding(client, "title")
-              const icon = title.as((t) => getWindowIcon(client.class, t))
+              const icon = title.as((t) => WorkspaceIcons.get(client.class, t))
               return <label label={icon} />
             })}
           </box>

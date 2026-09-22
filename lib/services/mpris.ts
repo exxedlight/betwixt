@@ -1,12 +1,12 @@
 import Gio from "gi://Gio"
 import GLib from "gi://GLib"
-import { createComputed, createState } from "ags"
+import { createComputed, createEffect, createState } from "ags"
 import { createPoll } from "ags/time"
+import { mprisConfig } from "../configs/mpris"
 
 
-//  Only God and I know what is written here. 
+//  Only God and I know what is written here.
 //  I have forgotten; now only God knows.
-
 
 
 //  But if seriosly, Astal mpris was broken:
@@ -19,32 +19,31 @@ import { createPoll } from "ags/time"
 //  Don't ask how it works, I'd fuck its mouth.
 
 
-
-//  supported players list; listen ONLY this players
-//  write PROCESS NAMES here (3rd column), not busnames:
-//  >> busctl --user list | grep org.mpris.MediaPlayer2
-//  example configs/player.json: ["audacious", "vivaldi-bin", "TelegramDesktop"]
-const CONFIG_PATH = `${SRC}/configs/players.json`
-
 //  MPRIS interfaces
 const PLAYER_IFACE = "org.mpris.MediaPlayer2.Player"
 const PROPS_IFACE = "org.freedesktop.DBus.Properties"
 const OBJ_PATH = "/org/mpris/MediaPlayer2"
 
-//  Reading config file — just a flat list of allowed process names
-function getSupportedPlayers(): string[] {
-    try {
-        const [ok, bytes] = GLib.file_get_contents(CONFIG_PATH)
-        if (!ok) return []
-        const parsed = JSON.parse(new TextDecoder().decode(bytes))
-        return Array.isArray(parsed) ? parsed.filter((x): x is string => typeof x === "string") : []
-    } catch {
-        return []
-    }
+
+// Re-evaluation trigger for activePlayer. Fires ONLY on real D-Bus events.
+const [tick, setTick] = createState(0)
+const bump = () => setTick(t => t + 1)
+
+//  validate player's names raw JSON
+function sanitizeNames(raw: unknown): string[] {
+    return Array.isArray(raw) ? raw.filter((x): x is string => typeof x === "string") : []
 }
 
-const supportedNames = getSupportedPlayers()
+//  Reactive list. Exists for external calls like activePlayerName. 
+//  Not for internal logic (or you will get multiple updates on one JSON change)
+const supportedNames = createComputed<string[]>(() => sanitizeNames(mprisConfig.bind()))
 const toBusName = (n: string) => n.startsWith("org.mpris.") ? n : `org.mpris.MediaPlayer2.${n}`
+
+// One wrapper per name, created once, lives until pruned.
+// WARN: tracked is simple Map, NOT reactive
+const tracked = new Map<string, MprisPlayer>()
+
+
 
 // ---- process-name resolution (busname -> real process name via /proc) ----
 const procNameCache = new Map<string, string | null>()
@@ -69,22 +68,21 @@ function getProcessName(busName: string): string | null {
     return name
 }
 
-// match by PROCESS NAME, not by busname
-const matches = (n: string) => {
-    if (supportedNames.length === 0) return true
+//  match by PROCESS NAME, not by busname.
+const matches = (n: string, allowed: string[]) => {
+    if (allowed.length === 0) return true
     const proc = getProcessName(n)
-    return proc ? supportedNames.some(s => proc.includes(s)) : false
+    return proc ? allowed.some(s => proc.includes(s)) : false
 }
 
-// Re-evaluation trigger for activePlayer. Fires ONLY on real D-Bus events.
-const [tick, setTick] = createState(0)
-const bump = () => setTick(t => t + 1)
+
 
 
 // MPRIS interface wrapper on Gio
 class MprisPlayer {
     private player: Gio.DBusProxy
     private props: Gio.DBusProxy
+    private propsHandlerId: number
     private lastPos = 0
     readonly bus: string
     readonly processName: string
@@ -100,7 +98,12 @@ class MprisPlayer {
             Gio.BusType.SESSION, flags, null, bus, OBJ_PATH, PROPS_IFACE, null,
         )
         // PlaybackStatus / Volume / Metadata change => re-pick active player
-        this.player.connect("g-properties-changed", () => bump())
+        this.propsHandlerId = this.player.connect("g-properties-changed", () => bump())
+    }
+
+    // remove subscription when player removed from allow-list or dies
+    dispose() {
+        try { this.player.disconnect(this.propsHandlerId) } catch { /* already dead */ }
     }
 
     // alive = bus name currently owned (Gio tracks this itself, no race)
@@ -156,7 +159,7 @@ class MprisPlayer {
     get position(): number {
         const r = this.scall("Get", new GLib.Variant("(ss)", [PLAYER_IFACE, "Position"]))
         if (!r) return this.lastPos
-        try { this.lastPos = (r.recursiveUnpack() as number) / 1_000_000 } catch {}
+        try { this.lastPos = (r.recursiveUnpack() as number) / 1_000_000 } catch { }
         return this.lastPos
     }
     set position(sec: number) {
@@ -198,18 +201,50 @@ class MprisPlayer {
 
 
 
-// One wrapper per name, created once, lives forever.
-const tracked = new Map<string, MprisPlayer>()
-const [knownNames, setKnownNames] = createState<string[]>([])
+
 
 const ensureName = (name: string) => {
     const bus = toBusName(name)
-    if (!tracked.has(bus)) {
-        try { tracked.set(bus, new MprisPlayer(bus)) }
-        catch (e) { console.warn("[MPRIS] proxy create failed:", bus, e); return }
+    if (tracked.has(bus)) return
+    try {
+        tracked.set(bus, new MprisPlayer(bus))
+        bump()
+    } catch (e) {
+        console.warn("[MPRIS] proxy create failed:", bus, e)
     }
-    setKnownNames(prev => (prev.includes(bus) ? prev : [...prev, bus]))
 }
+
+// remove from watch players that not allowed anymore
+// (like, name removed from players.json)
+const pruneUnsupported = (allowed: string[]) => {
+    for (const bus of tracked.keys()) {
+        if (!matches(bus, allowed)) {
+            tracked.get(bus)?.dispose()
+            tracked.delete(bus)
+            bump()
+        }
+    }
+}
+
+
+//  Full players rescan: get new names, remove unsupported.
+const refresh = () => {
+    const allowed = sanitizeNames(mprisConfig.bind())
+
+    const [names] = Gio.DBus.session.call_sync(
+        "org.freedesktop.DBus", "/org/freedesktop/DBus",
+        "org.freedesktop.DBus", "ListNames", null, null,
+        Gio.DBusCallFlags.NONE, -1, null,
+    ).deep_unpack() as [string[]]
+
+    for (const n of names) {
+        if (n.startsWith("org.mpris.MediaPlayer2.") && matches(n, allowed)) {
+            ensureName(n)
+        }
+    }
+    pruneUnsupported(allowed)
+}
+refresh()
 
 // Watch owner changes for everyone (survives SIGKILL + relaunch)
 Gio.DBus.session.signal_subscribe(
@@ -220,61 +255,55 @@ Gio.DBus.session.signal_subscribe(
         const [name, , owner] = params.deep_unpack() as [string, string, string]
         if (!name.startsWith("org.mpris.MediaPlayer2.")) return
         if (owner === "") {
-            // owner disappeared — drop cached process name so a relaunched
+            // owner disappeared - drop cached process name so a relaunched
             // process (possibly different PID) gets resolved fresh next time
             procNameCache.delete(name)
+            tracked.get(name)?.dispose()
+            tracked.delete(name)
             console.log(`[MPRIS] owner DOWN: ${name}`) // removable
             bump()
             return
         }
-        if (!matches(name)) return
+        
+
+        if (!matches(name, supportedNames())) return
         ensureName(name)
         console.log(`[MPRIS] owner UP: ${name}`) // removable
-        bump()
     },
 )
 
-// Pick up players already running at shell start
-const [existing] = Gio.DBus.session.call_sync(
-    "org.freedesktop.DBus", "/org/freedesktop/DBus",
-    "org.freedesktop.DBus", "ListNames", null, null,
-    Gio.DBusCallFlags.NONE, -1, null,
-).deep_unpack() as [string[]]
-for (const n of existing)
-    if (n.startsWith("org.mpris.MediaPlayer2.") && matches(n)) ensureName(n)
-
 
 //  Current player
-export const activePlayer = createComputed<MprisPlayer | null>(() => {
+const activePlayer = createComputed<MprisPlayer | null>(() => {
     tick()
-    const ready = knownNames().map(n => tracked.get(n)!).filter(p => p && p.alive)
+    const ready = Array.from(tracked.values()).filter(p => p.alive)
     if (ready.length === 0) return null
     return ready.find(p => p.playback_status === "Playing") ||
-           ready.find(p => p.playback_status === "Paused") ||
-           ready[0]
+        ready.find(p => p.playback_status === "Paused") ||
+        ready[0]
 })
 
 // resolved process name of the active player (e.g. "audacious", "vivaldi-bin"),
 // intended to be fed into adapters/getPlayerAdapter()
-export const activePlayerName = createComputed<string | null>(() => {
+const activePlayerName = createComputed<string | null>(() => {
     const player = activePlayer()
     if (!player) return null
-    return supportedNames.find(s => player.processName.includes(s)) ?? null
+    return supportedNames().find(s => player.processName.includes(s)) ?? null
 })
 
 
 
 // ================= GETTERS (unchanged, except isPlaying string compare) =================
 
-export const trackTitle         = createComputed(() => activePlayer()?.title  || "Unknown Track")
-export const trackArtist        = createComputed(() => activePlayer()?.artist || "Unknown Artist")
-export const isPlaying          = createComputed(() => activePlayer()?.playback_status === "Playing")
-export const playerVolume       = createComputed(() => activePlayer()?.volume || 0)
-export const trackDuration      = createComputed(() => activePlayer()?.length || 0)
-export const loopStatus         = createComputed(() => activePlayer()?.loop_status || "None")
-export const shuffleEnabled     = createComputed(() => activePlayer()?.shuffle || false)
-export const loopSupported      = createComputed(() => activePlayer()?.loop_supported ?? false)
-export const shuffleSupported   = createComputed(() => activePlayer()?.shuffle_supported ?? false)
+const trackTitle = createComputed(() => activePlayer()?.title || "Unknown Track")
+const trackArtist = createComputed(() => activePlayer()?.artist || "Unknown Artist")
+const isPlaying = createComputed(() => activePlayer()?.playback_status === "Playing")
+const playerVolume = createComputed(() => activePlayer()?.volume || 0)
+const trackDuration = createComputed(() => activePlayer()?.length || 0)
+const loopStatus = createComputed(() => activePlayer()?.loop_status || "None")
+const shuffleEnabled = createComputed(() => activePlayer()?.shuffle || false)
+const loopSupported = createComputed(() => activePlayer()?.loop_supported ?? false)
+const shuffleSupported = createComputed(() => activePlayer()?.shuffle_supported ?? false)
 
 
 
@@ -285,7 +314,7 @@ let optimisticPercent = 0
 const SEEK_SETTLE_MS = 250
 
 //  Seek to percent (0-100)
-export function seekTo(pct: number) {
+function seekTo(pct: number) {
     const player = activePlayer()
     if (!player || player.length === 0) return
 
@@ -296,7 +325,7 @@ export function seekTo(pct: number) {
 }
 
 //  Get current playback progress in percents (0-100)
-export const playbackPercentage = createPoll(0, 200, () => {
+const playbackPercentage = createPoll(0, 200, () => {
     const now = GLib.get_monotonic_time() / 1000
     if (now < suppressUntil) return optimisticPercent
 
@@ -310,7 +339,7 @@ export const playbackPercentage = createPoll(0, 200, () => {
 
 // ================= SETTERS / ACTIONS ============================
 
-export const cycleLoop = () => {
+const toggleLoop = () => {
     const player = activePlayer()
     if (!player) return
     const order = ["None", "Playlist", "Track"] as const
@@ -318,23 +347,70 @@ export const cycleLoop = () => {
     player.loop_status = next
 }
 
-export const toggleShuffle = () => {
+const toggleShuffle = () => {
     const player = activePlayer()
     if (!player) return
     player.shuffle = !player.shuffle
 }
 
-export const setVolume = (val: number) => {
+const setVolume = (val: number) => {
     const player = activePlayer()
     if (!player) return
     player.volume = Math.max(0, Math.min(1, val))
 }
-export const changeVolume = (delta: number) => {
+const changeVolume = (delta: number) => {
     const player = activePlayer()
     if (!player) return
     player.volume = Math.max(0, Math.min(1, player.volume + delta))
 }
 
-export const togglePlayPause = () => activePlayer()?.play_pause()
-export const nextTrack = () => activePlayer()?.next()
-export const prevTrack = () => activePlayer()?.previous()
+const togglePlayPause = () => activePlayer()?.play_pause()
+const nextTrack = () => activePlayer()?.next()
+const prevTrack = () => activePlayer()?.previous()
+
+
+let isHotReloadInitialized = false
+const useHotReload = () => {
+    if (isHotReloadInitialized) return
+    isHotReloadInitialized = true
+
+    // depends ONLY from mprisConfig.bind(). refresh() inside mprisConfig
+    // writes nothing, so effect can't be relaunced by itself
+    return createEffect(() => {
+        mprisConfig.bind()
+        console.log("[mpris] config changed, refreshing player list...")
+        refresh()
+    })
+}
+
+
+export const Mpris = {
+
+    //  --- Properties
+    activePlayer,
+    activePlayerName,
+    trackTitle,
+    trackArtist,
+    isPlaying,
+    playerVolume,
+    trackDuration,
+    loopStatus,
+    shuffleEnabled,
+    loopSupported,
+    shuffleSupported,
+    playbackPercentage,
+
+    //  --- Play actions
+    togglePlayPause,
+    nextTrack,
+    prevTrack,
+    toggleLoop,
+    toggleShuffle,
+    seekTo,
+    //  --- Volume
+    setVolume,
+    changeVolume,
+
+    //  ---
+    useHotReload,
+}

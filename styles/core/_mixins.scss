@@ -5,6 +5,6 @@
     &>*{ transform: skew(-$amount, 0); }
 }
 
-@mixin leaf(){
-    border-radius: 15px 5px 15px 5px;
+@mixin leaf($rad1: 15px, $rad2: 5px){
+    border-radius: $rad1 $rad2 $rad1 $rad2;
 }

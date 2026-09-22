@@ -1,5 +1,5 @@
 import { PlayerAdapter } from "../../core/types"
-import { activePlayerName } from "../mpris"
+import { Mpris } from "../mpris"
 import { audaciousAdapter } from "./audacious"
 import { createComputed } from "ags"
 
@@ -17,5 +17,5 @@ export function getPlayerAdapter(name: string | null): PlayerAdapter | null {
 // готовый reactive-адаптер текущего активного плеера —
 // потребителю не нужно самому дёргать activePlayerName + getPlayerAdapter
 export const activePlayerAdapter = createComputed<PlayerAdapter | null>(() =>
-    getPlayerAdapter(activePlayerName())
+    getPlayerAdapter(Mpris.activePlayerName())
 )

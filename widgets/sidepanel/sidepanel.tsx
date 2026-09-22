@@ -5,10 +5,14 @@ import DateTimeWidget from "./date-time"
 import RevealerPanel from "../primitives/revealer-panel"
 import { sidepanelVisible, toggleSidepanel } from "../../lib/global-states"
 import { onClick } from "../../lib/core/gestures"
+import { Weather } from "../../lib/services/weather"
 
 const { TOP, BOTTOM, RIGHT } = Astal.WindowAnchor;
 
 export default function SidePanelWindow(monitor: number){
+
+    Weather.useHotReload();
+
     return RevealerPanel({
         name: `sidepanel-${monitor}`,
         monitor: monitor,

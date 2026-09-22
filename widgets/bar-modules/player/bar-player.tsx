@@ -4,7 +4,7 @@ import PlayerProgressBar from "./progress"
 import Pango from "gi://Pango"
 import { createComputed } from "gnim"
 import { playerPanelVisible, setPlayerPanelVisible } from "../../../lib/global-states"
-import * as Mpris from "../../../lib/services/mpris"
+import { Mpris } from "../../../lib/services/mpris"
 import { onClick } from "../../../lib/core/gestures"
 import * as Audacious from "../../../lib/services/players/audacious"
 
@@ -15,6 +15,8 @@ const TITLE_WIDTH = 220
 
 export default function BarPlayer() {
     
+    Mpris.useHotReload();
+
     const metaTitle = createComputed(() => 
         `${Mpris.trackTitle()}${Mpris.trackArtist() !== "Unknown Artist" ? ` - ${Mpris.trackArtist()}` : ""}`
     )

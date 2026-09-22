@@ -1,57 +1,32 @@
 import GLib from "gi://GLib"
-import { createState } from "ags"
+import { createEffect, createRoot, createState } from "ags"
 import { execAsync } from "ags/process"
 import { CurrentDate } from "./date-time"
+import { weatherConfig } from "../configs/weather"
+import { DayForecast, WeatherState } from "../core/types"
 
-type WeatherConfig = {
-    location: string
-    icons: Record<string, string>
-}
 
-export type DayForecast = {
-    day: string
-    date: string
-    icon: string
-    condition: string
-    tempHigh: number | string
-    tempLow: number | string
-}
+const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+let isHotReloadInitialized = false
 
-type WeatherState = {
-    loading: boolean
-    days: DayForecast[]
-    error: string | null
-}
-
-const CONFIG_PATH = `${SRC}/configs/weather.json`
-
-function loadConfig(): WeatherConfig | null {
-    try {
-        const [ok, bytes] = GLib.file_get_contents(CONFIG_PATH)
-        if (!ok) return null
-        return JSON.parse(new TextDecoder().decode(bytes)) as WeatherConfig
-    } catch (e) {
-        console.error("[weather] failed to load config:", e)
-        return null
-    }
-}
 
 // WMO Weather interpretation codes ==> icon category
 // Docs: https://open-meteo.com/en/docs (Weather interpretation codes)
 function wmoToCondition(code: number): string {
-    if (code === 0) return "clear"
-    if (code === 1) return "mainly_clear"
-    if (code === 2) return "partly_cloudy"
-    if (code === 3) return "overcast"
+    if (code === 0)                 return "clear"
+    if (code === 1)                 return "mainly_clear"
+    if (code === 2)                 return "partly_cloudy"
+    if (code === 3)                 return "overcast"
     if (code === 45 || code === 48) return "fog"
-    if (code >= 51 && code <= 57) return "drizzle"
-    if (code >= 61 && code <= 63) return "rain"
-    if (code === 65) return "heavy_rain"
+    if (code >= 51 && code <= 57)   return "drizzle"
+    if (code >= 61 && code <= 63)   return "rain"
+    if (code === 65)                return "heavy_rain"
     if (code === 66 || code === 67) return "rain"  // freezing rain
-    if (code >= 71 && code <= 77) return "snow"
-    if (code >= 80 && code <= 82) return "rain"    // showers
+    if (code >= 71 && code <= 77)   return "snow"
+    if (code >= 80 && code <= 82)   return "rain"    // showers
     if (code === 85 || code === 86) return "snow"  // snow showers
-    if (code >= 95) return "thunderstorm"
+    if (code >= 95)                 return "thunderstorm"
+    
     return "unknown"
 }
 /* 
@@ -71,7 +46,7 @@ Code	Description
 96, 99 *	Thunderstorm with slight and heavy hail
 */
 
-const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+
 
 // Parse location ==> {lat, lon}
 // - "lat,lon" string ==> use as-is
@@ -119,15 +94,17 @@ async function fetchForecast(lat: number, lon: number, icons: Record<string, str
     })
 }
 
-export const [weatherState, setWeatherState] = createState<WeatherState>({
+const [weatherState, setWeatherState] = createState<WeatherState>({
     loading: true,
     days: [],
     error: null,
 })
 
 async function refresh() {
-    const cfg = loadConfig()
-    if (!cfg) {
+
+    const cfg = weatherConfig.data
+    
+    if (!cfg || !cfg.location) {
         setWeatherState({ loading: false, days: [], error: "config load failed" })
         return
     }
@@ -145,8 +122,21 @@ async function refresh() {
     }
 }
 
-// Initial fetch
+//  Initial fetch
 refresh()
+
+const useHotReload = () => {
+
+    if(isHotReloadInitialized) return
+    isHotReloadInitialized = true
+
+    return createEffect(() => {
+        weatherConfig.bind()
+        console.log("[weather] config changed, refreshing forecast...")
+        refresh()
+    })
+}
+
 
 // Poll every 30 minutes
 GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 30 * 60, () => {
@@ -168,3 +158,11 @@ CurrentDate.subscribe(() => {
         refresh()
     }
 })
+
+
+
+
+export const Weather = {
+    state: weatherState,
+    useHotReload,
+}
